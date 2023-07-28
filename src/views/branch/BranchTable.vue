@@ -1,0 +1,203 @@
+<script setup>
+import ControlPlane from "@/components/ControlPlane.vue";
+import DataPlane from "@/components/DataPlane.vue";
+import {Plus} from "@element-plus/icons-vue";
+import AppTable from "@/components/AppTable.vue";
+import FilterItem from "@/components/FilterItem.vue";
+import {reactive, ref} from "vue";
+import {ElButton, ElMessage, ElMessageBox} from "element-plus";
+import AppPagination from "@/components/AppPagination.vue";
+import TableDrawer from "@/views/branch/TableDrawer.vue";
+
+const tableColumn = [
+  {
+    key: 'id',
+    title: '編號',
+    dataKey: 'id',
+    width: 80,
+    align: 'center',
+  },
+  {
+    key: 'branch',
+    title: '分店',
+    dataKey: 'branch',
+    width: 150,
+    align: 'center',
+  },
+  {
+    key: 'floor',
+    title: '樓層',
+    dataKey: 'floor',
+    width: 150,
+    align: 'center',
+    cellRenderer: ({cellData:floor}) => floor < 0 ? `B ${(-1)*floor}` : `${floor} F`
+  },
+  {
+    key: 'table_no',
+    title: '桌號',
+    dataKey: 'table_no',
+    width: 150,
+    align: 'center',
+  },
+  {
+    key: 'capacity',
+    title: '容納人數',
+    dataKey: 'capacity',
+    width: 150,
+    align: 'center',
+    cellRenderer: ({cellData:capacity}) => `${capacity} 人`
+  },
+]
+const tableData = [
+  {
+    id: 1,
+    branch: '中華一店',
+    floor: -1,
+    table_no: 'A1',
+    capacity: 5,
+  },
+  {
+    id: 2,
+    branch: '成功二店',
+    floor: 1,
+    table_no: 'A8',
+    capacity: 5,
+  },
+  {
+    id: 3,
+    branch: '信義三店',
+    floor: 2,
+    table_no: 'C22',
+    capacity: 5,
+  },
+  {
+    id: 4,
+    branch: '中華一店',
+    floor: 3,
+    table_no: 'D5',
+    capacity: 5,
+  },
+  {
+    id: 5,
+    branch: '中華一店',
+    floor: 4,
+    table_no: 'D5',
+    capacity: 5,
+  },
+  {
+    id: 6,
+    branch: '中華一店',
+    floor: 5,
+    table_no: 'D5',
+    capacity: 5,
+  },
+  {
+    id: 7,
+    branch: '中華一店',
+    floor: 6,
+    table_no: 'D5',
+    capacity: 5,
+  },
+  {
+    id: 8,
+    branch: '中華一店',
+    floor: 7,
+    table_no: 'D5',
+    capacity: 5,
+  },
+]
+
+const initSearchParams = {
+  branch_id: 0,
+}
+
+const searchParams = reactive({ ...initSearchParams })
+function handleReset() {
+  Object.assign(searchParams, initSearchParams)
+}
+function handleSearch() {
+  console.log(searchParams)
+}
+
+function handleDelete(index, row) {
+  ElMessageBox.confirm(
+      '是否刪除此桌位？',
+      '刪除',
+      {
+        confirmButtonText: '確認',
+        cancelButtonText: '取消',
+        type: 'error',
+        center: false,
+        showClose: false,
+      }
+  ).then(() => {
+    // call delete api
+    ElMessage({
+      type: 'success',
+      message: '刪除成功',
+    })
+  }).catch(() => {})
+  console.log('delete', index, row.id)
+}
+
+const EditTableDrawer = ref(null)
+function handleEdit(index, row) {
+  EditTableDrawer.value.show(row.id)
+  console.log('edit', index, row.id)
+}
+
+const CreateTableDrawer = ref(null)
+function handleCreate() {
+  CreateTableDrawer.value.show()
+}
+
+const paginationParams = {
+  page: 1,
+  page_size: 10,
+  total: 40,
+}
+const pagination = reactive({ ...paginationParams })
+function handleChange(value) {
+  Object.assign(pagination, value)
+  // call api to get new data
+  console.log(value)
+}
+</script>
+
+<template>
+  <div class="dashboard-container">
+    <ControlPlane
+        :reset="handleReset"
+        :search="handleSearch"
+    >
+      <FilterItem title="分店">
+        <ElSelect v-model="searchParams.branch_id" placeholder="請選擇">
+          <ElOption label="全部" :value="0"/>
+          <ElOption label="中華一店" :value="1"/>
+          <ElOption label="成功二店" :value="2"/>
+        </ElSelect>
+      </FilterItem>
+    </ControlPlane>
+    <DataPlane>
+      <template #btn-group>
+        <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate">新增</ElButton>
+      </template>
+      <template #main-data>
+        <AppTable
+            :data="tableData"
+            :columns="tableColumn"
+            :edit="handleEdit"
+            :delete="handleDelete"
+        />
+      </template>
+      <template #page-data>
+        <AppPagination :data="pagination" @change="handleChange" />
+      </template>
+    </DataPlane>
+    <TableDrawer ref="CreateTableDrawer" type="create" />
+    <TableDrawer ref="EditTableDrawer" type="edit" />
+  </div>
+</template>
+
+<style lang="scss" scoped>
+</style>
