@@ -3,7 +3,6 @@ import MainLayout from '@/layout/MainLayout.vue'
 import {ColdDrink, Food, Location, Odometer, PieChart, Setting, ShoppingCart, User} from "@element-plus/icons-vue";
 import {useRoutesStore} from "@/stores/routes";
 import {useAdminStore} from "@/stores/admin";
-import MainDashboard from "@/views/dashboard/MainDashboard.vue";
 
 export const constRoutes = [
   {
@@ -17,7 +16,7 @@ export const constRoutes = [
         path: '/dashboard',
         name: 'Dashboard',
         meta: { title: '首頁', key: 'Dashboard' },
-        component: MainDashboard,
+        component: () => import('@/views/dashboard/MainDashboard.vue'),
       },
     ]
   },
