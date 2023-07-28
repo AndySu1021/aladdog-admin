@@ -9,7 +9,7 @@ export const setLanguage = (language) => localStorage.setItem(languageKey, langu
 
 // User
 const tokenKey = 'adminToken'
-export const getToken = () => localStorage.getItem(tokenKey)
+export const getToken = () => localStorage.getItem(tokenKey) ? localStorage.getItem(tokenKey) : ''
 export const setToken = (token) => localStorage.setItem(tokenKey, `${token}`)
 export const removeToken = () => localStorage.removeItem(tokenKey)
 

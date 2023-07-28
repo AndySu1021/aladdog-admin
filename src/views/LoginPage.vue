@@ -1,5 +1,74 @@
 <script setup>
 import {reactive, ref} from "vue";
+import {useRoutesStore} from "@/stores/routes";
+import {useAdminStore} from "@/stores/admin";
+import {useRouter} from "vue-router";
+import {setToken} from "@/utils/storage";
+
+const permissions = [
+  'Branch',
+  'Branch.List',
+  'Branch.List.Create',
+  'Branch.List.Edit',
+  'Branch.List.Delete',
+  'Branch.List.Password',
+  'Branch.Station',
+  'Branch.Station.Create',
+  'Branch.Station.Edit',
+  'Branch.Station.Delete',
+  'Branch.Table',
+  'Branch.Table.Create',
+  'Branch.Table.Edit',
+  'Branch.Table.Delete',
+  'Liquor',
+  'Liquor.Stock',
+  'Liquor.Stock.Create',
+  'Liquor.Stock.Edit',
+  'Liquor.Stock.Delete',
+  'Liquor.Stock.Replenish',
+  'Liquor.Recipe',
+  'Liquor.Recipe.Create',
+  'Liquor.Recipe.Edit',
+  'Liquor.Recipe.Delete',
+  'Liquor.Recipe.Category',
+  'Liquor.Addon',
+  'Liquor.Addon.Create',
+  'Liquor.Addon.Edit',
+  'Liquor.Addon.Delete',
+  'Product',
+  'Product.Create',
+  'Product.Edit',
+  'Product.Delete',
+  'Product.Category',
+  'Order',
+  'Report',
+  'Report.Profit',
+  'Report.Product',
+  'Staff',
+  'Staff.List',
+  'Staff.List.Create',
+  'Staff.List.Edit',
+  'Staff.List.Delete',
+  'Staff.AttendanceRecord',
+  'System',
+  'System.Role',
+  'System.Role.Create',
+  'System.Role.Edit',
+  'System.Role.Delete',
+  'System.Admin',
+  'System.Admin.Create',
+  'System.Admin.Edit',
+  'System.Admin.Delete',
+  'System.Admin.Password',
+  'System.Oplog',
+  'System.Setting',
+]
+
+const router = useRouter()
+const routeStore = useRoutesStore()
+const adminStore = useAdminStore()
+
+const loading = ref(false)
 
 const initForm ={
   company_no: '',
@@ -27,7 +96,20 @@ const LoginButton = ref(null)
 function handleLogin() {
   LoginForm.value.validate((valid, fields) => {
     if (valid) {
+      loading.value = true
       // call login api
+      setTimeout(function () {
+        setToken('ca4c0bc59653558441aa14386978bd6f')
+        adminStore.setAdmin({
+          name: 'Andy',
+          token: 'ca4c0bc59653558441aa14386978bd6f',
+          branch_id: 0,
+          permissions: permissions,
+        })
+        routeStore.setPermissions(permissions)
+        loading.value = false
+        router.push('/dashboard')
+      }, 1000)
       console.log(form)
     } else {
       console.log('error submit!', fields)
@@ -43,7 +125,7 @@ window.addEventListener('keyup', (event) => {
 </script>
 
 <template>
-  <div class="login-container">
+  <div class="login-container" v-loading="loading">
     <div class="login-container--form">
       <div class="login-container--title">管理後台</div>
       <ElForm
