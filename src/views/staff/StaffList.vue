@@ -8,6 +8,7 @@ import {reactive, ref} from "vue";
 import {ElButton, ElMessage, ElMessageBox} from "element-plus";
 import StaffDrawer from "@/views/staff/StaffDrawer.vue";
 import AppPagination from "@/components/AppPagination.vue";
+import {useAdminStore} from "@/stores/admin";
 
 const tableColumn = [
   {
@@ -177,6 +178,8 @@ function handleChange(value) {
   // call api to get new data
   console.log(value)
 }
+
+const store = useAdminStore()
 </script>
 
 <template>
@@ -198,14 +201,16 @@ function handleChange(value) {
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate">新增</ElButton>
+        <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate" :disabled="!store.checkPermission('Staff.List.Create')">新增</ElButton>
       </template>
       <template #main-data>
         <AppTable
             :data="tableData"
             :columns="tableColumn"
             :edit="handleEdit"
+            edit-key="Staff.List.Edit"
             :delete="handleDelete"
+            delete-key="Staff.List.Delete"
         />
       </template>
       <template #page-data>

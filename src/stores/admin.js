@@ -7,34 +7,34 @@ export const useAdminStore = defineStore('counter', () => {
     const branchId = ref(0)
     const permissions = ref([
         'Branch',
-        'Branch.BranchList',
-        'Branch.BranchList.Create',
-        'Branch.BranchList.Edit',
-        'Branch.BranchList.Delete',
-        'Branch.BranchList.Password',
-        'Branch.BranchStation',
-        'Branch.BranchStation.Create',
-        'Branch.BranchStation.Edit',
-        'Branch.BranchStation.Delete',
-        'Branch.BranchTable',
-        'Branch.BranchTable.Create',
-        'Branch.BranchTable.Edit',
-        'Branch.BranchTable.Delete',
+        'Branch.List',
+        'Branch.List.Create',
+        'Branch.List.Edit',
+        'Branch.List.Delete',
+        'Branch.List.Password',
+        'Branch.Station',
+        'Branch.Station.Create',
+        'Branch.Station.Edit',
+        'Branch.Station.Delete',
+        'Branch.Table',
+        'Branch.Table.Create',
+        'Branch.Table.Edit',
+        'Branch.Table.Delete',
         'Liquor',
-        'Liquor.LiquorStock',
-        'Liquor.LiquorStock.Create',
-        'Liquor.LiquorStock.Edit',
-        'Liquor.LiquorStock.Delete',
-        'Liquor.LiquorStock.Replenish',
-        'Liquor.LiquorRecipe',
-        'Liquor.LiquorRecipe.Create',
-        'Liquor.LiquorRecipe.Edit',
-        'Liquor.LiquorRecipe.Delete',
-        'Liquor.LiquorRecipe.Category',
-        'Liquor.LiquorAddon',
-        'Liquor.LiquorAddon.Create',
-        'Liquor.LiquorAddon.Edit',
-        'Liquor.LiquorAddon.Delete',
+        'Liquor.Stock',
+        'Liquor.Stock.Create',
+        'Liquor.Stock.Edit',
+        'Liquor.Stock.Delete',
+        'Liquor.Stock.Replenish',
+        'Liquor.Recipe',
+        'Liquor.Recipe.Create',
+        'Liquor.Recipe.Edit',
+        'Liquor.Recipe.Delete',
+        'Liquor.Recipe.Category',
+        'Liquor.Addon',
+        'Liquor.Addon.Create',
+        'Liquor.Addon.Edit',
+        'Liquor.Addon.Delete',
         'Product',
         'Product.Create',
         'Product.Edit',
@@ -45,11 +45,11 @@ export const useAdminStore = defineStore('counter', () => {
         'Report.Profit',
         'Report.Product',
         'Staff',
-        'Staff.StaffList',
-        'Staff.StaffList.Create',
-        'Staff.StaffList.Edit',
-        'Staff.StaffList.Delete',
-        'Staff.StaffAttendanceRecord',
+        'Staff.List',
+        'Staff.List.Create',
+        'Staff.List.Edit',
+        'Staff.List.Delete',
+        'Staff.AttendanceRecord',
         'System',
         'System.Role',
         'System.Role.Create',
@@ -61,19 +61,23 @@ export const useAdminStore = defineStore('counter', () => {
         'System.Admin.Delete',
         'System.Admin.Password',
         'System.Oplog',
-    ])
+        'System.Setting',
+    ].reduce((a, v) => ({ ...a, [v]: true}), {}))
 
     const getToken = computed(() => token.value)
     const getName = computed(() => name.value)
     const getBranchId = computed(() => branchId.value)
-    const getPermissions = computed(() => permissions.value)
 
     function setAdmin(info) {
         name.value = info.name
         token.value = info.token
         branchId.value = info.branch_id
-        permissions.value = info.permissions
+        permissions.value = info.permissions.reduce((a, v) => ({ ...a, [v]: true}), {})
     }
 
-    return { name, token, branchId, getToken, getName, getBranchId, getPermissions, setAdmin }
+    function checkPermission(permission) {
+        return !!permissions.value[permission]
+    }
+
+    return { name, token, branchId, permissions, getToken, getName, getBranchId, setAdmin, checkPermission }
 })

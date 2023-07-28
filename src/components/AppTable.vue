@@ -2,19 +2,34 @@
 import {Delete, EditPen, Lock, View} from "@element-plus/icons-vue";
 import {h, reactive} from "vue";
 import {ElButton, TableV2FixedDir} from "element-plus";
+import {useAdminStore} from "@/stores/admin";
+
+const store = useAdminStore()
 
 const props = defineProps({
   detail: {
     type: Function,
     default: null,
   },
+  passwordKey: {
+    type: String,
+    default: '',
+  },
   password: {
     type: Function,
     default: null,
   },
+  editKey: {
+    type: String,
+    default: '',
+  },
   edit: {
     type: Function,
     default: null,
+  },
+  deleteKey: {
+    type: String,
+    default: '',
   },
   delete: {
     type: Function,
@@ -29,7 +44,7 @@ const props = defineProps({
   rowHeight: {
     type: Number,
     default: 58,
-  }
+  },
 })
 
 let tmpColumns = reactive(props.columns)
@@ -69,18 +84,21 @@ if (props.detail || props.password || props.edit || props.delete) {
                 icon: Lock,
                 onClick: () => props.password(data.rowIndex, data.rowData),
                 circle: true,
+                disabled: props.passwordKey === '' ? false : !store.checkPermission(props.passwordKey),
               }) : null,
               props.edit ? h(ElButton, {
                 icon: EditPen,
                 onClick: () => props.edit(data.rowIndex, data.rowData),
                 circle: true,
                 color: '#eaeaea',
+                disabled: props.deleteKey === '' ? false : !store.checkPermission(props.editKey),
               }) : null,
               props.delete ? h(ElButton, {
                 type: 'danger',
                 icon: Delete,
                 onClick: () => props.delete(data.rowIndex, data.rowData),
-                circle: true
+                circle: true,
+                disabled: props.deleteKey === '' ? false : !store.checkPermission(props.deleteKey),
               }) : null,
             ]
         )
