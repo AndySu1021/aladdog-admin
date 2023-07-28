@@ -3,8 +3,20 @@ import MainLayout from '@/layout/MainLayout.vue'
 import {ColdDrink, Food, Location, Odometer, PieChart, Setting, ShoppingCart, User} from "@element-plus/icons-vue";
 import {useRoutesStore} from "@/stores/routes";
 import {useAdminStore} from "@/stores/admin";
+import LoginPage from "@/views/LoginPage.vue";
+import NotFoundPage from "@/views/NotFoundPage.vue";
 
 export const constRoutes = [
+  {
+    path: '/login',
+    component: LoginPage,
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: NotFoundPage,
+    hidden: true
+  },
   {
     path: '/',
     name: 'Root',

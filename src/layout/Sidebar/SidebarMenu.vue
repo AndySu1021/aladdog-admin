@@ -18,13 +18,15 @@ const store = useRoutesStore()
       :collapse="isCollapse"
       :router="true"
   >
-    <SidebarItem
-        v-for="route in store.getRoutes"
-        :key="route.path"
-        :item="route"
-        :path="route.path"
-        :is-top="true"
-    />
+    <template v-for="route in store.getRoutes">
+      <SidebarItem
+          v-if="!route.hidden"
+          :key="route.path"
+          :item="route"
+          :path="route.path"
+          :is-top="true"
+      />
+    </template>
   </ElMenu>
 </div>
 </template>
