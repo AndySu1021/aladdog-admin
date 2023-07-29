@@ -5,6 +5,7 @@ import {useRoutesStore} from "@/stores/routes";
 import LoginPage from "@/views/LoginPage.vue";
 import NotFoundPage from "@/views/NotFoundPage.vue";
 import {getToken} from "@/utils/storage";
+import {useAdminStore} from "@/stores/admin";
 
 export const constRoutes = [
   {
@@ -196,13 +197,14 @@ export const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const routeStore = useRoutesStore()
+  const adminStore = useAdminStore()
 
   if (to.path === '/login') {
     next()
     return
   }
 
-  if (to.path !== '/login' && getToken() === '') {
+  if (to.path !== '/login' && adminStore.getToken === '') {
     // redirect to login page
     next({ path: '/login' })
     return
@@ -214,7 +216,7 @@ router.beforeEach((to, from, next) => {
     return
   }
 
-  const permRouters = routeStore.getPermissionRoutes()
+  const permRouters = routeStore.getPermissionRoutes(adminStore.getPermissions)
   permRouters.forEach(function (route) {
     router.addRoute(route)
     if (route.children.length > 0) {

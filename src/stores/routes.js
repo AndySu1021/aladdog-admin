@@ -2,22 +2,17 @@ import {defineStore} from "pinia";
 import {computed, ref} from "vue";
 import {constRoutes, permRoutes} from "@/router";
 
-export const useRoutesStore = defineStore('routes', () =>{
+export const useRoutesStore = defineStore('routes', () => {
     const routes = ref([])
-    const permissions = ref({})
 
     const getRoutes = computed(function () {
         return routes.value
     })
 
-    function setPermissions(permissionData) {
-        permissions.value = permissionData
-    }
-
-    function getPermissionRoutes () {
+    function getPermissionRoutes (permissionData) {
         const result = []
         permRoutes.forEach(function (route) {
-            if (permissions.value[route.meta.key]) {
+            if (permissionData[route.meta.key]) {
                 const tmp = {
                     path: route.path,
                     name: route.name,
@@ -27,7 +22,7 @@ export const useRoutesStore = defineStore('routes', () =>{
                 };
                 if (route.children.length > 0) {
                     route.children.forEach(function (child) {
-                        if (permissions.value[child.meta.key]) {
+                        if (permissionData[child.meta.key]) {
                             tmp.children.push({
                                 path: child.path,
                                 name: child.name,
@@ -44,5 +39,5 @@ export const useRoutesStore = defineStore('routes', () =>{
         return result
     }
 
-    return {routes, permissions, getRoutes, setPermissions, getPermissionRoutes}
+    return {routes, getRoutes, getPermissionRoutes}
 })

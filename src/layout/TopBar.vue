@@ -3,7 +3,6 @@ import {BellFilled, CaretBottom, Setting, SwitchButton, Warning} from "@element-
 import {ref} from "vue";
 import {useAdminStore} from "@/stores/admin";
 import {ElMessage, ElMessageBox} from "element-plus";
-import {removeToken} from "@/utils/storage";
 import {useRoute, useRouter} from "vue-router";
 
 const hasDot = ref(true)
@@ -36,8 +35,6 @@ const notices = ref([
 function handleNotice(noticeId) {
   console.log(noticeId)
 }
-
-const adminStore = useAdminStore()
 
 function handleCommand(command) {
   switch (command) {
@@ -73,8 +70,7 @@ function handleCommand(command) {
           }
       ).then(() => {
         // TODO: call logout api
-        adminStore.$reset()
-        removeToken()
+        localStorage.clear()
         ElMessage({
           type: 'success',
           message: '登出成功',

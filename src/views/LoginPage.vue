@@ -112,15 +112,12 @@ function handleLogin() {
       loading.value = true
       // call login api
       setTimeout(function () {
-        const perm = resolvePermission()
-        setToken('ca4c0bc59653558441aa14386978bd6f')
         adminStore.setAdmin({
           name: 'Andy',
           token: 'ca4c0bc59653558441aa14386978bd6f',
           branch_id: 0,
-          permissions: perm,
+          permissions: resolvePermission(),
         })
-        routeStore.setPermissions(perm)
         loading.value = false
         router.push('/dashboard')
       }, 1000)

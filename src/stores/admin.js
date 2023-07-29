@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {computed, ref} from "vue";
 
-export const useAdminStore = defineStore('counter', () => {
+export const useAdminStore = defineStore('admin', () => {
     const name = ref('')
     const token = ref('')
     const branchId = ref(0)
@@ -10,6 +10,7 @@ export const useAdminStore = defineStore('counter', () => {
     const getToken = computed(() => token.value)
     const getName = computed(() => name.value)
     const getBranchId = computed(() => branchId.value)
+    const getPermissions = computed(() => permissions.value)
 
     function setAdmin(info) {
         name.value = info.name
@@ -22,12 +23,9 @@ export const useAdminStore = defineStore('counter', () => {
         return !!permissions.value[permission]
     }
 
-    function $reset() {
-        name.value = ''
-        token.value = ''
-        branchId.value = 0
-        permissions.value = {}
+    return { name, token, branchId, permissions, getToken, getName, getBranchId, getPermissions, setAdmin, checkPermission }
+}, {
+    persist: {
+        enabled: true,
     }
-
-    return { name, token, branchId, permissions, getToken, getName, getBranchId, setAdmin, checkPermission, $reset }
 })
