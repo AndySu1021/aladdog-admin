@@ -92,6 +92,19 @@ const rules= reactive({
 
 const LoginForm = ref(null)
 
+function resolvePermission() {
+  const permMap = permissions.reduce((a, v) => ({ ...a, [v]: true}), {})
+  for (const [key] of Object.entries(permMap)) {
+    const tmp = key.split('.')
+    if (tmp.length === 3) {
+      permMap[tmp[0]] = true
+      permMap[`${tmp[0]}.${tmp[1]}`] = true
+    }
+  }
+
+  return permMap
+}
+
 const LoginButton = ref(null)
 function handleLogin() {
   LoginForm.value.validate((valid, fields) => {
@@ -99,14 +112,15 @@ function handleLogin() {
       loading.value = true
       // call login api
       setTimeout(function () {
+        const perm = resolvePermission()
         setToken('ca4c0bc59653558441aa14386978bd6f')
         adminStore.setAdmin({
           name: 'Andy',
           token: 'ca4c0bc59653558441aa14386978bd6f',
           branch_id: 0,
-          permissions: permissions,
+          permissions: perm,
         })
-        routeStore.setPermissions(permissions)
+        routeStore.setPermissions(perm)
         loading.value = false
         router.push('/dashboard')
       }, 1000)

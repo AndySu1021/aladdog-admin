@@ -2,7 +2,6 @@ import {createRouter, createWebHistory} from 'vue-router'
 import MainLayout from '@/layout/MainLayout.vue'
 import {ColdDrink, Food, Location, Odometer, PieChart, Setting, ShoppingCart, User} from "@element-plus/icons-vue";
 import {useRoutesStore} from "@/stores/routes";
-import {useAdminStore} from "@/stores/admin";
 import LoginPage from "@/views/LoginPage.vue";
 import NotFoundPage from "@/views/NotFoundPage.vue";
 import {getToken} from "@/utils/storage";

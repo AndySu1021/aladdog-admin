@@ -15,7 +15,7 @@ export const useAdminStore = defineStore('counter', () => {
         name.value = info.name
         token.value = info.token
         branchId.value = info.branch_id
-        permissions.value = info.permissions.reduce((a, v) => ({ ...a, [v]: true}), {})
+        permissions.value = info.permissions
     }
 
     function checkPermission(permission) {

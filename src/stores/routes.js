@@ -11,7 +11,7 @@ export const useRoutesStore = defineStore('routes', () =>{
     })
 
     function setPermissions(permissionData) {
-        permissions.value = permissionData.reduce((a, v) => ({ ...a, [v]: true}), {})
+        permissions.value = permissionData
     }
 
     function getPermissionRoutes () {
