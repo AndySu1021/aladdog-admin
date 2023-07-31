@@ -206,13 +206,13 @@ export const permRoutes = [
         path: '/bill/payment',
         name: 'BillPayment',
         meta: { title: '付款設定', key: 'Bill.Payment' },
-        component: () => import('@/views/system/RoleList.vue'),
+        component: () => import('@/views/bill/BillPayment.vue'),
       },
       {
         path: '/bill/transaction',
         name: 'BillTransaction',
         meta: { title: '交易紀錄', key: 'Bill.Transaction' },
-        component: () => import('@/views/system/AdminList.vue'),
+        component: () => import('@/views/bill/BillTransaction.vue'),
       },
     ]
   },

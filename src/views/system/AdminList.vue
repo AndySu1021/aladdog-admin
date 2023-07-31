@@ -219,8 +219,8 @@ function handleChange(value) {
 <template>
   <div class="dashboard-container">
     <ControlPlane
-        @on-reset="handleReset"
-        @on-search="handleSearch"
+        :reset="handleReset"
+        :search="handleSearch"
     >
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />

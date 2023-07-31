@@ -10,3 +10,37 @@ export function getAddonCategory(data) {
         8: '其他',
     })
 }
+
+export function getPayStatus(data) {
+    Object.assign(data.value, {
+        1: {
+            type: 'info',
+            text: '未付款',
+        },
+        2: {
+            type: 'success',
+            text: '已付款',
+        },
+        3: {
+            type: 'danger',
+            text: '付款失敗',
+        },
+    })
+}
+
+export function getInvoiceStatus(data) {
+    Object.assign(data.value, {
+        1: {
+            type: 'info',
+            text: '未開立',
+        },
+        2: {
+            type: 'success',
+            text: '已開立',
+        },
+        3: {
+            type: 'danger',
+            text: '已作廢',
+        },
+    })
+}
