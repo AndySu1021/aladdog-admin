@@ -294,5 +294,19 @@ export function getPermissionData(data) {
                 },
             ]
         },
+        {
+            'id': 'Bill',
+            'label': '帳單',
+            'children': [
+                {
+                    'id': 'Bill.Payment',
+                    'label': '付款設定',
+                },
+                {
+                    'id': 'Bill.Transaction',
+                    'label': '交易紀錄',
+                }
+            ]
+        },
     ]
 }

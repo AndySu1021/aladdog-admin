@@ -1,5 +1,5 @@
 export function getAddonCategory(data) {
-    data.value = Object.assign(data, {
+    Object.assign(data.value, {
         1: '琴酒',
         2: '伏特加',
         3: '威士忌',

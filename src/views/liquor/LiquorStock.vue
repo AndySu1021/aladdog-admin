@@ -9,6 +9,7 @@ import {ElButton, ElMessage, ElMessageBox} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
 import StockDrawer from "@/views/liquor/StockDrawer.vue";
 import StockDialog from "@/views/liquor/StockDialog.vue";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
   {
@@ -206,11 +207,7 @@ function handleChange(value) {
         :search="handleSearch"
     >
       <FilterItem title="分店">
-        <ElSelect v-model="searchParams.branch_id" placeholder="請選擇">
-          <ElOption label="全部" :value="0"/>
-          <ElOption label="中華一店" :value="1"/>
-          <ElOption label="成功二店" :value="2"/>
-        </ElSelect>
+        <BranchSelect v-model="searchParams.branch_id" :show-all="true" />
       </FilterItem>
       <FilterItem title="名稱">
         <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />

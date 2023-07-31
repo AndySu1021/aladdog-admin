@@ -2,10 +2,11 @@
 import AppDrawer from "@/components/AppDrawer.vue";
 import {reactive, ref} from "vue";
 import {getAddonCategory} from "@/composable/enums";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const category = ref({})
 getAddonCategory(category)
-const categoryIds = Object.keys(category).map((value) => Number(value))
+const categoryIds = Object.keys(category.value).map((value) => Number(value))
 
 const props = defineProps({
   type: String,
@@ -98,15 +99,12 @@ const rules = reactive({
         label-position="top"
         status-icon
     >
-      <ElFormItem label="分店" required prop="branch_id">
-        <ElSelect v-model.number="form.branch_id" placeholder="請選擇">
-          <ElOption label="中華一店" :value="1" />
-          <ElOption label="成功二店" :value="2" />
-        </ElSelect>
+      <ElFormItem v-if="adminStore.getBranchId === 0" label="分店" required prop="branch_id">
+        <BranchSelect v-model.number="form.branch_id" />
       </ElFormItem>
       <ElFormItem label="分類" required prop="category_id">
         <ElSelect v-model.number="form.category_id" placeholder="請選擇">
-          <ElOption v-for="key in categoryIds" :key="key" :label="category[key]" :value="key" />
+          <ElOption v-for="(key, idx) in categoryIds" :key="idx" :label="category[key]" :value="key" />
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="酒品" required prop="stock_id">

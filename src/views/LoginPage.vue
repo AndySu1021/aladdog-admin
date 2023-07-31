@@ -70,6 +70,9 @@ const permissions = [
   'System.Admin.Password',
   'System.Oplog',
   'System.Setting',
+  'Bill',
+  'Bill.Payment',
+  'Bill.Transaction',
 ]
 
 const router = useRouter()

@@ -1,6 +1,7 @@
 <script setup>
 import {Plus} from "@element-plus/icons-vue";
 import {reactive, ref} from "vue";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const isShow = ref(false)
 function show() {
@@ -69,11 +70,8 @@ function handleCancel() {
         status-icon
         label-width="120px"
     >
-      <ElFormItem label="分店" required prop="branch_id">
-        <ElSelect v-model.number="form.branch_id" placeholder="請選擇">
-          <ElOption label="中華一店" :value="1" />
-          <ElOption label="成功二店" :value="2" />
-        </ElSelect>
+      <ElFormItem v-if="adminStore.getBranchId === 0" label="分店" required prop="branch_id">
+        <BranchSelect v-model.number="form.branch_id" />
       </ElFormItem>
       <template v-for="(stock, idx) in form.stocks" :key="idx">
         <ElFormItem :label="`酒品 ${idx+1}`" required>

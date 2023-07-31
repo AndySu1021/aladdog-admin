@@ -1,6 +1,15 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import MainLayout from '@/layout/MainLayout.vue'
-import {ColdDrink, Food, Location, Odometer, PieChart, Setting, ShoppingCart, User} from "@element-plus/icons-vue";
+import {
+  ColdDrink,
+  Food,
+  Location,
+  Odometer,
+  PieChart,
+  Setting,
+  ShoppingCart,
+  User, Wallet
+} from "@element-plus/icons-vue";
 import {useRoutesStore} from "@/stores/routes";
 import LoginPage from "@/views/LoginPage.vue";
 import NotFoundPage from "@/views/NotFoundPage.vue";
@@ -184,6 +193,26 @@ export const permRoutes = [
         name: 'SystemSetting',
         meta: { title: '設定', key: 'System.Setting' },
         component: () => import('@/views/system/SystemSetting.vue'),
+      },
+    ]
+  },
+  {
+    path: '/bill',
+    name: 'Bill',
+    meta: { title: '帳單', icon: Wallet, key: 'Bill' },
+    component: MainLayout,
+    children: [
+      {
+        path: '/bill/payment',
+        name: 'BillPayment',
+        meta: { title: '付款設定', key: 'Bill.Payment' },
+        component: () => import('@/views/system/RoleList.vue'),
+      },
+      {
+        path: '/bill/transaction',
+        name: 'BillTransaction',
+        meta: { title: '交易紀錄', key: 'Bill.Transaction' },
+        component: () => import('@/views/system/AdminList.vue'),
       },
     ]
   },

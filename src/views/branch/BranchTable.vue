@@ -8,6 +8,7 @@ import {reactive, ref} from "vue";
 import {ElButton, ElMessage, ElMessageBox} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
 import TableDrawer from "@/views/branch/TableDrawer.vue";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
   {
@@ -171,11 +172,7 @@ function handleChange(value) {
         :search="handleSearch"
     >
       <FilterItem title="分店">
-        <ElSelect v-model="searchParams.branch_id" placeholder="請選擇">
-          <ElOption label="全部" :value="0"/>
-          <ElOption label="中華一店" :value="1"/>
-          <ElOption label="成功二店" :value="2"/>
-        </ElSelect>
+        <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
     </ControlPlane>
     <DataPlane>

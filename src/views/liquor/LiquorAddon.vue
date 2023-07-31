@@ -9,6 +9,7 @@ import {ElButton, ElMessage, ElMessageBox} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
 import AddonDrawer from "@/views/liquor/AddonDrawer.vue";
 import {getAddonCategory} from "@/composable/enums";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const category = ref({})
 getAddonCategory(category)
@@ -34,7 +35,7 @@ const tableColumn = [
     dataKey: 'category_id',
     width: 120,
     align: 'center',
-    cellRenderer: ({cellData: category_id}) => category[category_id],
+    cellRenderer: ({cellData: category_id}) => category.value[category_id],
   },
   {
     key: 'liquor',
@@ -180,11 +181,7 @@ function handleChange(value) {
         :search="handleSearch"
     >
       <FilterItem title="分店">
-        <ElSelect v-model="searchParams.branch_id" placeholder="請選擇">
-          <ElOption label="全部" :value="0"/>
-          <ElOption label="中華一店" :value="1"/>
-          <ElOption label="成功二店" :value="2"/>
-        </ElSelect>
+        <BranchSelect v-model="searchParams.branch_id" :show-all="true" />
       </FilterItem>
       <FilterItem title="名稱">
         <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />
