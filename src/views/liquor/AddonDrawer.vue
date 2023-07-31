@@ -99,7 +99,7 @@ const rules = reactive({
         label-position="top"
         status-icon
     >
-      <ElFormItem v-if="adminStore.getBranchId === 0" label="分店" required prop="branch_id">
+      <ElFormItem label="分店" required prop="branch_id">
         <BranchSelect v-model.number="form.branch_id" />
       </ElFormItem>
       <ElFormItem label="分類" required prop="category_id">

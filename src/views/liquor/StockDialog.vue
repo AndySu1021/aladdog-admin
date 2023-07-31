@@ -70,7 +70,7 @@ function handleCancel() {
         status-icon
         label-width="120px"
     >
-      <ElFormItem v-if="adminStore.getBranchId === 0" label="分店" required prop="branch_id">
+      <ElFormItem label="分店" required prop="branch_id">
         <BranchSelect v-model.number="form.branch_id" />
       </ElFormItem>
       <template v-for="(stock, idx) in form.stocks" :key="idx">

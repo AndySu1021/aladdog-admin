@@ -14,7 +14,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const adminStore = useAdminStore()
 
-const form = reactive({branch_id: null})
+const form = reactive({branch_id: 0})
 
 watch(
     () => form.branch_id,
@@ -25,10 +25,7 @@ watch(
 
 onMounted(() => {
   console.log("call api!!!")
-  if (props.showAll) {
-    form.branch_id = adminStore.getBranchId
-  }
-  // emit('update:modelValue', adminStore.getBranchId)
+  form.branch_id = adminStore.getBranchId
 })
 </script>
 
