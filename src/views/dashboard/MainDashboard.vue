@@ -5,7 +5,11 @@ import {reactive} from "vue";
 
 const chartData = reactive({
   xAxisData: ["07/20", "07/21", "07/22", "07/23", "07/24", "07/25", "07/26"],
-  seriesData: [150, 230, 224, 218, 135, 147, 260],
+  seriesData: [
+    [150, 230, 224, 218, 135, 147, 260],
+    [100, 180, 274, 200, 135, 167, 260],
+    [80, 189, 204, 115, 180, 177, 210],
+  ]
 });
 </script>
 
@@ -107,7 +111,6 @@ const chartData = reactive({
     </ElCol>
   </ElRow>
     <div style="background-color: white;margin-top: 16px;border-radius: 8px;padding: 20px;">
-      <span style="font-size: 16px;font-weight: 500;">每日營業額</span>
       <LineChart :xAxisData="chartData.xAxisData" :seriesData="chartData.seriesData" />
     </div>
   </div>
