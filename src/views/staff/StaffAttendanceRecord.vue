@@ -7,6 +7,7 @@ import FilterItem from "@/components/FilterItem.vue";
 import {reactive} from "vue";
 import AppPagination from "@/components/AppPagination.vue";
 import moment from 'moment';
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
   {
@@ -137,6 +138,9 @@ function handleChange(value) {
         :reset="handleReset"
         :search="handleSearch"
     >
+      <FilterItem title="分店">
+        <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
+      </FilterItem>
       <FilterItem title="日期">
         <ElDatePicker
             v-model="searchParams.date"
@@ -145,13 +149,6 @@ function handleChange(value) {
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
         />
-      </FilterItem>
-      <FilterItem title="分店">
-        <ElSelect v-model="searchParams.branch_id" placeholder="請選擇">
-          <ElOption label="全部" :value="0"/>
-          <ElOption label="中華一店" :value="1"/>
-          <ElOption label="成功二店" :value="2"/>
-        </ElSelect>
       </FilterItem>
       <FilterItem title="姓名">
         <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />

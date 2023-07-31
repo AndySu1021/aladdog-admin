@@ -3,6 +3,7 @@ import AppDrawer from "@/components/AppDrawer.vue";
 import {reactive, ref} from "vue";
 import {Plus} from "@element-plus/icons-vue";
 import AppUpload from "@/components/AppUpload.vue";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const props = defineProps({
   type: String,
@@ -123,10 +124,7 @@ function handleSpecAdd() {
         status-icon
     >
       <ElFormItem label="分店" required prop="branch_id">
-        <ElSelect v-model.number="form.branch_id" placeholder="請選擇">
-          <ElOption label="中華一店" :value="1" />
-          <ElOption label="成功二店" :value="2" />
-        </ElSelect>
+        <BranchSelect v-model.number="form.branch_id" />
       </ElFormItem>
       <ElFormItem label="名稱" required prop="name">
         <ElInput v-model="form.name" />

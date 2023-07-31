@@ -8,6 +8,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  allTitle: {
+    type: String,
+    default: '全部',
+  }
 })
 
 const emit = defineEmits(['update:modelValue']);
@@ -31,7 +35,7 @@ onMounted(() => {
 
 <template>
   <ElSelect v-model.number="form.branch_id" placeholder="請選擇" :disabled="adminStore.getBranchId !== 0">
-    <ElOption v-if="props.showAll" label="全部" :value="0"/>
+    <ElOption v-if="props.showAll" :label="allTitle" :value="0"/>
     <ElOption label="中華一店" :value="1"/>
     <ElOption label="成功二店" :value="2"/>
   </ElSelect>

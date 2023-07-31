@@ -8,6 +8,7 @@ import AppPagination from "@/components/AppPagination.vue";
 import moment from 'moment';
 import {ElMessage} from "element-plus";
 import {Search} from "@element-plus/icons-vue";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
   {
@@ -150,6 +151,9 @@ function handleDownload() {
         :search="handleSearch"
         :download="handleDownload"
     >
+      <FilterItem title="分店">
+        <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
+      </FilterItem>
       <FilterItem title="類型">
         <ElSelect v-model="searchParams.type" placeholder="請選擇">
           <ElOption label="每日" :value="1"/>
@@ -165,13 +169,6 @@ function handleDownload() {
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
         />
-      </FilterItem>
-      <FilterItem title="分店">
-        <ElSelect v-model="searchParams.branch_id" placeholder="請選擇">
-          <ElOption label="全部" :value="0"/>
-          <ElOption label="中華一店" :value="1"/>
-          <ElOption label="成功二店" :value="2"/>
-        </ElSelect>
       </FilterItem>
       <FilterItem title="商品名稱">
         <ElInput v-model="searchParams.product_name" size="default" placeholder="請輸入" :suffix-icon="Search" />

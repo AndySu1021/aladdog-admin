@@ -1,6 +1,7 @@
 <script setup>
 import AppDrawer from "@/components/AppDrawer.vue";
 import {reactive, ref} from "vue";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const props = defineProps({
   type: String,
@@ -97,14 +98,11 @@ const rules = reactive({
         label-position="top"
         status-icon
     >
+      <ElFormItem label="分店" required prop="branch_id">
+        <BranchSelect v-model="form.branch_id" />
+      </ElFormItem>
       <ElFormItem label="姓名" required prop="name">
         <ElInput v-model="form.name" />
-      </ElFormItem>
-      <ElFormItem label="分店" required prop="branch_id">
-        <ElSelect v-model="form.branch_id" placeholder="請選擇">
-          <ElOption label="中華一店" :value="1" />
-          <ElOption label="成功二店" :value="2" />
-        </ElSelect>
       </ElFormItem>
       <ElFormItem label="性別" required prop="sex">
         <ElRadioGroup v-model="form.sex">

@@ -9,6 +9,7 @@ import {ElButton, ElMessage, ElMessageBox} from "element-plus";
 import StaffDrawer from "@/views/staff/StaffDrawer.vue";
 import AppPagination from "@/components/AppPagination.vue";
 import {useAdminStore} from "@/stores/admin";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
   {
@@ -123,8 +124,8 @@ const tableData = [
 ]
 
 const initSearchParams = {
-  staff_no: "",
   branch_id: 0,
+  staff_no: "",
 }
 
 const searchParams = reactive({ ...initSearchParams })
@@ -188,15 +189,11 @@ const store = useAdminStore()
         :reset="handleReset"
         :search="handleSearch"
     >
+      <FilterItem title="分店">
+        <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
+      </FilterItem>
       <FilterItem title="員工編號">
         <ElInput v-model="searchParams.staff_no" size="default" placeholder="請輸入" :suffix-icon="Search" />
-      </FilterItem>
-      <FilterItem title="性別">
-        <ElSelect v-model="searchParams.branch_id" placeholder="請選擇">
-          <ElOption label="全部" :value="0"/>
-          <ElOption label="男" :value="1"/>
-          <ElOption label="女" :value="2"/>
-        </ElSelect>
       </FilterItem>
     </ControlPlane>
     <DataPlane>
