@@ -1,41 +1,46 @@
 <script setup>
 import {reactive, ref} from "vue";
-import {useRoutesStore} from "@/stores/routes";
 import {useAdminStore} from "@/stores/admin";
 import {useRouter} from "vue-router";
-import {setToken} from "@/utils/storage";
 
 const permissions = [
   'Branch',
   'Branch.List',
+  'Branch.List.View',
   'Branch.List.Create',
   'Branch.List.Edit',
   'Branch.List.Delete',
   'Branch.List.Password',
   'Branch.Station',
+  'Branch.Station.View',
   'Branch.Station.Create',
   'Branch.Station.Edit',
   'Branch.Station.Delete',
   'Branch.Table',
+  'Branch.Table.View',
   'Branch.Table.Create',
   'Branch.Table.Edit',
   'Branch.Table.Delete',
   'Liquor',
   'Liquor.Stock',
+  'Liquor.Stock.View',
   'Liquor.Stock.Create',
   'Liquor.Stock.Edit',
   'Liquor.Stock.Delete',
   'Liquor.Stock.Replenish',
   'Liquor.Recipe',
+  'Liquor.Recipe.View',
   'Liquor.Recipe.Create',
   'Liquor.Recipe.Edit',
   'Liquor.Recipe.Delete',
   'Liquor.Recipe.Category',
   'Liquor.Addon',
+  'Liquor.Addon.View',
   'Liquor.Addon.Create',
   'Liquor.Addon.Edit',
   'Liquor.Addon.Delete',
   'Product',
+  'Product.View',
   'Product.Create',
   'Product.Edit',
   'Product.Delete',
@@ -46,16 +51,19 @@ const permissions = [
   'Report.Product',
   'Staff',
   'Staff.List',
+  'Staff.List.View',
   'Staff.List.Create',
   'Staff.List.Edit',
   'Staff.List.Delete',
   'Staff.AttendanceRecord',
   'System',
   'System.Role',
+  'System.Role.View',
   'System.Role.Create',
   'System.Role.Edit',
   'System.Role.Delete',
   'System.Admin',
+  'System.Admin.View',
   'System.Admin.Create',
   'System.Admin.Edit',
   'System.Admin.Delete',
@@ -65,7 +73,6 @@ const permissions = [
 ]
 
 const router = useRouter()
-const routeStore = useRoutesStore()
 const adminStore = useAdminStore()
 
 const loading = ref(false)
@@ -115,7 +122,7 @@ function handleLogin() {
         adminStore.setAdmin({
           name: 'Andy',
           token: 'ca4c0bc59653558441aa14386978bd6f',
-          branch_id: 0,
+          branch_id: 1,
           permissions: resolvePermission(),
         })
         loading.value = false

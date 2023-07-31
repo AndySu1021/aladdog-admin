@@ -1,7 +1,7 @@
 <script setup>
 import {CaretBottom, CaretTop, Warning} from '@element-plus/icons-vue'
 import LineChart from "@/components/LineChart.vue";
-import {onMounted, reactive} from "vue";
+import {reactive} from "vue";
 
 const chartData = reactive({
   xAxisData: ["07/20", "07/21", "07/22", "07/23", "07/24", "07/25", "07/26"],

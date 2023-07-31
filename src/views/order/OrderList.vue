@@ -6,7 +6,6 @@ import FilterItem from "@/components/FilterItem.vue";
 import {reactive} from "vue";
 import AppPagination from "@/components/AppPagination.vue";
 import moment from 'moment';
-import {ElMessage} from "element-plus";
 
 const tableColumn = [
   {

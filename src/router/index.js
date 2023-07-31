@@ -4,7 +4,6 @@ import {ColdDrink, Food, Location, Odometer, PieChart, Setting, ShoppingCart, Us
 import {useRoutesStore} from "@/stores/routes";
 import LoginPage from "@/views/LoginPage.vue";
 import NotFoundPage from "@/views/NotFoundPage.vue";
-import {getToken} from "@/utils/storage";
 import {useAdminStore} from "@/stores/admin";
 
 export const constRoutes = [
@@ -45,19 +44,19 @@ export const permRoutes = [
       {
         path: '/branch',
         name: 'BranchList',
-        meta: { title: '分店', key: 'Branch.List' },
+        meta: { title: '分店', key: 'Branch.List.View' },
         component: () => import('@/views/branch/BranchList.vue'),
       },
       {
         path: '/branch/station',
         name: 'BranchStation',
-        meta: { title: '崗位', key: 'Branch.Station' },
+        meta: { title: '崗位', key: 'Branch.Station.View' },
         component: () => import('@/views/branch/BranchStation.vue'),
       },
       {
         path: '/branch/table',
         name: 'BranchTable',
-        meta: { title: '桌位', key: 'Branch.Table' },
+        meta: { title: '桌位', key: 'Branch.Table.View' },
         component: () => import('@/views/branch/BranchTable.vue'),
       },
     ]
@@ -71,19 +70,19 @@ export const permRoutes = [
       {
         path: '/liquor/stock',
         name: 'LiquorStock',
-        meta: { title: '庫存', key: 'Liquor.Stock' },
+        meta: { title: '庫存', key: 'Liquor.Stock.View' },
         component: () => import('@/views/liquor/LiquorStock.vue'),
       },
       {
         path: '/liquor/recipe',
         name: 'LiquorRecipe',
-        meta: { title: '酒譜', key: 'Liquor.Recipe' },
+        meta: { title: '酒譜', key: 'Liquor.Recipe.View' },
         component: () => import('@/views/liquor/LiquorRecipe.vue'),
       },
       {
         path: '/liquor/addon',
         name: 'LiquorAddon',
-        meta: { title: '加價購', key: 'Liquor.Addon' },
+        meta: { title: '加價購', key: 'Liquor.Addon.View' },
         component: () => import('@/views/liquor/LiquorAddon.vue'),
       },
     ]
@@ -97,7 +96,7 @@ export const permRoutes = [
       {
         path: '/product',
         name: 'ProductList',
-        meta: { title: '商品', key: 'Product' },
+        meta: { title: '商品', key: 'Product.View' },
         component: () => import('@/views/product/ProductList.vue'),
       },
     ]
@@ -145,7 +144,7 @@ export const permRoutes = [
       {
         path: '/staff/list',
         name: 'StaffList',
-        meta: { title: '員工', key: 'Staff.List' },
+        meta: { title: '員工', key: 'Staff.List.View' },
         component: () => import('@/views/staff/StaffList.vue'),
       },
       {
@@ -165,13 +164,13 @@ export const permRoutes = [
       {
         path: '/system/role',
         name: 'SystemRole',
-        meta: { title: '角色', key: 'System.Role' },
+        meta: { title: '角色', key: 'System.Role.View' },
         component: () => import('@/views/system/RoleList.vue'),
       },
       {
         path: '/system/admin',
         name: 'SystemAdmin',
-        meta: { title: '管理員', key: 'System.Admin' },
+        meta: { title: '管理員', key: 'System.Admin.View' },
         component: () => import('@/views/system/AdminList.vue'),
       },
       {

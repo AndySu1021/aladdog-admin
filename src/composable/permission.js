@@ -9,6 +9,10 @@ export function getPermissionData(data) {
                     'label': '分店',
                     'children': [
                         {
+                            'id': 'Branch.List.View',
+                            'label': '查看',
+                        },
+                        {
                             'id': 'Branch.List.Create',
                             'label': '新增',
                         },
@@ -31,6 +35,10 @@ export function getPermissionData(data) {
                     'label': '崗位',
                     'children': [
                         {
+                            'id': 'Branch.Station.View',
+                            'label': '查看',
+                        },
+                        {
                             'id': 'Branch.Station.Create',
                             'label': '新增',
                         },
@@ -48,6 +56,10 @@ export function getPermissionData(data) {
                     'id': 'Branch.Table',
                     'label': '桌位',
                     'children': [
+                        {
+                            'id': 'Branch.Table.View',
+                            'label': '查看',
+                        },
                         {
                             'id': 'Branch.Table.Create',
                             'label': '新增',
@@ -73,6 +85,10 @@ export function getPermissionData(data) {
                     'label': '庫存',
                     'children': [
                         {
+                            'id': 'Liquor.Stock.View',
+                            'label': '查看',
+                        },
+                        {
                             'id': 'Liquor.Stock.Create',
                             'label': '新增',
                         },
@@ -94,6 +110,10 @@ export function getPermissionData(data) {
                     'id': 'Liquor.Recipe',
                     'label': '酒譜',
                     'children': [
+                        {
+                            'id': 'Liquor.Recipe.View',
+                            'label': '查看',
+                        },
                         {
                             'id': 'Liquor.Recipe.Create',
                             'label': '新增',
@@ -117,6 +137,10 @@ export function getPermissionData(data) {
                     'label': '加價購',
                     'children': [
                         {
+                            'id': 'Liquor.Addon.View',
+                            'label': '查看',
+                        },
+                        {
                             'id': 'Liquor.Addon.Create',
                             'label': '新增',
                         },
@@ -136,6 +160,10 @@ export function getPermissionData(data) {
             'id': 'Product',
             'label': '商品',
             'children': [
+                {
+                    'id': 'Product.View',
+                    'label': '查看',
+                },
                 {
                     'id': 'Product.Create',
                     'label': '新增',
@@ -181,6 +209,10 @@ export function getPermissionData(data) {
                     'label': '員工',
                     'children': [
                         {
+                            'id': 'Staff.List.View',
+                            'label': '查看',
+                        },
+                        {
                             'id': 'Staff.List.Create',
                             'label': '新增',
                         },
@@ -209,6 +241,10 @@ export function getPermissionData(data) {
                     'label': '角色',
                     'children': [
                         {
+                            'id': 'System.Role.View',
+                            'label': '查看',
+                        },
+                        {
                             'id': 'System.Role.Create',
                             'label': '新增',
                         },
@@ -226,6 +262,10 @@ export function getPermissionData(data) {
                     'id': 'System.Admin',
                     'label': '管理員',
                     'children': [
+                        {
+                            'id': 'System.Admin.View',
+                            'label': '查看',
+                        },
                         {
                             'id': 'System.Admin.Create',
                             'label': '新增',
