@@ -157,27 +157,27 @@ export function getPermissionData(data) {
             ]
         },
         {
-            'id': 'Product',
+            'id': 'Meal',
             'label': '商品',
             'children': [
                 {
-                    'id': 'Product.View',
+                    'id': 'Meal.View',
                     'label': '查看',
                 },
                 {
-                    'id': 'Product.Create',
+                    'id': 'Meal.Create',
                     'label': '新增',
                 },
                 {
-                    'id': 'Product.Edit',
+                    'id': 'Meal.Edit',
                     'label': '編輯',
                 },
                 {
-                    'id': 'Product.Delete',
+                    'id': 'Meal.Delete',
                     'label': '刪除',
                 },
                 {
-                    'id': 'Product.Category',
+                    'id': 'Meal.Category',
                     'label': '商品分類',
                 },
             ],
@@ -195,7 +195,7 @@ export function getPermissionData(data) {
                     'label': '營收',
                 },
                 {
-                    'id': 'Report.Product',
+                    'id': 'Report.Meal',
                     'label': '商品',
                 },
             ]

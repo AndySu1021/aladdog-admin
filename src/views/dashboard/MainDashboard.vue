@@ -1,16 +1,17 @@
 <script setup>
 import {CaretBottom, CaretTop, Warning} from '@element-plus/icons-vue'
 import LineChart from "@/components/LineChart.vue";
-import {reactive} from "vue";
 
-const chartData = reactive({
-  xAxisData: ["07/20", "07/21", "07/22", "07/23", "07/24", "07/25", "07/26"],
-  seriesData: [
-    [150, 230, 224, 218, 135, 147, 260],
-    [100, 180, 274, 200, 135, 167, 260],
-    [80, 189, 204, 115, 180, 177, 210],
-  ]
-});
+const chartData = [
+  ['date', '中華一店', '成功二店', '西門三店'],
+  ['07/20', 150, 150, 80],
+  ['07/21', 300, 130, 100],
+  ['07/22', 60, 170, 120],
+  ['07/23', 250, 200, 150],
+  ['07/24', 400, 250, 60],
+  ['07/25', 234, 310, 90],
+  ['07/26', 150, 279, 80],
+]
 </script>
 
 <template>
@@ -111,16 +112,12 @@ const chartData = reactive({
     </ElCol>
   </ElRow>
     <div style="background-color: white;margin-top: 16px;border-radius: 8px;padding: 20px;">
-      <LineChart :xAxisData="chartData.xAxisData" :seriesData="chartData.seriesData" />
+      <LineChart :data-set="chartData" />
     </div>
   </div>
 </template>
 
 <style scoped>
-:global(h2#card-usage ~ .example .example-showcase) {
-  background-color: var(--el-fill-color) !important;
-}
-
 .el-statistic {
   --el-statistic-content-font-size: 28px;
 }

@@ -7,8 +7,8 @@ import FilterItem from "@/components/FilterItem.vue";
 import {h, reactive, ref} from "vue";
 import {ElButton, ElMessage, ElMessageBox, ElTag} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
-import ProductDrawer from "@/views/product/ProductDrawer.vue";
-import ProductCategoryDialog from "@/views/product/ProductCategoryDialog.vue";
+import MealDrawer from "@/views/meal/MealDrawer.vue";
+import MealCategoryDialog from "@/views/meal/MealCategoryDialog.vue";
 import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
@@ -202,15 +202,15 @@ function handleDelete(index, row) {
   console.log('delete', index, row.id)
 }
 
-const EditProductDrawer = ref(null)
+const EditMealDrawer = ref(null)
 function handleEdit(index, row) {
-  EditProductDrawer.value.show(row.id)
+  EditMealDrawer.value.show(row.id)
   console.log('edit', index, row.id)
 }
 
-const CreateProductDrawer = ref(null)
+const CreateMealDrawer = ref(null)
 function handleCreate() {
-  CreateProductDrawer.value.show()
+  CreateMealDrawer.value.show()
 }
 
 const paginationParams = {
@@ -262,9 +262,9 @@ function handleCategory() {
         <AppPagination :data="pagination" @change="handleChange" />
       </template>
     </DataPlane>
-    <ProductDrawer ref="CreateProductDrawer" type="create" />
-    <ProductDrawer ref="EditProductDrawer" type="edit" />
-    <ProductCategoryDialog ref="CategoryDialog" />
+    <MealDrawer ref="CreateMealDrawer" type="create" />
+    <MealDrawer ref="EditMealDrawer" type="edit" />
+    <MealCategoryDialog ref="CategoryDialog" />
   </div>
 </template>
 

@@ -25,8 +25,8 @@ const initForm = {
 
 const form = reactive(JSON.parse(JSON.stringify(initForm)))
 
-const ProductDrawer = ref(null)
-const ProductForm = ref(null)
+const MealDrawer = ref(null)
+const MealForm = ref(null)
 function show(id=0) {
   if (props.type === "create") {
     Object.assign(form, initForm);
@@ -51,20 +51,20 @@ function show(id=0) {
     }
     Object.assign(form, apiReturn);
   }
-  ProductDrawer.value.show()
+  MealDrawer.value.show()
 }
 
 defineExpose({show});
 
 function handleConfirm() {
-  ProductForm.value.validate((valid, fields) => {
+  MealForm.value.validate((valid, fields) => {
     if (valid) {
       if (props.type === "create") {
         // call create api
       } else if (props.type === "edit") {
         // call edit api with {branchId}
       }
-      ProductDrawer.value.close()
+      MealDrawer.value.close()
       console.log(form)
     } else {
       console.log('error submit!', fields)
@@ -76,7 +76,7 @@ function handleCancel() {
   if (props.type === "create") {
     Object.assign(form, JSON.parse(JSON.stringify(initForm)))
   }
-  ProductDrawer.value.close()
+  MealDrawer.value.close()
 }
 
 const rules = reactive({
@@ -110,13 +110,13 @@ function handleSpecAdd() {
 
 <template>
   <AppDrawer
-      ref="ProductDrawer"
+      ref="MealDrawer"
       :title="type === 'create' ? '新增商品' : '編輯商品'"
       @confirm="handleConfirm"
       @cancel="handleCancel"
   >
     <ElForm
-        ref="ProductForm"
+        ref="MealForm"
         :model="form"
         :rules="rules"
         require-asterisk-position="right"

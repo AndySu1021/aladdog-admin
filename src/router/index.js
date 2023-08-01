@@ -2,13 +2,14 @@ import {createRouter, createWebHistory} from 'vue-router'
 import MainLayout from '@/layout/MainLayout.vue'
 import {
   ColdDrink,
-  Food,
+  Dish,
   Location,
   Odometer,
   PieChart,
   Setting,
   ShoppingCart,
-  User, Wallet
+  User,
+  Wallet
 } from "@element-plus/icons-vue";
 import {useRoutesStore} from "@/stores/routes";
 import LoginPage from "@/views/LoginPage.vue";
@@ -97,16 +98,16 @@ export const permRoutes = [
     ]
   },
   {
-    path: '/product',
-    name: 'Product',
-    meta: { title: '商品', icon: Food, key: 'Product' },
+    path: '/meal',
+    name: 'Meal',
+    meta: { title: '餐點', icon: Dish, key: 'Meal' },
     component: MainLayout,
     children: [
       {
-        path: '/product',
-        name: 'ProductList',
-        meta: { title: '商品', key: 'Product.View' },
-        component: () => import('@/views/product/ProductList.vue'),
+        path: '/meal',
+        name: 'MealList',
+        meta: { title: '餐點', key: 'Meal.View' },
+        component: () => import('@/views/meal/MealList.vue'),
       },
     ]
   },
@@ -134,13 +135,13 @@ export const permRoutes = [
         path: '/report/profit',
         name: 'ReportProfit',
         meta: { title: '營收', key: 'Report.Profit' },
-        component: () => import('@/views/report/Profit.vue'),
+        component: () => import('@/views/report/ProfitReport.vue'),
       },
       {
-        path: '/report/product',
-        name: 'ReportProduct',
-        meta: { title: '商品', key: 'Report.Product' },
-        component: () => import('@/views/report/Product.vue'),
+        path: '/report/meal',
+        name: 'ReportMeal',
+        meta: { title: '商品', key: 'Report.Meal' },
+        component: () => import('@/views/report/MealReport.vue'),
       },
     ]
   },
