@@ -158,27 +158,55 @@ export function getPermissionData(data) {
         },
         {
             'id': 'Meal',
-            'label': '商品',
+            'label': '餐點',
             'children': [
                 {
-                    'id': 'Meal.View',
-                    'label': '查看',
-                },
-                {
-                    'id': 'Meal.Create',
-                    'label': '新增',
-                },
-                {
-                    'id': 'Meal.Edit',
-                    'label': '編輯',
-                },
-                {
-                    'id': 'Meal.Delete',
-                    'label': '刪除',
+                    'id': 'Meal.List',
+                    'label': '餐點',
+                    'children': [
+                        {
+                            'id': 'Meal.List.View',
+                            'label': '查看',
+                        },
+                        {
+                            'id': 'Meal.List.Create',
+                            'label': '新增',
+                        },
+                        {
+                            'id': 'Meal.List.Edit',
+                            'label': '編輯',
+                        },
+                        {
+                            'id': 'Meal.List.Delete',
+                            'label': '刪除',
+                        },
+                    ]
                 },
                 {
                     'id': 'Meal.Category',
-                    'label': '商品分類',
+                    'label': '分類',
+                    'children': [
+                        {
+                            'id': 'Meal.Category.View',
+                            'label': '查看',
+                        },
+                        {
+                            'id': 'Meal.Category.Create',
+                            'label': '新增',
+                        },
+                        {
+                            'id': 'Meal.Category.Edit',
+                            'label': '編輯',
+                        },
+                        {
+                            'id': 'Meal.Category.Delete',
+                            'label': '刪除',
+                        },
+                        {
+                            'id': 'Meal.Category.Select',
+                            'label': '挑選商品',
+                        },
+                    ]
                 },
             ],
         },

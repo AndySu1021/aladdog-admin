@@ -9,8 +9,6 @@ const props = defineProps({
   type: String,
 })
 
-const branchId = ref(0)
-
 const initForm = {
   branch_id: null,
   image: '',
@@ -24,7 +22,6 @@ const initForm = {
     quantity: 0,
   }],
 }
-
 const form = reactive(JSON.parse(JSON.stringify(initForm)))
 
 const RecipeDrawer = ref(null)
@@ -33,18 +30,24 @@ function show(id=0) {
   if (props.type === "create") {
     Object.assign(form, initForm);
   } else if (props.type === "edit") {
-    branchId.value = id
     // call api to get data
     const apiReturn = {
-        id: 1,
+        id: id,
         branch_id: 1,
+        image: '',
         name: 'Campari',
-        capacity: 750,
-        quantity: 3,
-        cost: 1200,
+        category_id: 1,
+        price: 1500,
+        cost: 500,
+        is_enabled: 1,
+        stocks: [{
+          stock_id: 1,
+          quantity: 45,
+        }],
     }
-    Object.assign(form, apiReturn);
+    Object.assign(form, JSON.parse(JSON.stringify(apiReturn)))
   }
+  console.log(form)
   RecipeDrawer.value.show()
 }
 
@@ -114,8 +117,8 @@ const categories = ref([
   <AppDrawer
       ref="RecipeDrawer"
       :title="type === 'create' ? '新增酒譜' : '編輯酒譜'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="RecipeForm"
@@ -126,7 +129,7 @@ const categories = ref([
         status-icon
     >
       <ElFormItem label="分店" required prop="branch_id">
-        <BranchSelect v-model.number="form.branch_id" />
+        <BranchSelect v-model.number="form.branch_id" :show-all="false" />
       </ElFormItem>
       <ElFormItem label="圖片" prop="image">
         <AppUpload v-model="form.image" />

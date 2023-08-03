@@ -1,6 +1,9 @@
 <script setup>
 import {useAdminStore} from "@/stores/admin";
-import {onMounted, reactive, watch} from "vue";
+import {reactive, watch} from "vue";
+import {useBranchStore} from "@/stores/branch";
+
+const branchStore = useBranchStore()
 
 const props = defineProps({
   modelValue: Number,
@@ -18,7 +21,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const adminStore = useAdminStore()
 
-const form = reactive({branch_id: 0})
+const form = reactive({branch_id: props.modelValue})
 
 watch(
     () => form.branch_id,
@@ -27,17 +30,15 @@ watch(
     }
 )
 
-onMounted(() => {
-  console.log("call api!!!")
+if (adminStore.getBranchId !== 0) {
   form.branch_id = adminStore.getBranchId
-})
+}
 </script>
 
 <template>
   <ElSelect v-model.number="form.branch_id" placeholder="請選擇" :disabled="adminStore.getBranchId !== 0">
     <ElOption v-if="props.showAll" :label="allTitle" :value="0"/>
-    <ElOption label="中華一店" :value="1"/>
-    <ElOption label="成功二店" :value="2"/>
+    <ElOption v-for="(branch, idx) in branchStore.getBranches" :key="idx" :label="branch.name" :value="branch.id" />
   </ElSelect>
 </template>
 

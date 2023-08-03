@@ -87,8 +87,8 @@ const rules = reactive({
   <AppDrawer
       ref="StaffDrawer"
       :title="type === 'create' ? '新增員工' : '編輯員工'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="StaffForm"

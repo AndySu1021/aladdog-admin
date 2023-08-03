@@ -87,7 +87,7 @@ export const permRoutes = [
         path: '/liquor/recipe',
         name: 'LiquorRecipe',
         meta: { title: '酒譜', key: 'Liquor.Recipe.View' },
-        component: () => import('@/views/liquor/LiquorRecipe.vue'),
+        component: () => import('@/views/liquor/recipe/RecipeList.vue'),
       },
       {
         path: '/liquor/addon',
@@ -104,9 +104,15 @@ export const permRoutes = [
     component: MainLayout,
     children: [
       {
-        path: '/meal',
+        path: '/meal/category',
+        name: 'MealCategory',
+        meta: { title: '分類', key: 'Meal.Category.View' },
+        component: () => import('@/views/meal/MealCategory.vue'),
+      },
+      {
+        path: '/meal/list',
         name: 'MealList',
-        meta: { title: '餐點', key: 'Meal.View' },
+        meta: { title: '餐點', key: 'Meal.List.View' },
         component: () => import('@/views/meal/MealList.vue'),
       },
     ]

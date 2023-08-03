@@ -84,9 +84,9 @@ getPermissionData(permissionData)
   <AppDrawer
       ref="RoleDrawer"
       :title="type === 'create' ? '新增角色' : '編輯角色'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
-      @opened="handleOpened"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
+      :opened="handleOpened"
   >
     <ElForm
         ref="RoleForm"

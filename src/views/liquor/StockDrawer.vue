@@ -89,8 +89,8 @@ const rules = reactive({
   <AppDrawer
       ref="StockDrawer"
       :title="type === 'create' ? '新增庫存' : '編輯庫存'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="StockForm"

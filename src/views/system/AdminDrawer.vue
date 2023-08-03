@@ -94,8 +94,8 @@ const rules = reactive({
   <AppDrawer
       ref="AdminDrawer"
       :title="type === 'create' ? '新增管理員' : '編輯管理員'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="AdminForm"

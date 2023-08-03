@@ -111,8 +111,8 @@ function handleDistrict(val) {
   <AppDrawer
       ref="BranchDrawer"
       :title="type === 'create' ? '新增分店' : '編輯分店'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="BranchForm"

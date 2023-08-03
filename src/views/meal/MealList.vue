@@ -1,14 +1,13 @@
 <script setup>
 import ControlPlane from "@/components/ControlPlane.vue";
 import DataPlane from "@/components/DataPlane.vue";
-import {Filter, Plus, Search} from "@element-plus/icons-vue";
+import {Plus, Search} from "@element-plus/icons-vue";
 import AppTable from "@/components/AppTable.vue";
 import FilterItem from "@/components/FilterItem.vue";
 import {h, reactive, ref} from "vue";
 import {ElButton, ElMessage, ElMessageBox, ElTag} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
 import MealDrawer from "@/views/meal/MealDrawer.vue";
-import MealCategoryDialog from "@/views/meal/MealCategoryDialog.vue";
 import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
@@ -224,11 +223,6 @@ function handleChange(value) {
   // call api to get new data
   console.log(value)
 }
-
-const CategoryDialog = ref(null)
-function handleCategory() {
-  CategoryDialog.value.show()
-}
 </script>
 
 <template>
@@ -247,7 +241,6 @@ function handleCategory() {
     <DataPlane>
       <template #btn-group>
         <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate">新增</ElButton>
-        <ElButton type="warning" :icon="Filter" size="large" @click="handleCategory">分類</ElButton>
       </template>
       <template #main-data>
         <AppTable
@@ -264,7 +257,6 @@ function handleCategory() {
     </DataPlane>
     <MealDrawer ref="CreateMealDrawer" type="create" />
     <MealDrawer ref="EditMealDrawer" type="edit" />
-    <MealCategoryDialog ref="CategoryDialog" />
   </div>
 </template>
 

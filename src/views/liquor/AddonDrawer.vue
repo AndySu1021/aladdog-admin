@@ -88,8 +88,8 @@ const rules = reactive({
   <AppDrawer
       ref="AddonDrawer"
       :title="type === 'create' ? '新增項目' : '編輯項目'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="AddonForm"

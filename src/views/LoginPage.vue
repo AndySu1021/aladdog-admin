@@ -40,11 +40,17 @@ const permissions = [
   'Liquor.Addon.Edit',
   'Liquor.Addon.Delete',
   'Meal',
-  'Meal.View',
-  'Meal.Create',
-  'Meal.Edit',
-  'Meal.Delete',
+  'Meal.List',
+  'Meal.List.View',
+  'Meal.List.Create',
+  'Meal.List.Edit',
+  'Meal.List.Delete',
   'Meal.Category',
+  'Meal.Category.View',
+  'Meal.Category.Create',
+  'Meal.Category.Edit',
+  'Meal.Category.Delete',
+  'Meal.Category.Select',
   'Order',
   'Report',
   'Report.Profit',
@@ -122,10 +128,14 @@ function handleLogin() {
       loading.value = true
       // call login api
       setTimeout(function () {
+        let branchId = 0;
+        if (form.account === 'staff') {
+          branchId = 1
+        }
         adminStore.setAdmin({
           name: 'Andy',
           token: 'ca4c0bc59653558441aa14386978bd6f',
-          branch_id: 1,
+          branch_id: branchId,
           permissions: resolvePermission(),
         })
         loading.value = false

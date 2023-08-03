@@ -73,8 +73,8 @@ const rules = reactive({
   <AppDrawer
       ref="StationDrawer"
       :title="type === 'create' ? '新增崗位' : '編輯崗位'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="StationForm"

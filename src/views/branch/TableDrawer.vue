@@ -92,8 +92,8 @@ const rules = reactive({
   <AppDrawer
       ref="TableDrawer"
       :title="type === 'create' ? '新增桌位' : '編輯桌位'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="TableForm"

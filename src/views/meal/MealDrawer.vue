@@ -112,8 +112,8 @@ function handleSpecAdd() {
   <AppDrawer
       ref="MealDrawer"
       :title="type === 'create' ? '新增商品' : '編輯商品'"
-      @confirm="handleConfirm"
-      @cancel="handleCancel"
+      :confirm="handleConfirm"
+      :cancel="handleCancel"
   >
     <ElForm
         ref="MealForm"

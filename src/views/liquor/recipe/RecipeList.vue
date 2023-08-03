@@ -7,8 +7,8 @@ import FilterItem from "@/components/FilterItem.vue";
 import {h, reactive, ref} from "vue";
 import {ElButton, ElMessage, ElMessageBox, ElTag} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
-import RecipeDrawer from "@/views/liquor/RecipeDrawer.vue";
-import LiquorCategoryDialog from "@/views/liquor/LiquorCategoryDialog.vue";
+import RecipeDrawer from "@/views/liquor/recipe/RecipeDrawer.vue";
+import CategoryDrawer from "@/views/liquor/recipe/CategoryDrawer.vue";
 import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
@@ -105,6 +105,7 @@ const tableData = [
   {
     id: 1,
     branch: '中華一店',
+    branch_id: 1,
     image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
     name: 'White Lady',
     category_id: '琴酒',
@@ -115,6 +116,7 @@ const tableData = [
   {
     id: 2,
     branch: '成功二店',
+    branch_id: 2,
     image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
     name: 'White Lady',
     category_id: '琴酒',
@@ -125,6 +127,7 @@ const tableData = [
   {
     id: 3,
     branch: '信義三店',
+    branch_id: 1,
     image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
     name: 'White Lady',
     category_id: '琴酒',
@@ -135,6 +138,7 @@ const tableData = [
   {
     id: 4,
     branch: '中華一店',
+    branch_id: 1,
     image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
     name: 'White Lady',
     category_id: '琴酒',
@@ -145,6 +149,7 @@ const tableData = [
   {
     id: 5,
     branch: '中華一店',
+    branch_id: 1,
     image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
     name: 'White Lady',
     category_id: '琴酒',
@@ -155,6 +160,7 @@ const tableData = [
   {
     id: 6,
     branch: '中華一店',
+    branch_id: 1,
     image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
     name: 'White Lady',
     category_id: '琴酒',
@@ -165,6 +171,7 @@ const tableData = [
   {
     id: 7,
     branch: '中華一店',
+    branch_id: 1,
     image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
     name: 'White Lady',
     category_id: '琴酒',
@@ -175,6 +182,7 @@ const tableData = [
   {
     id: 8,
     branch: '中華一店',
+    branch_id: 1,
     image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
     name: 'White Lady',
     category_id: '琴酒',
@@ -188,13 +196,31 @@ const initSearchParams = {
   branch_id: 0,
   name: '',
 }
-
 const searchParams = reactive({ ...initSearchParams })
+
 function handleReset() {
   Object.assign(searchParams, initSearchParams)
 }
 function handleSearch() {
   console.log(searchParams)
+}
+function handleDownload() {
+  ElMessage.success('下載成功')
+}
+
+const CreateRecipeDrawer = ref(null)
+function handleCreate() {
+  CreateRecipeDrawer.value.show()
+}
+
+const EditRecipeDrawer = ref(null)
+function handleEdit(index, row) {
+  EditRecipeDrawer.value.show(row.id)
+}
+
+const EditCategoryDrawer = ref(null)
+function handleCategory() {
+  EditCategoryDrawer.value.show()
 }
 
 function handleDelete(index, row) {
@@ -218,17 +244,6 @@ function handleDelete(index, row) {
   console.log('delete', index, row.id)
 }
 
-const EditRecipeDrawer = ref(null)
-function handleEdit(index, row) {
-  EditRecipeDrawer.value.show(row.id)
-  console.log('edit', index, row.id)
-}
-
-const CreateRecipeDrawer = ref(null)
-function handleCreate() {
-  CreateRecipeDrawer.value.show()
-}
-
 const paginationParams = {
   page: 1,
   page_size: 10,
@@ -239,15 +254,6 @@ function handleChange(value) {
   Object.assign(pagination, value)
   // call api to get new data
   console.log(value)
-}
-
-function handleDownload() {
-  ElMessage.success('下載成功')
-}
-
-const CategoryDialog = ref(null)
-function handleCategory() {
-  CategoryDialog.value.show()
 }
 </script>
 
@@ -285,7 +291,7 @@ function handleCategory() {
     </DataPlane>
     <RecipeDrawer ref="CreateRecipeDrawer" type="create" />
     <RecipeDrawer ref="EditRecipeDrawer" type="edit" />
-    <LiquorCategoryDialog ref="CategoryDialog" />
+    <CategoryDrawer ref="EditCategoryDrawer" />
   </div>
 </template>
 
