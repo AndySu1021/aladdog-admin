@@ -134,8 +134,15 @@ function handleSpecAdd() {
       </ElFormItem>
       <ElFormItem label="分類" required prop="category_id">
         <ElSelect v-model.number="form.category_id" placeholder="請選擇">
-          <ElOption label="主食" :value="1" />
-          <ElOption label="甜點" :value="2" />
+          <ElOptionGroup label="主食">
+            <ElOption label="排餐" :value="1" />
+            <ElOption label="套餐" :value="2" />
+            <ElOption label="單點" :value="3" />
+          </ElOptionGroup>
+          <ElOptionGroup label="甜點">
+            <ElOption label="蛋糕" :value="4" />
+            <ElOption label="飲品" :value="5" />
+          </ElOptionGroup>
         </ElSelect>
       </ElFormItem>
       <ElDivider style="margin-top: 30px;">規格</ElDivider>
