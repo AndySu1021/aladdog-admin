@@ -165,7 +165,6 @@ const dragOptions = [
     option: { // sortablejs's option
       animation: 150,
       onEnd: (evt) => {
-        console.log(tableData.data[evt.newIndex], tableData.data[evt.oldIndex])
         if (evt.oldIndex > evt.newIndex) {
           const newSort = tableData.data[evt.newIndex].sort;
           for (let i = evt.newIndex; i < evt.oldIndex; i++) {
@@ -179,6 +178,8 @@ const dragOptions = [
           }
           tableData.data[evt.oldIndex].sort = newSort
         }
+        const currRow = tableData.data.splice(evt.oldIndex, 1)[0];
+        tableData.data.splice(evt.newIndex, 0, currRow);
       },
     },
   },
@@ -214,6 +215,7 @@ const dragOptions = [
       </template>
     </ElTabs>
     <ElTable
+        row-key="id"
         v-dragable="dragOptions"
         :data="tableData.data"
         border
