@@ -1,7 +1,6 @@
 <script setup>
 import {reactive, ref} from "vue";
 import {ElMessage, ElMessageBox} from "element-plus";
-import MealCategoryDialog from "@/views/meal/MealCategoryDialog.vue";
 import {useAdminStore} from "@/stores/admin";
 
 const adminStore = useAdminStore()
@@ -60,8 +59,6 @@ function handleTabChange() {
   // call api to get category data
   console.log(searchParams)
 }
-
-const CategoryDialog = ref(null)
 
 let id = 1000
 function handleCreate(data) {
@@ -159,7 +156,6 @@ function handleDelete(node, data) {
         </span>
       </template>
     </ElTree>
-    <MealCategoryDialog ref="CategoryDialog" />
   </div>
 </template>
 
