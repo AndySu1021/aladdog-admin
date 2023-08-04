@@ -1,7 +1,7 @@
 <script setup>
 import ControlPlane from "@/components/ControlPlane.vue";
 import DataPlane from "@/components/DataPlane.vue";
-import {Plus, Search} from "@element-plus/icons-vue";
+import {Filter, Plus, Search} from "@element-plus/icons-vue";
 import AppTable from "@/components/AppTable.vue";
 import FilterItem from "@/components/FilterItem.vue";
 import {h, reactive, ref} from "vue";
@@ -9,6 +9,10 @@ import {ElButton, ElMessage, ElMessageBox, ElTag} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
 import MealDrawer from "@/views/meal/MealDrawer.vue";
 import BranchSelect from "@/components/BranchSelect.vue";
+import CategoryDrawer from "@/views/meal/CategoryDrawer.vue";
+import {useAdminStore} from "@/stores/admin";
+
+const store = useAdminStore()
 
 const tableColumn = [
   {
@@ -212,6 +216,12 @@ function handleCreate() {
   CreateMealDrawer.value.show()
 }
 
+const EditCategoryDrawer = ref(null)
+function handleCategory() {
+  EditCategoryDrawer.value.show()
+}
+
+
 const paginationParams = {
   page: 1,
   page_size: 10,
@@ -240,14 +250,17 @@ function handleChange(value) {
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate">新增</ElButton>
+        <ElButton type="primary" :icon="Plus" size="large" :disabled="!store.checkPermission('Meal.Create')" @click="handleCreate">新增</ElButton>
+        <ElButton type="warning" :icon="Filter" size="large" :disabled="!store.checkPermission('Meal.Category')" @click="handleCategory">分類</ElButton>
       </template>
       <template #main-data>
         <AppTable
             :data="tableData"
             :columns="tableColumn"
             :edit="handleEdit"
+            edit-key="Meal.Edit"
             :delete="handleDelete"
+            delete-key="Meal.Delete"
             :row-height="100"
         />
       </template>
@@ -257,6 +270,7 @@ function handleChange(value) {
     </DataPlane>
     <MealDrawer ref="CreateMealDrawer" type="create" />
     <MealDrawer ref="EditMealDrawer" type="edit" />
+    <CategoryDrawer ref="EditCategoryDrawer" />
   </div>
 </template>
 

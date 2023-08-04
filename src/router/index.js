@@ -104,15 +104,9 @@ export const permRoutes = [
     component: MainLayout,
     children: [
       {
-        path: '/meal/category',
-        name: 'MealCategory',
-        meta: { title: '分類', key: 'Meal.Category.View' },
-        component: () => import('@/views/meal/MealCategory.vue'),
-      },
-      {
-        path: '/meal/list',
+        path: '/meal',
         name: 'MealList',
-        meta: { title: '餐點', key: 'Meal.List.View' },
+        meta: { title: '餐點', key: 'Meal' },
         component: () => import('@/views/meal/MealList.vue'),
       },
     ]

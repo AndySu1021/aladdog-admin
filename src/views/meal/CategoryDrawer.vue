@@ -1,17 +1,134 @@
 <script setup>
+import {Plus} from "@element-plus/icons-vue";
 import {reactive, ref} from "vue";
+import {vDragable} from "element-plus-table-dragable";
 import {ElMessage, ElMessageBox} from "element-plus";
+import AppDrawer from "@/components/AppDrawer.vue";
+import BranchSelect from "@/components/BranchSelect.vue";
 import {useAdminStore} from "@/stores/admin";
+import {useBranchStore} from "@/stores/branch";
+
+const branchStore = useBranchStore()
+
+const initSearchParams = {
+  branch_id: branchStore.getBranches[0].id,
+}
+const searchParams = reactive({ ...initSearchParams })
+
+const tableData = reactive({
+  data: []
+})
+function getTableData() {
+  switch (searchParams.branch_id) {
+    case 1: {
+      tableData.data = [
+        {
+          id: 1,
+          name: '特調',
+          sort: 1,
+          editable: false,
+        },
+        {
+          id:2,
+          name: '琴酒',
+          sort: 2,
+          editable: false,
+        },
+        {
+          id:3,
+          name: '威士忌',
+          sort: 3,
+          editable: false,
+        },
+        {
+          id:4,
+          name: '經典',
+          sort: 4,
+          editable: false,
+        }
+      ]
+      break
+    }
+    case 2: {
+      tableData.data = [
+        {
+          id: 5,
+          name: '特調',
+          sort: 1,
+          editable: false,
+        },
+        {
+          id:6,
+          name: '經典',
+          sort: 2,
+          editable: false,
+        }
+      ]
+      break
+    }
+    case 3: {
+      tableData.data = [
+        {
+          id:7,
+          name: '琴酒',
+          sort: 1,
+          editable: false,
+        },
+        {
+          id:8,
+          name: '威士忌',
+          sort: 2,
+          editable: false,
+        },
+      ]
+      break
+    }
+  }
+}
+getTableData()
 
 const adminStore = useAdminStore()
 
-const branches = [{id:1, name:'中華一店'}, {id:2, name: '成功二店'}, {id:3, name: '西門三店'}]
-
-const initSearchParams = {
-  branch_id: branches[0].id,
+const CategoryForm = ref(null)
+const CategoryDrawer = ref(null)
+function show() {
+  CategoryDrawer.value.show()
 }
 
-const searchParams = reactive({ ...initSearchParams })
+defineExpose({show})
+
+const initForm = {
+  branch_id: null,
+  name: '',
+}
+const form = reactive({ ...initForm })
+const rules = reactive({
+  branch_id: [
+    { required: true, message: '請選擇分店', trigger: 'change' },
+  ],
+  name: [
+    { required: true, message: '請輸入名稱', trigger: 'blue' },
+  ],
+})
+function handleAdd() {
+  CategoryForm.value.validate((valid, fields) => {
+    if (valid) {
+      if (form.branch_id === searchParams.branch_id) {
+        tableData.data.push({
+          id: tableData.data.length + 1,
+          name: form.name,
+          sort: tableData.data.length + 1,
+          editable: false,
+        })
+      }
+      // call add api
+      form.name = ''
+      console.log(form)
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
+}
 
 const dataSource = ref([
   {
@@ -54,11 +171,6 @@ const dataSource = ref([
     ],
   },
 ])
-
-function handleTabChange() {
-  // call api to get category data
-  console.log(searchParams)
-}
 
 let id = 1000
 function handleCreate(data) {
@@ -131,9 +243,30 @@ function handleDelete(node, data) {
 </script>
 
 <template>
-  <div class="meal-category-container">
-    <ElTabs v-model="searchParams.branch_id" class="demo-tabs" @tab-change="handleTabChange">
-      <template v-for="(branch, idx) in branches">
+  <AppDrawer
+      ref="CategoryDrawer"
+      title="管理分類"
+      size="40%"
+  >
+    <ElForm
+        ref="CategoryForm"
+        :model="form"
+        :rules="rules"
+        require-asterisk-position="right"
+        label-position="top"
+        status-icon
+    >
+      <ElFormItem label="分店" required prop="branch_id">
+        <BranchSelect v-model.number="form.branch_id" />
+      </ElFormItem>
+      <ElFormItem label="名稱" required prop="name">
+        <ElInput v-model="form.name" placeholder="請輸入分類" />
+      </ElFormItem>
+      <ElButton style="margin-top: 4px;" type="primary" :icon="Plus" @click="handleAdd">添加</ElButton>
+    </ElForm>
+    <div style="margin: 32px 0 16px;font-size: 16px;font-weight: 500;">當前分類</div>
+    <ElTabs v-model="searchParams.branch_id" @tab-change="getTableData">
+      <template v-for="(branch, idx) in branchStore.getBranches">
         <ElTabPane v-if="adminStore.getBranchId === 0 || adminStore.getBranchId === branch.id" :key="idx" :label="branch.name" :name="branch.id" />
       </template>
     </ElTabs>
@@ -156,14 +289,12 @@ function handleDelete(node, data) {
         </span>
       </template>
     </ElTree>
-  </div>
+  </AppDrawer>
 </template>
 
-<style lang="scss" scoped>
-.meal-category-container {
-  background-color: white;
-  border-radius: 8px;
-  padding: 20px 40px 30px;
+<style scoped lang="scss">
+.ff .cell{
+  color: #000!important;
 }
 .custom-tree-node {
   flex: 1;
