@@ -3,13 +3,17 @@ import {reactive} from "vue";
 import {Box} from "@element-plus/icons-vue";
 
 const initForm = {
-  liquor_stock_warning_percent: 70
+  liquor_stock_warning_percent: 70,
+  branch_prefix: '',
 }
 
 const form = reactive({ ...initForm })
 
 const rules = reactive({
   liquor_stock_warning_percent: [
+    { required: true, message: '請輸入', trigger: 'blue' },
+  ],
+  branch_prefix: [
     { required: true, message: '請輸入', trigger: 'blue' },
   ],
 })
@@ -32,6 +36,9 @@ const rules = reactive({
               :min="0"
               :max="100"
           />
+        </ElFormItem>
+        <ElFormItem label="分店代號前綴" required prop="branch_prefix">
+          <ElInput v-model="form.branch_prefix" placeholder="請輸入" style="width: 250px;"/>
         </ElFormItem>
       </ElForm>
       <div style="margin-top: 32px;display: flex;justify-content: right;">

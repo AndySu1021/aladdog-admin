@@ -15,7 +15,7 @@ const initForm = {
   branch_id: null,
   image: '',
   name: '',
-  category_id: null,
+  category_path: [],
   specs: [{
     spec: '',
     price: 1,
@@ -38,7 +38,7 @@ function show(id=0) {
         branch_id: 1,
         image: 'https://res.cloudinary.com/enotria/image/upload/ar_16:9,c_fill,dpr_auto,w_auto/v1615282620/White_Lady_Banner_effeaf0fc0.jpg',
         name: '牛小牌',
-        category_id: 1,
+        category_path: [1, 3],
         specs: [{
           spec: '大',
           price: 100,
@@ -86,7 +86,7 @@ const rules = reactive({
   name: [
     { required: true, message: '請輸入名稱', trigger: 'blue' },
   ],
-  category_id: [
+  category_path: [
     { required: true, message: '請選擇分類', trigger: 'change' },
   ],
   capacity: [
@@ -106,6 +106,45 @@ function handleSpecAdd() {
     price: 1,
   })
 }
+
+const options = [
+  {
+    value: 1,
+    label: '主食',
+    children: [
+      {
+        value: 2,
+        label: '排餐',
+      },
+      {
+        value: 3,
+        label: '套餐',
+      },
+      {
+        value: 4,
+        label: '單點',
+      },
+    ],
+  },
+  {
+    value: 5,
+    label: '甜點',
+    children: [
+      {
+        value: 6,
+        label: '蛋糕',
+      },
+      {
+        value: 7,
+        label: '飲品',
+      },
+    ],
+  },
+  {
+    value: 8,
+    label: '酒水',
+  },
+]
 </script>
 
 <template>
@@ -132,18 +171,12 @@ function handleSpecAdd() {
       <ElFormItem label="圖片" prop="image">
         <AppUpload v-model="form.image" />
       </ElFormItem>
-      <ElFormItem label="分類" required prop="category_id">
-        <ElSelect v-model.number="form.category_id" placeholder="請選擇">
-          <ElOptionGroup label="主食">
-            <ElOption label="排餐" :value="1" />
-            <ElOption label="套餐" :value="2" />
-            <ElOption label="單點" :value="3" />
-          </ElOptionGroup>
-          <ElOptionGroup label="甜點">
-            <ElOption label="蛋糕" :value="4" />
-            <ElOption label="飲品" :value="5" />
-          </ElOptionGroup>
-        </ElSelect>
+      <ElFormItem label="分類" required prop="category_path">
+        <ElCascader
+            v-model="form.category_path"
+            :options="options"
+            placeholder="請選擇"
+        />
       </ElFormItem>
       <ElDivider style="margin-top: 30px;">規格</ElDivider>
       <template v-for="(spec, idx) in form.specs" :key="idx">
