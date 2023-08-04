@@ -3,10 +3,11 @@ import ControlPlane from "@/components/ControlPlane.vue";
 import DataPlane from "@/components/DataPlane.vue";
 import AppTable from "@/components/AppTable.vue";
 import FilterItem from "@/components/FilterItem.vue";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import AppPagination from "@/components/AppPagination.vue";
 import moment from 'moment';
 import BranchSelect from "@/components/BranchSelect.vue";
+import DetailDialog from "@/views/order/DetailDialog.vue";
 
 const tableColumn = [
   {
@@ -164,7 +165,9 @@ function handleChange(value) {
   // call api to get new data
 }
 
+const OrderDetailDialog = ref(null)
 function handleDetail(idx, data) {
+  OrderDetailDialog.value.show(data.order_no)
   console.log(idx, data)
 }
 </script>
@@ -201,6 +204,7 @@ function handleDetail(idx, data) {
         <AppPagination :data="pagination" @change="handleChange" />
       </template>
     </DataPlane>
+    <DetailDialog ref="OrderDetailDialog" />
   </div>
 </template>
 

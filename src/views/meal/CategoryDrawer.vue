@@ -15,78 +15,6 @@ const initSearchParams = {
 }
 const searchParams = reactive({ ...initSearchParams })
 
-const tableData = reactive({
-  data: []
-})
-function getTableData() {
-  switch (searchParams.branch_id) {
-    case 1: {
-      tableData.data = [
-        {
-          id: 1,
-          name: '特調',
-          sort: 1,
-          editable: false,
-        },
-        {
-          id:2,
-          name: '琴酒',
-          sort: 2,
-          editable: false,
-        },
-        {
-          id:3,
-          name: '威士忌',
-          sort: 3,
-          editable: false,
-        },
-        {
-          id:4,
-          name: '經典',
-          sort: 4,
-          editable: false,
-        }
-      ]
-      break
-    }
-    case 2: {
-      tableData.data = [
-        {
-          id: 5,
-          name: '特調',
-          sort: 1,
-          editable: false,
-        },
-        {
-          id:6,
-          name: '經典',
-          sort: 2,
-          editable: false,
-        }
-      ]
-      break
-    }
-    case 3: {
-      tableData.data = [
-        {
-          id:7,
-          name: '琴酒',
-          sort: 1,
-          editable: false,
-        },
-        {
-          id:8,
-          name: '威士忌',
-          sort: 2,
-          editable: false,
-        },
-      ]
-      break
-    }
-  }
-}
-getTableData()
-
 const adminStore = useAdminStore()
 
 const CategoryForm = ref(null)
@@ -117,8 +45,8 @@ function handleAdd() {
         tableData.data.push({
           id: tableData.data.length + 1,
           name: form.name,
+          level: 1,
           sort: tableData.data.length + 1,
-          editable: false,
         })
       }
       // call add api
@@ -130,60 +58,69 @@ function handleAdd() {
   })
 }
 
-const dataSource = ref([
-  {
-    id: 1,
-    label: '主食',
-    level: 1,
-    children: [
-      {
-        id: 2,
-        level: 2,
-        label: '排餐',
-      },
-      {
-        id: 3,
-        level: 2,
-        label: '套餐',
-      },
-      {
-        id: 4,
-        level: 2,
-        label: '單點',
-      },
-    ],
-  },
-  {
-    id: 5,
-    level: 1,
-    label: '甜點',
-    children: [
-      {
-        id: 6,
-        level: 2,
-        label: '蛋糕',
-      },
-      {
-        id: 7,
-        level: 2,
-        label: '飲品',
-      },
-    ],
-  },
-])
+const tableData = reactive({
+  data: [
+    {
+      id: 1,
+      name: '主食',
+      level: 1,
+      sort: 1,
+      sub: [
+        {
+          id: 2,
+          level: 2,
+          name: '排餐',
+          sort: 1,
+        },
+        {
+          id: 3,
+          level: 2,
+          name: '套餐',
+          sort: 2,
+        },
+        {
+          id: 4,
+          level: 2,
+          name: '單點',
+          sort: 3,
+        },
+      ],
+    },
+    {
+      id: 5,
+      level: 1,
+      name: '甜點',
+      sort: 2,
+      sub: [
+        {
+          id: 6,
+          level: 2,
+          name: '蛋糕',
+          sort: 1,
+        },
+        {
+          id: 7,
+          level: 2,
+          name: '飲品',
+          sort: 2,
+        },
+      ],
+    },
+  ]
+})
 
 let id = 1000
-function handleCreate(data) {
+function handleSubCreate(data) {
   ElMessageBox.prompt('請輸入分類名稱', '新增分類', {
     confirmButtonText: '確認',
     cancelButtonText: '取消',
   }).then((info) => {
     // call create api
-    const newChild = { id: id++, label: info.value, level: 2 }
-    if (!data.children) {
-      data.children = []
+    const newChild = { id: id++, name: info.value, level: 2, sort: 5}
+    if (!data.sub) {
+      data.sub = []
     }
-    data.children.push(newChild)
+    data.sub.push(newChild)
     ElMessage({
       type: 'success',
       message: `新增分類: ${info.value} 成功`,
@@ -196,27 +133,7 @@ function handleCreate(data) {
   })
 }
 
-function handleEdit(data) {
-  ElMessageBox.prompt('請輸入分類名稱', '編輯分類', {
-    confirmButtonText: '確認',
-    cancelButtonText: '取消',
-    inputValue: data.label,
-  }).then((info) => {
-    // call edit api
-    data.label = info.value
-    ElMessage({
-      type: 'success',
-      message: `新增分類: ${info.value} 成功`,
-    })
-  }).catch(() => {
-    ElMessage({
-      type: 'info',
-      message: '取消修改',
-    })
-  })
-}
-
-function handleDelete(node, data) {
+function handleDelete(index, row) {
   ElMessageBox.confirm(
       '是否刪除此分類？',
       '刪除',
@@ -229,16 +146,40 @@ function handleDelete(node, data) {
       }
   ).then(() => {
     // call delete api
-    const parent = node.parent
-    const children = parent.data.children || parent.data
-    const index = children.findIndex((d) => d.id === data.id)
-    children.splice(index, 1)
-    dataSource.value = [...dataSource.value]
+    console.log('delete:', row.id)
+    tableData.data.splice(index, 1)
     ElMessage({
       type: 'success',
-      message: '刪除成功',
+      message: '移除成功',
     })
   }).catch(() => {})
+}
+
+function handleSubDelete(index, subIndex, row) {
+  ElMessageBox.confirm(
+      '是否刪除此分類？',
+      '刪除',
+      {
+        confirmButtonText: '確認',
+        cancelButtonText: '取消',
+        type: 'error',
+        center: false,
+        showClose: false,
+      }
+  ).then(() => {
+    // call delete api
+    console.log('delete:', row.id)
+    tableData.data[index].sub.splice(subIndex, 1)
+    ElMessage({
+      type: 'success',
+      message: '移除成功',
+    })
+  }).catch(() => {})
+}
+
+function handleBlur(index, id) {
+  console.log(id)
+  tableData.data[index].editable = false
 }
 </script>
 
@@ -265,30 +206,68 @@ function handleDelete(node, data) {
       <ElButton style="margin-top: 4px;" type="primary" :icon="Plus" @click="handleAdd">添加</ElButton>
     </ElForm>
     <div style="margin: 32px 0 16px;font-size: 16px;font-weight: 500;">當前分類</div>
-    <ElTabs v-model="searchParams.branch_id" @tab-change="getTableData">
+    <ElTabs v-model="searchParams.branch_id">
       <template v-for="(branch, idx) in branchStore.getBranches">
         <ElTabPane v-if="adminStore.getBranchId === 0 || adminStore.getBranchId === branch.id" :key="idx" :label="branch.name" :name="branch.id" />
       </template>
     </ElTabs>
-    <ElTree
-        :data="dataSource"
-        node-key="id"
-        default-expand-all
-        :expand-on-click-node="false"
-        draggable
+    <ElTable
+        row-key="id"
+        :data="tableData.data"
+        border
     >
-      <template #default="{ node, data }">
-        <span class="custom-tree-node">
-          <span>{{ node.label }}</span>
-          <span>
-            <ElButton v-if="node.level === 1" type="primary" size="small" @click="handleCreate(data)">新增</ElButton>
-            <ElButton size="small" @click="handleSelect(data)">商品</ElButton>
-            <ElButton type="primary" size="small" @click="handleEdit(data)">編輯</ElButton>
-            <ElButton type="danger" size="small" style="margin-left: 8px" @click="handleDelete(node, data)">刪除</ElButton>
-          </span>
-        </span>
-      </template>
-    </ElTree>
+      <ElTableColumn type="expand">
+        <template #default="scope1">
+          <div style="width: 90%;margin: auto;">
+            <ElTable
+                row-key="id"
+                :data="scope1.row.sub"
+                border
+            >
+              <ElTableColumn label="子分類名稱" prop="name" align="center">
+                <template #default="scope2">
+                  <ElInput v-model="scope2.row.name" @blur="handleBlur(scope2.$index, scope2.row.id)" />
+                </template>
+              </ElTableColumn>
+              <ElTableColumn label="排序" prop="sort" align="center" sortable>
+                <template #default="scope2">
+                  <ElInput v-model="scope2.row.sort" @blur="handleBlur(scope2.$index, scope2.row.id)" />
+                </template>
+              </ElTableColumn>
+              <ElTableColumn
+                  prop="operations"
+                  label="操作"
+                  align="center"
+              >
+                <template #default="scope2">
+                  <ElButton size="small" type="danger" @click.stop="handleSubDelete(scope1.$index, scope2.$index, scope2.row)">刪除</ElButton>
+                </template>
+              </ElTableColumn>
+            </ElTable>
+          </div>
+        </template>
+      </ElTableColumn>
+      <ElTableColumn label="分類名稱" prop="name" width="120" align="center">
+        <template #default="scope">
+          <ElInput v-model="scope.row.name" @blur="handleBlur(scope.$index, scope.row.id)" />
+        </template>
+      </ElTableColumn>
+      <ElTableColumn label="排序" prop="sort" width="80" align="center" sortable>
+        <template #default="scope">
+          <ElInput v-model="scope.row.sort" @blur="handleBlur(scope.$index, scope.row.id)" />
+        </template>
+      </ElTableColumn>
+      <ElTableColumn
+          prop="operations"
+          label="操作"
+          align="center"
+      >
+        <template #default="scope">
+          <ElButton type="primary" size="small" @click.stop="handleSubCreate(scope.row)">新增</ElButton>
+          <ElButton size="small" type="danger" @click.stop="handleDelete(scope.$index, scope.row)">刪除</ElButton>
+        </template>
+      </ElTableColumn>
+    </ElTable>
   </AppDrawer>
 </template>
 
