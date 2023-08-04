@@ -2,6 +2,9 @@
 import AppDrawer from "@/components/AppDrawer.vue";
 import {reactive, ref} from "vue";
 import {getAddressData} from '@/composable/address.js'
+import {useBranchStore} from "@/stores/branch";
+
+const branchStore = useBranchStore()
 
 const props = defineProps({
   type: String,
@@ -126,7 +129,11 @@ function handleDistrict(val) {
         <ElInput v-model="form.name" />
       </ElFormItem>
       <ElFormItem label="分店代號" required prop="code">
-        <ElInput v-model="form.code" />
+        <ElInput
+            v-model="form.code"
+            :formatter="(value) => `${branchStore.getCodePrefix} - ${value}`"
+            :parser="(value) => value.replace(new RegExp(branchStore.getCodePrefix + ' - ', 'g'), '')"
+        />
       </ElFormItem>
       <ElFormItem label="統一編號" required prop="tax_id_number">
         <ElInput v-model="form.tax_id_number" />

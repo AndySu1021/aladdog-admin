@@ -7,8 +7,10 @@ export const useBranchStore = defineStore('branch', () => {
         {id: 2, name: '成功二店'},
         {id: 3, name: '西門三店'},
     ])
+    const codePrefix = ref('PX')
 
     const getBranches = computed(() => branches.value)
+    const getCodePrefix = computed(() => codePrefix.value)
 
     function fetchBranches() {
         branches.value = [
@@ -18,8 +20,11 @@ export const useBranchStore = defineStore('branch', () => {
         ]
     }
 
+    function setCodePrefix(prefix) {
+        codePrefix.value = prefix
+    }
 
-    return { branches, getBranches, fetchBranches}
+    return { branches, codePrefix, getBranches, getCodePrefix, fetchBranches, setCodePrefix}
 }, {
     persist: {
         enabled: true,
