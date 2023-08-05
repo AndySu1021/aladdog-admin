@@ -26,25 +26,21 @@ function getTableData() {
           id: 1,
           name: '特調',
           sort: 1,
-          editable: false,
         },
         {
           id:2,
           name: '琴酒',
           sort: 2,
-          editable: false,
         },
         {
           id:3,
           name: '威士忌',
           sort: 3,
-          editable: false,
         },
         {
           id:4,
           name: '經典',
           sort: 4,
-          editable: false,
         }
       ]
       break
@@ -55,13 +51,11 @@ function getTableData() {
           id: 5,
           name: '特調',
           sort: 1,
-          editable: false,
         },
         {
           id:6,
           name: '經典',
           sort: 2,
-          editable: false,
         }
       ]
       break
@@ -72,13 +66,11 @@ function getTableData() {
           id:7,
           name: '琴酒',
           sort: 1,
-          editable: false,
         },
         {
           id:8,
           name: '威士忌',
           sort: 2,
-          editable: false,
         },
       ]
       break
@@ -130,13 +122,11 @@ function handleAdd() {
   })
 }
 
-function handleEdit(row) {
-  row.editable = !row.editable
-}
 function handleBlur(index, id) {
   console.log(id)
   tableData.data[index].editable = false
 }
+
 function handleDelete(index, row) {
   ElMessageBox.confirm(
       '是否刪除此分類？',
@@ -227,17 +217,20 @@ const dragOptions = [
           align="center"
       >
         <template #default="scope">
-          <ElInput v-model="scope.row.name" :disabled="!scope.row.editable" @blur="handleBlur(scope.$index, scope.row.id)" />
+          <ElInput v-model="scope.row.name" @blur="handleBlur(scope.$index, scope.row.id)" />
         </template>
       </ElTableColumn>
-      <ElTableColumn prop="sort" label="排序" width="100" align="center" />
+      <ElTableColumn prop="sort" label="排序" width="100" align="center">
+        <template #default="scope">
+          <ElInput v-model="scope.row.sort" @blur="handleBlur(scope.$index, scope.row.id)" />
+        </template>
+      </ElTableColumn>
       <ElTableColumn
           prop="operations"
           label="操作"
           align="center"
       >
         <template #default="scope">
-          <ElButton size="small" @click.stop="handleEdit(scope.row)">編輯</ElButton>
           <ElButton size="small" type="danger" @click.stop="handleDelete(scope.$index, scope.row)">刪除</ElButton>
         </template>
       </ElTableColumn>
