@@ -188,7 +188,7 @@ export function getPermissionData(data) {
         },
         {
             'id': 'Promotion',
-            'label': '餐點',
+            'label': '活動',
             'children': [
                 {
                     'id': 'Promotion.View',
