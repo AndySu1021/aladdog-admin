@@ -1,13 +1,13 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import MainLayout from '@/layout/MainLayout.vue'
 import {
-  ColdDrink,
+  ColdDrink, CreditCard, Discount,
   Dish,
   Location,
   Odometer,
   PieChart,
   Setting,
-  ShoppingCart,
+  ShoppingCart, Ticket,
   User,
   Wallet
 } from "@element-plus/icons-vue";
@@ -126,6 +126,20 @@ export const permRoutes = [
     ]
   },
   {
+    path: '/promotion',
+    name: 'Promotion',
+    meta: { title: '活動', icon: Discount, key: 'Promotion' },
+    component: MainLayout,
+    children: [
+      {
+        path: '/promotion',
+        name: 'Promotion',
+        meta: { title: '活動', key: 'Promotion.View' },
+        component: () => import('@/views/promotion/PromotionList.vue'),
+      },
+    ]
+  },
+  {
     path: '/report',
     name: 'Report',
     meta: { title: '報表', icon: PieChart, key: 'Report' },
@@ -200,7 +214,7 @@ export const permRoutes = [
   {
     path: '/bill',
     name: 'Bill',
-    meta: { title: '帳單', icon: Wallet, key: 'Bill' },
+    meta: { title: '帳單', icon: CreditCard, key: 'Bill' },
     component: MainLayout,
     children: [
       {

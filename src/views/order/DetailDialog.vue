@@ -1,10 +1,5 @@
 <script setup>
 import {reactive, ref} from "vue";
-import {ElLoading} from "element-plus";
-
-defineProps({
-
-})
 
 const isVisible = ref(false)
 const detailData = reactive({

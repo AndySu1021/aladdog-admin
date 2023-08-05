@@ -8,6 +8,7 @@ import AppPagination from "@/components/AppPagination.vue";
 import moment from "moment/moment";
 import {getInvoiceStatus, getPayStatus} from "@/composable/enums";
 import {ElTag} from "element-plus";
+import DetailDialog from "@/views/bill/DetailDialog.vue";
 
 const payStatus = ref({})
 getPayStatus(payStatus)
@@ -115,8 +116,9 @@ function handleSearch() {
   console.log(searchParams)
 }
 
-function handleDetail(id) {
-  console.log('detail', id)
+const TransactionDetailDialog = ref(null)
+function handleDetail(index, data) {
+  TransactionDetailDialog.value.show(data)
 }
 
 const paginationParams = {
@@ -160,6 +162,7 @@ function handleChange(value) {
         <AppPagination :data="pagination" @change="handleChange" />
       </template>
     </DataPlane>
+    <DetailDialog ref="TransactionDetailDialog" />
   </div>
 </template>
 

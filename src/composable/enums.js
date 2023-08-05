@@ -44,3 +44,10 @@ export function getInvoiceStatus(data) {
         },
     })
 }
+
+export function getPromotionType(data) {
+    Object.assign(data.value, {
+        1: '滿額折扣',
+        2: '贈品',
+    })
+}

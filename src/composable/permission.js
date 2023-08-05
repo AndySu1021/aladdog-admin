@@ -187,6 +187,28 @@ export function getPermissionData(data) {
             'label': '訂單',
         },
         {
+            'id': 'Promotion',
+            'label': '餐點',
+            'children': [
+                {
+                    'id': 'Promotion.View',
+                    'label': '查看',
+                },
+                {
+                    'id': 'Promotion.Create',
+                    'label': '新增',
+                },
+                {
+                    'id': 'Promotion.Edit',
+                    'label': '編輯',
+                },
+                {
+                    'id': 'Promotion.Delete',
+                    'label': '刪除',
+                },
+            ],
+        },
+        {
             'id': 'Report',
             'label': '報表',
             'children': [
