@@ -17,7 +17,7 @@ const initForm = {
   branch_id: null,
   title: '',
   type: 1,
-  date_range: [],
+  datetime_range: [],
   is_enabled: 1,
   condition: {
     target_amount: 0,
@@ -44,7 +44,7 @@ function show(id=0) {
       branch_id: 1,
       title: '8月滿額贈',
       type: 1,
-      date_range: ['2023-07-01', '2023-08-31'],
+      datetime_range: ['2023-07-01 15:00:00', '2023-08-31 16:00:00'],
       is_enabled: 1,
       condition: {
         target_amount: 0,
@@ -119,10 +119,10 @@ const rules = reactive({
       <ElFormItem label="分店" required prop="branch_id">
         <BranchSelect v-model.number="form.branch_id" />
       </ElFormItem>
-      <ElFormItem label="標題" required prop="title">
+      <ElFormItem label="活動標題" required prop="title">
         <ElInput v-model="form.title" />
       </ElFormItem>
-      <ElFormItem label="類型" prop="type">
+      <ElFormItem label="活動類型" prop="type">
         <ElSelect v-model.number="form.type" placeholder="請選擇">
           <ElOption label="一般折扣" :value="1" />
           <ElOption label="一般贈送" :value="2" />
@@ -130,17 +130,17 @@ const rules = reactive({
           <ElOption label="滿額贈送" :value="4" />
         </ElSelect>
       </ElFormItem>
-      <ElFormItem label="日期" required prop="date_range">
+      <ElFormItem label="活動日期" required prop="datetime_range">
         <ElDatePicker
-            v-model="form.date_range"
-            type="daterange"
-            start-placeholder="開始日期"
-            end-placeholder="結束日期"
-            format="YYYY-MM-DD"
-            value-format="YYYY-MM-DD"
+            v-model="form.datetime_range"
+            type="datetimerange"
+            start-placeholder="開始時間"
+            end-placeholder="結束時間"
+            format="YYYY-MM-DD HH:mm:ss"
+            value-format="YYYY-MM-DD HH:mm:ss"
         />
       </ElFormItem>
-      <ElFormItem label="狀態" required prop="is_enabled">
+      <ElFormItem label="活動狀態" required prop="is_enabled">
         <ElSwitch v-model="form.is_enabled" :active-value="1" :inactive-value="0" />
       </ElFormItem>
       <ElDivider>條件</ElDivider>
