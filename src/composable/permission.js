@@ -187,23 +187,23 @@ export function getPermissionData(data) {
             'label': '訂單',
         },
         {
-            'id': 'Promotion',
+            'id': 'Activity',
             'label': '活動',
             'children': [
                 {
-                    'id': 'Promotion.View',
+                    'id': 'Activity.View',
                     'label': '查看',
                 },
                 {
-                    'id': 'Promotion.Create',
+                    'id': 'Activity.Create',
                     'label': '新增',
                 },
                 {
-                    'id': 'Promotion.Edit',
+                    'id': 'Activity.Edit',
                     'label': '編輯',
                 },
                 {
-                    'id': 'Promotion.Delete',
+                    'id': 'Activity.Delete',
                     'label': '刪除',
                 },
             ],

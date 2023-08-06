@@ -126,16 +126,16 @@ export const permRoutes = [
     ]
   },
   {
-    path: '/promotion',
-    name: 'Promotion',
-    meta: { title: '活動', icon: Discount, key: 'Promotion' },
+    path: '/activity',
+    name: 'Activity',
+    meta: { title: '活動', icon: Discount, key: 'Activity' },
     component: MainLayout,
     children: [
       {
-        path: '/promotion',
-        name: 'Promotion',
-        meta: { title: '活動', key: 'Promotion.View' },
-        component: () => import('@/views/promotion/PromotionList.vue'),
+        path: '/activity',
+        name: 'ActivityList',
+        meta: { title: '活動', key: 'Activity.View' },
+        component: () => import('@/views/promotion/ActivityList.vue'),
       },
     ]
   },

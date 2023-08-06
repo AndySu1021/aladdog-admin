@@ -4,15 +4,15 @@ import DataPlane from "@/components/DataPlane.vue";
 import {Plus, Search} from "@element-plus/icons-vue";
 import AppTable from "@/components/AppTable.vue";
 import FilterItem from "@/components/FilterItem.vue";
-import {reactive, ref} from "vue";
-import {ElButton, ElMessage, ElMessageBox} from "element-plus";
+import {h, reactive, ref} from "vue";
+import {ElButton, ElMessage, ElMessageBox, ElTag} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
-import AddonDrawer from "@/views/liquor/AddonDrawer.vue";
-import {getAddonCategory, getPromotionType} from "@/composable/enums";
+import ActivityDrawer from "@/views/promotion/ActivityDrawer.vue";
+import {getActivityType} from "@/composable/enums";
 import BranchSelect from "@/components/BranchSelect.vue";
 
-const promotionType = ref({})
-getPromotionType(promotionType)
+const activityType = ref({})
+getActivityType(activityType)
 
 const tableColumn = [
   {
@@ -42,7 +42,7 @@ const tableColumn = [
     dataKey: 'type',
     width: 120,
     align: 'center',
-    cellRenderer: ({cellData: type}) => promotionType.value[type],
+    cellRenderer: ({cellData: type}) => activityType.value[type],
   },
   {
     key: 'start_time',
@@ -58,6 +58,14 @@ const tableColumn = [
     width: 180,
     align: 'center',
   },
+  {
+    key: 'is_enabled',
+    title: '狀態',
+    dataKey: 'is_enabled',
+    width: 120,
+    align: 'center',
+    cellRenderer: ({cellData: is_enabled}) => is_enabled === 1 ? h(ElTag, {type: 'success'}, () => '已上架') : h(ElTag, {type: 'danger'}, () => '下架中'),
+  },
 ]
 const tableData = [
   {
@@ -67,6 +75,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    is_enabled: 1,
   },
   {
     id: 2,
@@ -75,6 +84,7 @@ const tableData = [
     type: 2,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    is_enabled: 2,
   },
   {
     id: 3,
@@ -83,6 +93,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    is_enabled: 1,
   },
   {
     id: 4,
@@ -91,6 +102,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    is_enabled: 1,
   },
   {
     id: 5,
@@ -99,6 +111,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    is_enabled: 1,
   },
   {
     id: 6,
@@ -107,6 +120,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    is_enabled: 1,
   },
   {
     id: 7,
@@ -115,6 +129,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    is_enabled: 1,
   },
   {
     id: 8,
@@ -123,6 +138,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    is_enabled: 1,
   },
 ]
 
@@ -160,15 +176,15 @@ function handleDelete(index, row) {
   console.log('delete', index, row.id)
 }
 
-const EditAddonDrawer = ref(null)
+const EditActivityDrawer = ref(null)
 function handleEdit(index, row) {
-  EditAddonDrawer.value.show(row.id)
+  EditActivityDrawer.value.show(row.id)
   console.log('edit', index, row.id)
 }
 
-const CreateAddonDrawer = ref(null)
+const CreateActivityDrawer = ref(null)
 function handleCreate() {
-  CreateAddonDrawer.value.show()
+  CreateActivityDrawer.value.show()
 }
 
 const paginationParams = {
@@ -213,8 +229,8 @@ function handleChange(value) {
         <AppPagination :data="pagination" @change="handleChange" />
       </template>
     </DataPlane>
-    <AddonDrawer ref="CreateAddonDrawer" type="create" />
-    <AddonDrawer ref="EditAddonDrawer" type="edit" />
+    <ActivityDrawer ref="CreateActivityDrawer" type="create" />
+    <ActivityDrawer ref="EditActivityDrawer" type="edit" />
   </div>
 </template>
 

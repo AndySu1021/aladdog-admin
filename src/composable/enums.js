@@ -45,9 +45,11 @@ export function getInvoiceStatus(data) {
     })
 }
 
-export function getPromotionType(data) {
+export function getActivityType(data) {
     Object.assign(data.value, {
-        1: '滿額折扣',
-        2: '贈品',
+        1: '一般折扣', // ex. 全館8折
+        2: '一般贈送', // ex. 送一盤 shot
+        3: '滿額折扣', // ex. 滿2000送200
+        4: '滿額贈送', // ex. 滿 1500 送一盤 shot
     })
 }
