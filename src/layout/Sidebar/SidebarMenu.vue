@@ -43,5 +43,14 @@ const store = useRoutesStore()
   overflow-y: auto;
   overflow-x: hidden;
   padding: 12px 20px;
+  :deep(.el-menu--collapse) {
+    .el-sub-menu > .el-sub-menu__title span,.el-sub-menu__icon-arrow {
+      height: 0;
+      width: 0;
+      overflow: hidden;
+      visibility: hidden;
+      display: inline-block;
+    }
+  }
 }
 </style>
