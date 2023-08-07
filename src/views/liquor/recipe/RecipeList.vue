@@ -5,7 +5,7 @@ import {Filter, Plus, Search} from "@element-plus/icons-vue";
 import AppTable from "@/components/AppTable.vue";
 import FilterItem from "@/components/FilterItem.vue";
 import {h, reactive, ref} from "vue";
-import {ElButton, ElMessage, ElMessageBox, ElTag} from "element-plus";
+import {ElMessage, ElMessageBox, ElTag} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
 import RecipeDrawer from "@/views/liquor/recipe/RecipeDrawer.vue";
 import CategoryDrawer from "@/views/liquor/recipe/CategoryDrawer.vue";

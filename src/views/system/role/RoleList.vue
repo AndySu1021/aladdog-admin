@@ -5,7 +5,7 @@ import {Plus, Search} from "@element-plus/icons-vue";
 import AppTable from "@/components/AppTable.vue";
 import FilterItem from "@/components/FilterItem.vue";
 import {h, reactive, ref} from "vue";
-import {ElButton, ElMessage, ElMessageBox, ElTag} from "element-plus";
+import {ElMessage, ElMessageBox, ElTag} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
 import RoleDrawer from "@/views/system/role/RoleDrawer.vue";
 import PermButton from "@/components/PermButton.vue";

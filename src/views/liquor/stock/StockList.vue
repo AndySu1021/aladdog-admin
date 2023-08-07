@@ -5,7 +5,7 @@ import {Plus, Search, Top} from "@element-plus/icons-vue";
 import AppTable from "@/components/AppTable.vue";
 import FilterItem from "@/components/FilterItem.vue";
 import {reactive, ref} from "vue";
-import {ElButton, ElMessage, ElMessageBox} from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
 import StockDrawer from "@/views/liquor/stock/StockDrawer.vue";
 import StockDialog from "@/views/liquor/stock/StockDialog.vue";
