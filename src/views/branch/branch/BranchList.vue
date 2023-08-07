@@ -1,14 +1,14 @@
 <script setup>
-import ControlPlane from "@/components/ControlPlane.vue";
-import DataPlane from "@/components/DataPlane.vue";
-import {Plus, Search} from "@element-plus/icons-vue";
-import AppTable from "@/components/AppTable.vue";
-import FilterItem from "@/components/FilterItem.vue";
-import {reactive, ref} from "vue";
-import {ElMessage, ElMessageBox} from "element-plus";
-import AppPagination from "@/components/AppPagination.vue";
-import BranchDrawer from "@/views/branch/branch/BranchDrawer.vue";
-import PermButton from "@/components/PermButton.vue";
+import ControlPlane from '@/components/ControlPlane.vue'
+import DataPlane from '@/components/DataPlane.vue'
+import { Plus, Search } from '@element-plus/icons-vue'
+import AppTable from '@/components/AppTable.vue'
+import FilterItem from '@/components/FilterItem.vue'
+import { reactive, ref } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import AppPagination from '@/components/AppPagination.vue'
+import BranchDrawer from '@/views/branch/branch/BranchDrawer.vue'
+import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
@@ -16,35 +16,35 @@ const tableColumn = [
     title: '編號',
     dataKey: 'id',
     width: 80,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'name',
     title: '名稱',
     dataKey: 'name',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'code',
     title: '分店代號',
     dataKey: 'code',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'tax_id_number',
     title: '統一編號',
     dataKey: 'tax_id_number',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'address',
     title: '地址',
     dataKey: 'address',
     width: 250,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'minimum_order',
@@ -52,12 +52,13 @@ const tableColumn = [
     dataKey: 'minimum_order',
     width: 120,
     align: 'center',
-    cellRenderer: ({cellData: minimum_order}) => new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'TWD',
-      maximumFractionDigits: 0
-    }).format(minimum_order)
-  },
+    cellRenderer: ({ cellData: minimum_order }) =>
+      new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'TWD',
+        maximumFractionDigits: 0
+      }).format(minimum_order)
+  }
 ]
 const tableData = [
   {
@@ -66,7 +67,7 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
-    minimum_order: 3000,
+    minimum_order: 3000
   },
   {
     id: 2,
@@ -74,7 +75,7 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
-    minimum_order: 300,
+    minimum_order: 300
   },
   {
     id: 3,
@@ -82,7 +83,7 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
-    minimum_order: 300,
+    minimum_order: 300
   },
   {
     id: 4,
@@ -90,7 +91,7 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
-    minimum_order: 300,
+    minimum_order: 300
   },
   {
     id: 5,
@@ -98,7 +99,7 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
-    minimum_order: 300,
+    minimum_order: 300
   },
   {
     id: 6,
@@ -106,7 +107,7 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
-    minimum_order: 300,
+    minimum_order: 300
   },
   {
     id: 7,
@@ -114,7 +115,7 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
-    minimum_order: 300,
+    minimum_order: 300
   },
   {
     id: 8,
@@ -122,12 +123,12 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
-    minimum_order: 300,
-  },
+    minimum_order: 300
+  }
 ]
 
 const initSearchParams = {
-  name: "",
+  name: ''
 }
 
 const searchParams = reactive({ ...initSearchParams })
@@ -139,23 +140,21 @@ function handleSearch() {
 }
 
 function handleDelete(index, row) {
-  ElMessageBox.confirm(
-      '是否刪除此間分店？',
-      '刪除',
-      {
-        confirmButtonText: '確認',
-        cancelButtonText: '取消',
-        type: 'error',
-        center: false,
-        showClose: false,
-      }
-  ).then(() => {
-    // call delete api
-    ElMessage({
-      type: 'success',
-      message: '刪除成功',
+  ElMessageBox.confirm('是否刪除此間分店？', '刪除', {
+    confirmButtonText: '確認',
+    cancelButtonText: '取消',
+    type: 'error',
+    center: false,
+    showClose: false
+  })
+    .then(() => {
+      // call delete api
+      ElMessage({
+        type: 'success',
+        message: '刪除成功'
+      })
     })
-  }).catch(() => {})
+    .catch(() => {})
   console.log('delete', index, row.id)
 }
 
@@ -165,18 +164,20 @@ function handlePassword(idx, data) {
     confirmButtonText: '確認',
     cancelButtonText: '取消',
     inputPattern: /^[a-zA-Z0-9]{8,20}$/,
-    inputErrorMessage: '密碼長度為 8 - 20 英文數字',
-  }).then(() => {
-    ElMessage({
-      type: 'success',
-      message: '修改成功',
-    })
-  }).catch(() => {
-    ElMessage({
-      type: 'info',
-      message: '取消修改',
-    })
+    inputErrorMessage: '密碼長度為 8 - 20 英文數字'
   })
+    .then(() => {
+      ElMessage({
+        type: 'success',
+        message: '修改成功'
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消修改'
+      })
+    })
 }
 
 const EditBranchDrawer = ref(null)
@@ -193,7 +194,7 @@ function handleCreate() {
 const paginationParams = {
   page: 1,
   page_size: 10,
-  total: 1200,
+  total: 1200
 }
 const pagination = reactive({ ...paginationParams })
 function handleChange(value) {
@@ -205,28 +206,32 @@ function handleChange(value) {
 
 <template>
   <div>
-    <ControlPlane
-        :reset="handleReset"
-        :search="handleSearch"
-    >
+    <ControlPlane :reset="handleReset" :search="handleSearch">
       <FilterItem title="分店名稱">
-        <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />
+        <ElInput
+          v-model="searchParams.name"
+          size="default"
+          placeholder="請輸入"
+          :suffix-icon="Search"
+        />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <PermButton :icon="Plus" perm-key="Branch.List.Create" @click="handleCreate">新增</PermButton>
+        <PermButton :icon="Plus" perm-key="Branch.List.Create" @click="handleCreate"
+          >新增</PermButton
+        >
       </template>
       <template #main-data>
         <AppTable
-            :data="tableData"
-            :columns="tableColumn"
-            :password="handlePassword"
-            password-key="Branch.List.Password"
-            :edit="handleEdit"
-            edit-key="Branch.List.Edit"
-            :delete="handleDelete"
-            delete-key="Branch.List.Delete"
+          :data="tableData"
+          :columns="tableColumn"
+          :password="handlePassword"
+          password-key="Branch.List.Password"
+          :edit="handleEdit"
+          edit-key="Branch.List.Edit"
+          :delete="handleDelete"
+          delete-key="Branch.List.Delete"
         />
       </template>
       <template #page-data>
@@ -238,5 +243,4 @@ function handleChange(value) {
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

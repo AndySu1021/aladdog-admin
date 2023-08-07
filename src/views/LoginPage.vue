@@ -1,7 +1,7 @@
 <script setup>
-import {reactive, ref} from "vue";
-import {useAdminStore} from "@/stores/admin";
-import {useRouter} from "vue-router";
+import { reactive, ref } from 'vue'
+import { useAdminStore } from '@/stores/admin'
+import { useRouter } from 'vue-router'
 
 const permissions = [
   'Branch',
@@ -80,7 +80,7 @@ const permissions = [
   'System.Setting',
   'Bill',
   'Bill.Payment',
-  'Bill.Transaction',
+  'Bill.Transaction'
 ]
 
 const router = useRouter()
@@ -88,30 +88,24 @@ const adminStore = useAdminStore()
 
 const loading = ref(false)
 
-const initForm ={
+const initForm = {
   company_no: '',
   account: '',
-  password: '',
+  password: ''
 }
 
 const form = reactive({ ...initForm })
 
-const rules= reactive({
-  company_no: [
-    { required: true, message: '請輸入公司代號', trigger: 'blur' },
-  ],
-  account: [
-      { required: true, message: '請輸入帳號', trigger: 'blur' },
-  ],
-  password: [
-      { required: true, message: '請輸入密碼', trigger: 'blur' },
-  ],
+const rules = reactive({
+  company_no: [{ required: true, message: '請輸入公司代號', trigger: 'blur' }],
+  account: [{ required: true, message: '請輸入帳號', trigger: 'blur' }],
+  password: [{ required: true, message: '請輸入密碼', trigger: 'blur' }]
 })
 
 const LoginForm = ref(null)
 
 function resolvePermission() {
-  const permMap = permissions.reduce((a, v) => ({ ...a, [v]: true}), {})
+  const permMap = permissions.reduce((a, v) => ({ ...a, [v]: true }), {})
   for (const [key] of Object.entries(permMap)) {
     const tmp = key.split('.')
     if (tmp.length === 3) {
@@ -130,7 +124,7 @@ function handleLogin() {
       loading.value = true
       // call login api
       setTimeout(function () {
-        let branchId = 0;
+        let branchId = 0
         if (form.account === 'staff') {
           branchId = 1
         }
@@ -138,7 +132,7 @@ function handleLogin() {
           name: 'Andy',
           token: 'ca4c0bc59653558441aa14386978bd6f',
           branch_id: branchId,
-          permissions: resolvePermission(),
+          permissions: resolvePermission()
         })
         loading.value = false
         router.push('/dashboard')
@@ -154,7 +148,7 @@ window.addEventListener('keyup', (event) => {
   if (event.key === 'Enter') {
     handleLogin()
   }
-});
+})
 </script>
 
 <template>
@@ -162,12 +156,12 @@ window.addEventListener('keyup', (event) => {
     <div class="login-container--form">
       <div class="login-container--title">管理後台</div>
       <ElForm
-          ref="LoginForm"
-          :model="form"
-          :rules="rules"
-          label-position="top"
-          label-width="100px"
-          hide-required-asterisk
+        ref="LoginForm"
+        :model="form"
+        :rules="rules"
+        label-position="top"
+        label-width="100px"
+        hide-required-asterisk
       >
         <ElFormItem label="公司代號" prop="company_no">
           <ElInput v-model="form.company_no" placeholder="請輸入公司代號" size="large" />
@@ -176,9 +170,22 @@ window.addEventListener('keyup', (event) => {
           <ElInput v-model="form.account" placeholder="請輸入帳號" size="large" />
         </ElFormItem>
         <ElFormItem label="密碼" prop="password">
-          <ElInput v-model="form.password" type="password" placeholder="請輸入密碼" show-password size="large" />
+          <ElInput
+            v-model="form.password"
+            type="password"
+            placeholder="請輸入密碼"
+            show-password
+            size="large"
+          />
         </ElFormItem>
-        <ElButton ref="LoginButton" style="width: 100%;margin-top: 12px;" type="primary" @click="handleLogin" size="large">登入</ElButton>
+        <ElButton
+          ref="LoginButton"
+          style="width: 100%; margin-top: 12px"
+          type="primary"
+          @click="handleLogin"
+          size="large"
+          >登入</ElButton
+        >
       </ElForm>
       <div class="login-container--footer">
         <p>Copyright ©{{ new Date().getFullYear() }} Aladdog. All rights reserved.</p>

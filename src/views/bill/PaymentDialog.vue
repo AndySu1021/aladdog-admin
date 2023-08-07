@@ -1,32 +1,26 @@
 <script setup>
-import {reactive, ref} from "vue";
-import {ElButton} from "element-plus";
+import { reactive, ref } from 'vue'
+import { ElButton } from 'element-plus'
 
 const isShow = ref(false)
 function show() {
   isShow.value = true
 }
 
-defineExpose({show})
+defineExpose({ show })
 
 const initForm = {
   card_no: '',
   expired: '',
-  ccv: '',
+  ccv: ''
 }
 
 const form = reactive({ ...initForm })
 
 const rules = reactive({
-  card_no: [
-    { required: true, message: '請輸入卡號', trigger: 'blue' },
-  ],
-  expired: [
-    { required: true, message: '請輸入到期日', trigger: 'blue' },
-  ],
-  ccv: [
-    { required: true, message: '請輸入安全驗證碼', trigger: 'blue' },
-  ],
+  card_no: [{ required: true, message: '請輸入卡號', trigger: 'blue' }],
+  expired: [{ required: true, message: '請輸入到期日', trigger: 'blue' }],
+  ccv: [{ required: true, message: '請輸入安全驗證碼', trigger: 'blue' }]
 })
 
 function handleCancel() {
@@ -41,19 +35,19 @@ function handleConfirm() {
 
 <template>
   <ElDialog
-      v-model="isShow"
-      title="新增付款方式"
-      width="35%"
-      :close-on-click-modal="false"
-      :destroy-on-close="true"
+    v-model="isShow"
+    title="新增付款方式"
+    width="35%"
+    :close-on-click-modal="false"
+    :destroy-on-close="true"
   >
     <ElForm
-        ref="SystemSettingForm"
-        :model="form"
-        :rules="rules"
-        require-asterisk-position="right"
-        label-position="top"
-        status-icon
+      ref="SystemSettingForm"
+      :model="form"
+      :rules="rules"
+      require-asterisk-position="right"
+      label-position="top"
+      status-icon
     >
       <ElFormItem label="卡號" required prop="card_no">
         <ElInput v-model="form.card_no" placeholder="請輸入卡號" />
@@ -72,6 +66,4 @@ function handleConfirm() {
   </ElDialog>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

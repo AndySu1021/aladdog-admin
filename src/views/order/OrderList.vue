@@ -1,13 +1,13 @@
 <script setup>
-import ControlPlane from "@/components/ControlPlane.vue";
-import DataPlane from "@/components/DataPlane.vue";
-import AppTable from "@/components/AppTable.vue";
-import FilterItem from "@/components/FilterItem.vue";
-import {reactive, ref} from "vue";
-import AppPagination from "@/components/AppPagination.vue";
-import moment from 'moment';
-import BranchSelect from "@/components/BranchSelect.vue";
-import DetailDialog from "@/views/order/DetailDialog.vue";
+import ControlPlane from '@/components/ControlPlane.vue'
+import DataPlane from '@/components/DataPlane.vue'
+import AppTable from '@/components/AppTable.vue'
+import FilterItem from '@/components/FilterItem.vue'
+import { reactive, ref } from 'vue'
+import AppPagination from '@/components/AppPagination.vue'
+import moment from 'moment'
+import BranchSelect from '@/components/BranchSelect.vue'
+import DetailDialog from '@/views/order/DetailDialog.vue'
 
 const tableColumn = [
   {
@@ -15,42 +15,42 @@ const tableColumn = [
     title: '訂單號',
     dataKey: 'order_no',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'branch',
     title: '分店',
     dataKey: 'branch',
     width: 180,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'table_no',
     title: '桌號',
     dataKey: 'table_no',
     width: 120,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'batch_no',
     title: '批次號',
     dataKey: 'batch_no',
     width: 120,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'start_time',
     title: '入座時間',
     dataKey: 'start_time',
     width: 200,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'headcount',
     title: '用餐人數',
     dataKey: 'headcount',
     width: 120,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'total_amount',
@@ -58,12 +58,13 @@ const tableColumn = [
     dataKey: 'total_amount',
     width: 150,
     align: 'center',
-    cellRenderer: ({cellData: total_amount}) => new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'TWD',
-      maximumFractionDigits: 0
-    }).format(total_amount)
-  },
+    cellRenderer: ({ cellData: total_amount }) =>
+      new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'TWD',
+        maximumFractionDigits: 0
+      }).format(total_amount)
+  }
 ]
 const tableData = [
   {
@@ -73,7 +74,7 @@ const tableData = [
     branch: '成功二店',
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
-    total_amount: 6500,
+    total_amount: 6500
   },
   {
     order_no: '202307231145',
@@ -82,7 +83,7 @@ const tableData = [
     branch: '成功二店',
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
-    total_amount: 6500,
+    total_amount: 6500
   },
   {
     order_no: '202307231145',
@@ -91,7 +92,7 @@ const tableData = [
     branch: '成功二店',
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
-    total_amount: 6500,
+    total_amount: 6500
   },
   {
     order_no: '202307231145',
@@ -100,7 +101,7 @@ const tableData = [
     branch: '成功二店',
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
-    total_amount: 6500,
+    total_amount: 6500
   },
   {
     order_no: '202307231145',
@@ -109,7 +110,7 @@ const tableData = [
     branch: '成功二店',
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
-    total_amount: 6500,
+    total_amount: 6500
   },
   {
     order_no: '202307231145',
@@ -118,7 +119,7 @@ const tableData = [
     branch: '成功二店',
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
-    total_amount: 6500,
+    total_amount: 6500
   },
   {
     order_no: '202307231145',
@@ -127,7 +128,7 @@ const tableData = [
     branch: '成功二店',
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
-    total_amount: 6500,
+    total_amount: 6500
   },
   {
     order_no: '202307231145',
@@ -136,13 +137,16 @@ const tableData = [
     branch: '成功二店',
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
-    total_amount: 6500,
-  },
+    total_amount: 6500
+  }
 ]
 
 const initSearchParams = {
-  datetime_range: [moment().add(-4, 'd').format('YYYY-MM-DD HH:mm:ss'), moment().format('YYYY-MM-DD HH:mm:ss')],
-  branch_id: 0,
+  datetime_range: [
+    moment().add(-4, 'd').format('YYYY-MM-DD HH:mm:ss'),
+    moment().format('YYYY-MM-DD HH:mm:ss')
+  ],
+  branch_id: 0
 }
 
 const searchParams = reactive({ ...initSearchParams })
@@ -156,7 +160,7 @@ function handleSearch() {
 const paginationParams = {
   page: 1,
   page_size: 10,
-  total: 40,
+  total: 40
 }
 
 const pagination = reactive({ ...paginationParams })
@@ -174,31 +178,24 @@ function handleDetail(idx, data) {
 
 <template>
   <div class="dashboard-container">
-    <ControlPlane
-        :reset="handleReset"
-        :search="handleSearch"
-    >
+    <ControlPlane :reset="handleReset" :search="handleSearch">
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
       <FilterItem title="入座時間">
         <ElDatePicker
-            v-model="searchParams.datetime_range"
-            type="datetimerange"
-            start-placeholder="開始時間"
-            end-placeholder="結束時間"
-            format="YYYY-MM-DD HH:mm:ss"
-            value-format="YYYY-MM-DD HH:mm:ss"
+          v-model="searchParams.datetime_range"
+          type="datetimerange"
+          start-placeholder="開始時間"
+          end-placeholder="結束時間"
+          format="YYYY-MM-DD HH:mm:ss"
+          value-format="YYYY-MM-DD HH:mm:ss"
         />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #main-data>
-        <AppTable
-            :data="tableData"
-            :columns="tableColumn"
-            :detail="handleDetail"
-        />
+        <AppTable :data="tableData" :columns="tableColumn" :detail="handleDetail" />
       </template>
       <template #page-data>
         <AppPagination :data="pagination" @change="handleChange" />
@@ -208,5 +205,4 @@ function handleDetail(idx, data) {
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

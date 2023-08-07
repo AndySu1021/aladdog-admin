@@ -1,5 +1,5 @@
 <script setup>
-import {CaretBottom, CaretTop, Warning} from "@element-plus/icons-vue";
+import { CaretBottom, CaretTop, Warning } from '@element-plus/icons-vue'
 
 defineProps({
   value: Number,
@@ -10,19 +10,19 @@ defineProps({
   title: String,
   tooltip: {
     type: String,
-    default: '',
+    default: ''
   },
   hasFooter: {
     type: Boolean,
-    default: false,
+    default: false
   },
   greater: {
     type: Boolean,
-    default: false,
+    default: false
   },
   comparedValue: {
     type: Number,
-    default: 0,
+    default: 0
   }
 })
 </script>
@@ -33,12 +33,7 @@ defineProps({
       <template #title>
         <div style="display: inline-flex; align-items: center">
           {{ title }}
-          <ElTooltip
-              v-if="tooltip !== ''"
-              effect="dark"
-              :content="tooltip"
-              placement="top"
-          >
+          <ElTooltip v-if="tooltip !== ''" effect="dark" :content="tooltip" placement="top">
             <el-icon style="margin-left: 4px" :size="12">
               <Warning />
             </el-icon>
@@ -50,12 +45,12 @@ defineProps({
       <div class="footer-item">
         <span>相較昨日</span>
         <span :class="[greater ? 'red' : 'green']">
-              {{ comparedValue }}%
-              <ElIcon>
-                <CaretBottom v-if="!greater" />
-                <CaretTop v-else />
-              </ElIcon>
-            </span>
+          {{ comparedValue }}%
+          <ElIcon>
+            <CaretBottom v-if="!greater" />
+            <CaretTop v-else />
+          </ElIcon>
+        </span>
       </div>
     </div>
   </div>

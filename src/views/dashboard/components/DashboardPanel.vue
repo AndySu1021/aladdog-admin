@@ -1,11 +1,9 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-<div class="dashboard-panel">
-  <slot />
-</div>
+  <div class="dashboard-panel">
+    <slot />
+  </div>
 </template>
 
 <style scoped lang="scss">

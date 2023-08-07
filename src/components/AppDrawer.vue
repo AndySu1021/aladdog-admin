@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import { ref } from 'vue'
 
 defineProps({
   title: {
@@ -8,20 +8,20 @@ defineProps({
   },
   size: {
     type: String,
-    default: '35%',
+    default: '35%'
   },
   cancel: {
     type: Function,
-    default: null,
+    default: null
   },
   confirm: {
     type: Function,
-    default: null,
+    default: null
   },
   opened: {
     type: Function,
-    default: null,
-  },
+    default: null
+  }
 })
 
 const isShow = ref(false)
@@ -35,21 +35,21 @@ function close() {
   AppDrawer.value.handleClose()
 }
 
-defineExpose({show, close});
+defineExpose({ show, close })
 </script>
 
 <template>
   <ElDrawer
-      ref="AppDrawer"
-      class="app-drawer-container"
-      v-model="isShow"
-      :destroy-on-close="true"
-      direction="rtl"
-      :size="size"
-      @opened="opened"
+    ref="AppDrawer"
+    class="app-drawer-container"
+    v-model="isShow"
+    :destroy-on-close="true"
+    direction="rtl"
+    :size="size"
+    @opened="opened"
   >
     <template #header>
-      <span class="app-drawer-container--title">{{title}}</span>
+      <span class="app-drawer-container--title">{{ title }}</span>
     </template>
     <template #default>
       <slot />

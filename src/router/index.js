@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import MainLayout from '@/layout/MainLayout.vue'
 import {
   ColdDrink,
@@ -10,12 +10,12 @@ import {
   PieChart,
   Setting,
   ShoppingCart,
-  User,
-} from "@element-plus/icons-vue";
-import {useRoutesStore} from "@/stores/routes";
-import LoginPage from "@/views/LoginPage.vue";
-import NotFoundPage from "@/views/NotFoundPage.vue";
-import {useAdminStore} from "@/stores/admin";
+  User
+} from '@element-plus/icons-vue'
+import { useRoutesStore } from '@/stores/routes'
+import LoginPage from '@/views/LoginPage.vue'
+import NotFoundPage from '@/views/NotFoundPage.vue'
+import { useAdminStore } from '@/stores/admin'
 
 export const constRoutes = [
   {
@@ -39,11 +39,11 @@ export const constRoutes = [
         path: '/dashboard',
         name: 'Dashboard',
         meta: { title: '首頁', key: 'Dashboard' },
-        component: () => import('@/views/dashboard/MainDashboard.vue'),
-      },
+        component: () => import('@/views/dashboard/MainDashboard.vue')
+      }
     ]
-  },
-];
+  }
+]
 
 export const permRoutes = [
   {
@@ -56,20 +56,20 @@ export const permRoutes = [
         path: '/branch',
         name: 'BranchList',
         meta: { title: '分店', key: 'Branch.List.View' },
-        component: () => import('@/views/branch/branch/BranchList.vue'),
+        component: () => import('@/views/branch/branch/BranchList.vue')
       },
       {
         path: '/branch/station',
         name: 'BranchStation',
         meta: { title: '崗位', key: 'Branch.Station.View' },
-        component: () => import('@/views/branch/station/StationList.vue'),
+        component: () => import('@/views/branch/station/StationList.vue')
       },
       {
         path: '/branch/table',
         name: 'BranchTable',
         meta: { title: '桌位', key: 'Branch.Table.View' },
-        component: () => import('@/views/branch/table/TableList.vue'),
-      },
+        component: () => import('@/views/branch/table/TableList.vue')
+      }
     ]
   },
   {
@@ -82,20 +82,20 @@ export const permRoutes = [
         path: '/liquor/stock',
         name: 'LiquorStock',
         meta: { title: '庫存', key: 'Liquor.Stock.View' },
-        component: () => import('@/views/liquor/stock/StockList.vue'),
+        component: () => import('@/views/liquor/stock/StockList.vue')
       },
       {
         path: '/liquor/recipe',
         name: 'LiquorRecipe',
         meta: { title: '酒譜', key: 'Liquor.Recipe.View' },
-        component: () => import('@/views/liquor/recipe/RecipeList.vue'),
+        component: () => import('@/views/liquor/recipe/RecipeList.vue')
       },
       {
         path: '/liquor/addon',
         name: 'LiquorReplacement',
         meta: { title: '加價換', key: 'Liquor.Replacement.View' },
-        component: () => import('@/views/liquor/replacement/ReplacementList.vue'),
-      },
+        component: () => import('@/views/liquor/replacement/ReplacementList.vue')
+      }
     ]
   },
   {
@@ -108,8 +108,8 @@ export const permRoutes = [
         path: '/meal',
         name: 'MealList',
         meta: { title: '餐點', key: 'Meal' },
-        component: () => import('@/views/meal/MealList.vue'),
-      },
+        component: () => import('@/views/meal/MealList.vue')
+      }
     ]
   },
   {
@@ -122,8 +122,8 @@ export const permRoutes = [
         path: '/order',
         name: 'Order',
         meta: { title: '訂單', key: 'Order' },
-        component: () => import('@/views/order/OrderList.vue'),
-      },
+        component: () => import('@/views/order/OrderList.vue')
+      }
     ]
   },
   {
@@ -136,8 +136,8 @@ export const permRoutes = [
         path: '/activity',
         name: 'ActivityList',
         meta: { title: '活動', key: 'Promotion.Activity.View' },
-        component: () => import('@/views/promotion/activity/ActivityList.vue'),
-      },
+        component: () => import('@/views/promotion/activity/ActivityList.vue')
+      }
     ]
   },
   {
@@ -150,26 +150,26 @@ export const permRoutes = [
         path: '/report/profit',
         name: 'ReportProfit',
         meta: { title: '營收', key: 'Report.Profit' },
-        component: () => import('@/views/report/ProfitReport.vue'),
+        component: () => import('@/views/report/ProfitReport.vue')
       },
       {
         path: '/report/average-order-value',
         name: 'ReportAverageOrderValue',
         meta: { title: '平均客單價', key: 'Report.AverageOrderValue' },
-        component: () => import('@/views/report/AverageOrderValueReport.vue'),
+        component: () => import('@/views/report/AverageOrderValueReport.vue')
       },
       {
         path: '/report/meal',
         name: 'ReportProduct',
         meta: { title: '商品', key: 'Report.Product' },
-        component: () => import('@/views/report/ProductReport.vue'),
+        component: () => import('@/views/report/ProductReport.vue')
       },
       {
         path: '/report/product-summary',
         name: 'ReportProductSummary',
         meta: { title: '商品匯總', key: 'Report.ProductSummary' },
-        component: () => import('@/views/report/ProductSummaryReport.vue'),
-      },
+        component: () => import('@/views/report/ProductSummaryReport.vue')
+      }
     ]
   },
   {
@@ -182,14 +182,14 @@ export const permRoutes = [
         path: '/staff/list',
         name: 'StaffList',
         meta: { title: '員工', key: 'Staff.List.View' },
-        component: () => import('@/views/staff/StaffList.vue'),
+        component: () => import('@/views/staff/StaffList.vue')
       },
       {
         path: '/staff/attendance',
         name: 'StaffAttendanceRecord',
         meta: { title: '打卡記錄', key: 'Staff.AttendanceRecord' },
-        component: () => import('@/views/staff/StaffAttendanceRecord.vue'),
-      },
+        component: () => import('@/views/staff/StaffAttendanceRecord.vue')
+      }
     ]
   },
   {
@@ -202,26 +202,26 @@ export const permRoutes = [
         path: '/system/role',
         name: 'SystemRole',
         meta: { title: '角色', key: 'System.Role.View' },
-        component: () => import('@/views/system/role/RoleList.vue'),
+        component: () => import('@/views/system/role/RoleList.vue')
       },
       {
         path: '/system/admin',
         name: 'SystemAdmin',
         meta: { title: '管理員', key: 'System.Admin.View' },
-        component: () => import('@/views/system/admin/AdminList.vue'),
+        component: () => import('@/views/system/admin/AdminList.vue')
       },
       {
         path: '/system/oplog',
         name: 'SystemOplog',
         meta: { title: '操作日誌', key: 'System.Oplog' },
-        component: () => import('@/views/system/SystemOplog.vue'),
+        component: () => import('@/views/system/SystemOplog.vue')
       },
       {
         path: '/system/setting',
         name: 'SystemSetting',
         meta: { title: '設定', key: 'System.Setting' },
-        component: () => import('@/views/system/SystemSetting.vue'),
-      },
+        component: () => import('@/views/system/SystemSetting.vue')
+      }
     ]
   },
   {
@@ -234,21 +234,21 @@ export const permRoutes = [
         path: '/bill/payment',
         name: 'BillPayment',
         meta: { title: '付款設定', key: 'Bill.Payment' },
-        component: () => import('@/views/bill/BillPayment.vue'),
+        component: () => import('@/views/bill/BillPayment.vue')
       },
       {
         path: '/bill/transaction',
         name: 'BillTransaction',
         meta: { title: '交易紀錄', key: 'Bill.Transaction' },
-        component: () => import('@/views/bill/BillTransaction.vue'),
-      },
+        component: () => import('@/views/bill/BillTransaction.vue')
+      }
     ]
-  },
-];
+  }
+]
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: constRoutes.concat(permRoutes),
+  routes: constRoutes.concat(permRoutes)
 })
 
 router.beforeEach((to, from, next) => {

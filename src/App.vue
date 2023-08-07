@@ -1,6 +1,6 @@
 <script setup>
-import {RouterView} from 'vue-router'
-import {onMounted} from "vue";
+import { RouterView } from 'vue-router'
+import { onMounted } from 'vue'
 
 onMounted(() => {
   // document.body.style.setProperty('--el-color-primary', '#FF0000')
@@ -11,6 +11,4 @@ onMounted(() => {
   <RouterView />
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -1,15 +1,15 @@
 <script setup>
-import ControlPlane from "@/components/ControlPlane.vue";
-import DataPlane from "@/components/DataPlane.vue";
-import {Plus} from "@element-plus/icons-vue";
-import AppTable from "@/components/AppTable.vue";
-import FilterItem from "@/components/FilterItem.vue";
-import {reactive, ref} from "vue";
-import {ElMessage, ElMessageBox} from "element-plus";
-import AppPagination from "@/components/AppPagination.vue";
-import TableDrawer from "@/views/branch/table/TableDrawer.vue";
-import BranchSelect from "@/components/BranchSelect.vue";
-import PermButton from "@/components/PermButton.vue";
+import ControlPlane from '@/components/ControlPlane.vue'
+import DataPlane from '@/components/DataPlane.vue'
+import { Plus } from '@element-plus/icons-vue'
+import AppTable from '@/components/AppTable.vue'
+import FilterItem from '@/components/FilterItem.vue'
+import { reactive, ref } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import AppPagination from '@/components/AppPagination.vue'
+import TableDrawer from '@/views/branch/table/TableDrawer.vue'
+import BranchSelect from '@/components/BranchSelect.vue'
+import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
@@ -17,14 +17,14 @@ const tableColumn = [
     title: '編號',
     dataKey: 'id',
     width: 80,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'branch',
     title: '分店',
     dataKey: 'branch',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'floor',
@@ -32,14 +32,14 @@ const tableColumn = [
     dataKey: 'floor',
     width: 150,
     align: 'center',
-    cellRenderer: ({cellData:floor}) => floor < 0 ? `B ${(-1)*floor}` : `${floor} F`
+    cellRenderer: ({ cellData: floor }) => (floor < 0 ? `B ${-1 * floor}` : `${floor} F`)
   },
   {
     key: 'table_no',
     title: '桌號',
     dataKey: 'table_no',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'capacity',
@@ -47,8 +47,8 @@ const tableColumn = [
     dataKey: 'capacity',
     width: 150,
     align: 'center',
-    cellRenderer: ({cellData:capacity}) => `${capacity} 人`
-  },
+    cellRenderer: ({ cellData: capacity }) => `${capacity} 人`
+  }
 ]
 const tableData = [
   {
@@ -56,61 +56,61 @@ const tableData = [
     branch: '中華一店',
     floor: -1,
     table_no: 'A1',
-    capacity: 5,
+    capacity: 5
   },
   {
     id: 2,
     branch: '成功二店',
     floor: 1,
     table_no: 'A8',
-    capacity: 5,
+    capacity: 5
   },
   {
     id: 3,
     branch: '信義三店',
     floor: 2,
     table_no: 'C22',
-    capacity: 5,
+    capacity: 5
   },
   {
     id: 4,
     branch: '中華一店',
     floor: 3,
     table_no: 'D5',
-    capacity: 5,
+    capacity: 5
   },
   {
     id: 5,
     branch: '中華一店',
     floor: 4,
     table_no: 'D5',
-    capacity: 5,
+    capacity: 5
   },
   {
     id: 6,
     branch: '中華一店',
     floor: 5,
     table_no: 'D5',
-    capacity: 5,
+    capacity: 5
   },
   {
     id: 7,
     branch: '中華一店',
     floor: 6,
     table_no: 'D5',
-    capacity: 5,
+    capacity: 5
   },
   {
     id: 8,
     branch: '中華一店',
     floor: 7,
     table_no: 'D5',
-    capacity: 5,
-  },
+    capacity: 5
+  }
 ]
 
 const initSearchParams = {
-  branch_id: 0,
+  branch_id: 0
 }
 
 const searchParams = reactive({ ...initSearchParams })
@@ -122,23 +122,21 @@ function handleSearch() {
 }
 
 function handleDelete(index, row) {
-  ElMessageBox.confirm(
-      '是否刪除此桌位？',
-      '刪除',
-      {
-        confirmButtonText: '確認',
-        cancelButtonText: '取消',
-        type: 'error',
-        center: false,
-        showClose: false,
-      }
-  ).then(() => {
-    // call delete api
-    ElMessage({
-      type: 'success',
-      message: '刪除成功',
+  ElMessageBox.confirm('是否刪除此桌位？', '刪除', {
+    confirmButtonText: '確認',
+    cancelButtonText: '取消',
+    type: 'error',
+    center: false,
+    showClose: false
+  })
+    .then(() => {
+      // call delete api
+      ElMessage({
+        type: 'success',
+        message: '刪除成功'
+      })
     })
-  }).catch(() => {})
+    .catch(() => {})
   console.log('delete', index, row.id)
 }
 
@@ -156,7 +154,7 @@ function handleCreate() {
 const paginationParams = {
   page: 1,
   page_size: 10,
-  total: 40,
+  total: 40
 }
 const pagination = reactive({ ...paginationParams })
 function handleChange(value) {
@@ -168,26 +166,25 @@ function handleChange(value) {
 
 <template>
   <div class="dashboard-container">
-    <ControlPlane
-        :reset="handleReset"
-        :search="handleSearch"
-    >
+    <ControlPlane :reset="handleReset" :search="handleSearch">
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <PermButton :icon="Plus" perm-key="Branch.Table.Create" @click="handleCreate">新增</PermButton>
+        <PermButton :icon="Plus" perm-key="Branch.Table.Create" @click="handleCreate"
+          >新增</PermButton
+        >
       </template>
       <template #main-data>
         <AppTable
-            :data="tableData"
-            :columns="tableColumn"
-            :edit="handleEdit"
-            edit-key="Branch.Table.Edit"
-            :delete="handleDelete"
-            delete-key="Branch.Table.Delete"
+          :data="tableData"
+          :columns="tableColumn"
+          :edit="handleEdit"
+          edit-key="Branch.Table.Edit"
+          :delete="handleDelete"
+          delete-key="Branch.Table.Delete"
         />
       </template>
       <template #page-data>
@@ -199,5 +196,4 @@ function handleChange(value) {
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

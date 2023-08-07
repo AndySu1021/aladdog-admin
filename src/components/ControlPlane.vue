@@ -1,6 +1,6 @@
 <script setup>
-import {Close, Download, Search} from "@element-plus/icons-vue";
-import {ElButton} from "element-plus";
+import { Close, Download, Search } from '@element-plus/icons-vue'
+import { ElButton } from 'element-plus'
 
 const props = defineProps({
   reset: {
@@ -30,16 +30,20 @@ function handleDownload() {
 </script>
 
 <template>
-<div class="control-plane-container">
-  <div class="filter-section">
-    <slot />
+  <div class="control-plane-container">
+    <div class="filter-section">
+      <slot />
+    </div>
+    <div class="control-btn-section">
+      <ElButton v-if="reset" @click="handleReset" size="large" :icon="Close">重置</ElButton>
+      <ElButton v-if="search" type="primary" @click="handleSearch" size="large" :icon="Search"
+        >搜尋</ElButton
+      >
+      <ElButton v-if="download" type="success" @click="handleDownload" size="large" :icon="Download"
+        >下載</ElButton
+      >
+    </div>
   </div>
-  <div class="control-btn-section">
-    <ElButton v-if="reset" @click="handleReset" size="large" :icon="Close">重置</ElButton>
-    <ElButton v-if="search" type="primary" @click="handleSearch" size="large" :icon="Search">搜尋</ElButton>
-    <ElButton v-if="download" type="success" @click="handleDownload" size="large" :icon="Download">下載</ElButton>
-  </div>
-</div>
 </template>
 
 <style scoped lang="scss">
@@ -55,7 +59,7 @@ function handleDownload() {
     margin-top: 10px;
     :deep(.filter-item) {
       display: inline-flex;
-      align-items:center;
+      align-items: center;
       margin-bottom: 24px;
       .el-input {
         width: 200px;

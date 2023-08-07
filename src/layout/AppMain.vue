@@ -1,5 +1,5 @@
 <script setup>
-import {RouterView, useRoute} from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 
 const key = useRoute().path
 </script>
@@ -8,7 +8,7 @@ const key = useRoute().path
   <div class="app-main-container">
     <RouterView :key="key" v-slot="{ Component }">
       <Transition>
-      <Component :is="Component" />
+        <Component :is="Component" />
       </Transition>
     </RouterView>
   </div>

@@ -1,13 +1,13 @@
 <script setup>
-import ControlPlane from "@/components/ControlPlane.vue";
-import DataPlane from "@/components/DataPlane.vue";
-import AppTable from "@/components/AppTable.vue";
-import FilterItem from "@/components/FilterItem.vue";
-import {reactive} from "vue";
-import AppPagination from "@/components/AppPagination.vue";
-import moment from 'moment';
-import {ElMessage} from "element-plus";
-import BranchSelect from "@/components/BranchSelect.vue";
+import ControlPlane from '@/components/ControlPlane.vue'
+import DataPlane from '@/components/DataPlane.vue'
+import AppTable from '@/components/AppTable.vue'
+import FilterItem from '@/components/FilterItem.vue'
+import { reactive } from 'vue'
+import AppPagination from '@/components/AppPagination.vue'
+import moment from 'moment'
+import { ElMessage } from 'element-plus'
+import BranchSelect from '@/components/BranchSelect.vue'
 
 const tableColumn = [
   {
@@ -15,14 +15,14 @@ const tableColumn = [
     title: '日期',
     dataKey: 'date',
     align: 'center',
-    flexGrow: 1,
+    flexGrow: 1
   },
   {
     key: 'branch',
     title: '分店',
     dataKey: 'branch',
     align: 'center',
-    flexGrow: 1,
+    flexGrow: 1
   },
   {
     key: 'average_order_value',
@@ -30,60 +30,61 @@ const tableColumn = [
     dataKey: 'average_order_value',
     align: 'center',
     flexGrow: 1,
-    cellRenderer: ({cellData: average_order_value}) => new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'TWD',
-      maximumFractionDigits: 0
-    }).format(average_order_value)
-  },
+    cellRenderer: ({ cellData: average_order_value }) =>
+      new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'TWD',
+        maximumFractionDigits: 0
+      }).format(average_order_value)
+  }
 ]
 const tableData = [
   {
     date: '2023-07-23',
     branch: '成功二店',
-    average_order_value: 2000,
+    average_order_value: 2000
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
-    average_order_value: 2000,
+    average_order_value: 2000
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
-    average_order_value: 2000,
+    average_order_value: 2000
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
-    average_order_value: 2000,
+    average_order_value: 2000
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
-    average_order_value: 2000,
+    average_order_value: 2000
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
-    average_order_value: 2000,
+    average_order_value: 2000
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
-    average_order_value: 2000,
+    average_order_value: 2000
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
-    average_order_value: 2000,
-  },
+    average_order_value: 2000
+  }
 ]
 
 const initSearchParams = {
   date_range: [moment().add(-4, 'd').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')],
   type: 1,
-  branch_id: 0,
+  branch_id: 0
 }
 
 const searchParams = reactive({ ...initSearchParams })
@@ -97,7 +98,7 @@ function handleSearch() {
 const paginationParams = {
   page: 1,
   page_size: 10,
-  total: 40,
+  total: 40
 }
 const pagination = reactive({ ...paginationParams })
 function handleChange(value) {
@@ -113,38 +114,30 @@ function handleDownload() {
 
 <template>
   <div class="dashboard-container">
-    <ControlPlane
-        :reset="handleReset"
-        :search="handleSearch"
-        :download="handleDownload"
-    >
+    <ControlPlane :reset="handleReset" :search="handleSearch" :download="handleDownload">
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
       <FilterItem title="類型">
         <ElSelect v-model="searchParams.type" placeholder="請選擇">
-          <ElOption label="每日" :value="1"/>
-          <ElOption label="每月" :value="2"/>
+          <ElOption label="每日" :value="1" />
+          <ElOption label="每月" :value="2" />
         </ElSelect>
       </FilterItem>
       <FilterItem title="日期">
         <ElDatePicker
-            v-model="searchParams.date_range"
-            type="daterange"
-            start-placeholder="開始日期"
-            end-placeholder="結束日期"
-            format="YYYY-MM-DD"
-            value-format="YYYY-MM-DD"
+          v-model="searchParams.date_range"
+          type="daterange"
+          start-placeholder="開始日期"
+          end-placeholder="結束日期"
+          format="YYYY-MM-DD"
+          value-format="YYYY-MM-DD"
         />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #main-data>
-        <AppTable
-            :data="tableData"
-            :columns="tableColumn"
-            :fixed="false"
-        />
+        <AppTable :data="tableData" :columns="tableColumn" :fixed="false" />
       </template>
       <template #page-data>
         <AppPagination :data="pagination" @change="handleChange" />
@@ -153,5 +146,4 @@ function handleDownload() {
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

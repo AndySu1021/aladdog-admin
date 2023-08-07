@@ -1,15 +1,15 @@
 <script setup>
-import ControlPlane from "@/components/ControlPlane.vue";
-import DataPlane from "@/components/DataPlane.vue";
-import {Plus, Search} from "@element-plus/icons-vue";
-import AppTable from "@/components/AppTable.vue";
-import FilterItem from "@/components/FilterItem.vue";
-import {reactive, ref} from "vue";
-import {ElMessage, ElMessageBox} from "element-plus";
-import StaffDrawer from "@/views/staff/StaffDrawer.vue";
-import AppPagination from "@/components/AppPagination.vue";
-import BranchSelect from "@/components/BranchSelect.vue";
-import PermButton from "@/components/PermButton.vue";
+import ControlPlane from '@/components/ControlPlane.vue'
+import DataPlane from '@/components/DataPlane.vue'
+import { Plus, Search } from '@element-plus/icons-vue'
+import AppTable from '@/components/AppTable.vue'
+import FilterItem from '@/components/FilterItem.vue'
+import { reactive, ref } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import StaffDrawer from '@/views/staff/StaffDrawer.vue'
+import AppPagination from '@/components/AppPagination.vue'
+import BranchSelect from '@/components/BranchSelect.vue'
+import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
@@ -17,21 +17,21 @@ const tableColumn = [
     title: '編號',
     dataKey: 'id',
     width: 100,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'branch',
     title: '分店',
     dataKey: 'branch',
     width: 180,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'name',
     title: '姓名',
     dataKey: 'name',
     width: 180,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'sex',
@@ -39,22 +39,22 @@ const tableColumn = [
     dataKey: 'sex',
     width: 80,
     align: 'center',
-    cellRenderer: ({ cellData: sex }) => sex === 1 ? '男' : '女',
+    cellRenderer: ({ cellData: sex }) => (sex === 1 ? '男' : '女')
   },
   {
     key: 'mobile',
     title: '手機號',
     dataKey: 'mobile',
     width: 180,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'staff_no',
     title: '員工編號',
     dataKey: 'staff_no',
     width: 180,
-    align: 'center',
-  },
+    align: 'center'
+  }
 ]
 const tableData = [
   {
@@ -63,7 +63,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    staff_no: '112056',
+    staff_no: '112056'
   },
   {
     id: 2,
@@ -71,7 +71,7 @@ const tableData = [
     name: 'Andy',
     sex: 2,
     mobile: '0912345678',
-    staff_no: '112056',
+    staff_no: '112056'
   },
   {
     id: 3,
@@ -79,7 +79,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    staff_no: '112056',
+    staff_no: '112056'
   },
   {
     id: 4,
@@ -87,7 +87,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    staff_no: '112056',
+    staff_no: '112056'
   },
   {
     id: 5,
@@ -95,7 +95,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    staff_no: '112056',
+    staff_no: '112056'
   },
   {
     id: 6,
@@ -103,7 +103,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    staff_no: '112056',
+    staff_no: '112056'
   },
   {
     id: 7,
@@ -111,7 +111,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    staff_no: '112056',
+    staff_no: '112056'
   },
   {
     id: 8,
@@ -119,13 +119,13 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    staff_no: '112056',
-  },
+    staff_no: '112056'
+  }
 ]
 
 const initSearchParams = {
   branch_id: 0,
-  staff_no: "",
+  staff_no: ''
 }
 
 const searchParams = reactive({ ...initSearchParams })
@@ -137,23 +137,21 @@ function handleSearch() {
 }
 
 function handleDelete(index, row) {
-  ElMessageBox.confirm(
-      '是否刪除此位員工？',
-      '刪除',
-      {
-        confirmButtonText: '確認',
-        cancelButtonText: '取消',
-        type: 'error',
-        center: false,
-        showClose: false,
-      }
-  ).then(() => {
-    // call delete api
-    ElMessage({
-      type: 'success',
-      message: '刪除成功',
+  ElMessageBox.confirm('是否刪除此位員工？', '刪除', {
+    confirmButtonText: '確認',
+    cancelButtonText: '取消',
+    type: 'error',
+    center: false,
+    showClose: false
+  })
+    .then(() => {
+      // call delete api
+      ElMessage({
+        type: 'success',
+        message: '刪除成功'
+      })
     })
-  }).catch(() => {})
+    .catch(() => {})
   console.log('delete', index, row.id)
 }
 
@@ -171,7 +169,7 @@ function handleCreate() {
 const paginationParams = {
   page: 1,
   page_size: 10,
-  total: 40,
+  total: 40
 }
 const pagination = reactive({ ...paginationParams })
 function handleChange(value) {
@@ -183,29 +181,33 @@ function handleChange(value) {
 
 <template>
   <div class="dashboard-container">
-    <ControlPlane
-        :reset="handleReset"
-        :search="handleSearch"
-    >
+    <ControlPlane :reset="handleReset" :search="handleSearch">
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
       <FilterItem title="員工編號">
-        <ElInput v-model="searchParams.staff_no" size="default" placeholder="請輸入" :suffix-icon="Search" />
+        <ElInput
+          v-model="searchParams.staff_no"
+          size="default"
+          placeholder="請輸入"
+          :suffix-icon="Search"
+        />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <PermButton :icon="Plus" perm-key="Staff.List.Create" @click="handleCreate">新增</PermButton>
+        <PermButton :icon="Plus" perm-key="Staff.List.Create" @click="handleCreate"
+          >新增</PermButton
+        >
       </template>
       <template #main-data>
         <AppTable
-            :data="tableData"
-            :columns="tableColumn"
-            :edit="handleEdit"
-            edit-key="Staff.List.Edit"
-            :delete="handleDelete"
-            delete-key="Staff.List.Delete"
+          :data="tableData"
+          :columns="tableColumn"
+          :edit="handleEdit"
+          edit-key="Staff.List.Edit"
+          :delete="handleDelete"
+          delete-key="Staff.List.Delete"
         />
       </template>
       <template #page-data>
@@ -217,5 +219,4 @@ function handleChange(value) {
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

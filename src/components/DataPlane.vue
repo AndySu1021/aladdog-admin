@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
   <div class="data-plane-container">
@@ -8,10 +6,10 @@
       <slot name="btn-group" />
     </div>
     <div class="main-data">
-      <slot name="main-data"/>
+      <slot name="main-data" />
     </div>
     <div v-if="$slots['page-data']" class="page-data">
-      <slot name="page-data"/>
+      <slot name="page-data" />
     </div>
   </div>
 </template>

@@ -1,21 +1,20 @@
 <script setup>
-import {Delete, Plus} from '@element-plus/icons-vue'
-import {ElMessage} from "element-plus";
-import {ref} from "vue";
+import { Delete, Plus } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import { ref } from 'vue'
 
 const props = defineProps({
   modelValue: String,
   multiple: {
     type: Boolean,
-    default: false,
+    default: false
   },
   limit: {
     type: Number,
-    default: 1,
-  },
+    default: 1
+  }
 })
-const emit = defineEmits(['update:modelValue']);
-
+const emit = defineEmits(['update:modelValue'])
 
 const hideUploadBtn = ref(false)
 const Upload = ref(null)
@@ -49,21 +48,21 @@ function handleEditChange(file, files) {
 
 <template>
   <ElUpload
-      ref="Upload"
-      action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-      list-type="picture-card"
-      :multiple="multiple"
-      accept="jpg"
-      :before-upload="beforeAvatarUpload"
-      :on-success="handleAvatarSuccess"
-      :limit="limit"
-      :auto-upload="false"
-      :class="{ 'hide': hideUploadBtn }"
-      :on-change="handleEditChange"
+    ref="Upload"
+    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+    list-type="picture-card"
+    :multiple="multiple"
+    accept="jpg"
+    :before-upload="beforeAvatarUpload"
+    :on-success="handleAvatarSuccess"
+    :limit="limit"
+    :auto-upload="false"
+    :class="{ hide: hideUploadBtn }"
+    :on-change="handleEditChange"
   >
     <ElIcon><Plus /></ElIcon>
     <template #tip>
-      <div style="font-size: 12px;color: #909090;">* 僅限 jpg 和 png，大小限制為 2MB</div>
+      <div style="font-size: 12px; color: #909090">* 僅限 jpg 和 png，大小限制為 2MB</div>
     </template>
     <template #file="{ file }">
       <div>

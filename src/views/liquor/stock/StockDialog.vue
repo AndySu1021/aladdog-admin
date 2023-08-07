@@ -1,7 +1,7 @@
 <script setup>
-import {Plus} from "@element-plus/icons-vue";
-import {reactive, ref} from "vue";
-import BranchSelect from "@/components/BranchSelect.vue";
+import { Plus } from '@element-plus/icons-vue'
+import { reactive, ref } from 'vue'
+import BranchSelect from '@/components/BranchSelect.vue'
 
 const isShow = ref(false)
 function show() {
@@ -10,10 +10,12 @@ function show() {
 
 const initForm = {
   branch_id: null,
-  stocks: [{
-    stock_id: null,
-    quantity: 0,
-  }],
+  stocks: [
+    {
+      stock_id: null,
+      quantity: 0
+    }
+  ]
 }
 
 const form = reactive(JSON.parse(JSON.stringify(initForm)))
@@ -21,16 +23,14 @@ const form = reactive(JSON.parse(JSON.stringify(initForm)))
 function handleStockAdd() {
   form.stocks.push({
     stock_id: null,
-    quantity: 0,
+    quantity: 0
   })
 }
 
-defineExpose({show})
+defineExpose({ show })
 
 const rules = reactive({
-  branch_id: [
-    { required: true, message: '請選擇分店', trigger: 'change' },
-  ],
+  branch_id: [{ required: true, message: '請選擇分店', trigger: 'change' }]
 })
 
 const ReStockForm = ref(null)
@@ -54,27 +54,27 @@ function handleCancel() {
 
 <template>
   <ElDialog
-      v-model="isShow"
-      title="庫存補貨"
-      width="40%"
-      :close-on-click-modal="false"
-      :destroy-on-close="true"
-      center
+    v-model="isShow"
+    title="庫存補貨"
+    width="40%"
+    :close-on-click-modal="false"
+    :destroy-on-close="true"
+    center
   >
     <ElForm
-        ref="ReStockForm"
-        :model="form"
-        :rules="rules"
-        require-asterisk-position="right"
-        label-position="right"
-        status-icon
-        label-width="120px"
+      ref="ReStockForm"
+      :model="form"
+      :rules="rules"
+      require-asterisk-position="right"
+      label-position="right"
+      status-icon
+      label-width="120px"
     >
       <ElFormItem label="分店" required prop="branch_id">
         <BranchSelect v-model.number="form.branch_id" />
       </ElFormItem>
       <template v-for="(stock, idx) in form.stocks" :key="idx">
-        <ElFormItem :label="`酒品 ${idx+1}`" required>
+        <ElFormItem :label="`酒品 ${idx + 1}`" required>
           <ElRow :gutter="4">
             <ElCol :span="12">
               <ElSelect filterable v-model.number="stock.stock_id" placeholder="請選擇">
@@ -90,7 +90,7 @@ function handleCancel() {
           </ElRow>
         </ElFormItem>
       </template>
-      <ElButton :icon="Plus" plain @click="handleStockAdd" style="margin-left: 58px;"/>
+      <ElButton :icon="Plus" plain @click="handleStockAdd" style="margin-left: 58px" />
     </ElForm>
     <template #footer>
       <div style="flex: auto">
@@ -101,6 +101,4 @@ function handleCancel() {
   </ElDialog>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

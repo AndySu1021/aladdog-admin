@@ -1,14 +1,14 @@
 <script setup>
-import ControlPlane from "@/components/ControlPlane.vue";
-import DataPlane from "@/components/DataPlane.vue";
-import {Plus, Search} from "@element-plus/icons-vue";
-import AppTable from "@/components/AppTable.vue";
-import FilterItem from "@/components/FilterItem.vue";
-import {h, reactive, ref} from "vue";
-import {ElMessage, ElMessageBox, ElTag} from "element-plus";
-import AppPagination from "@/components/AppPagination.vue";
-import AdminDrawer from "@/views/system/admin/AdminDrawer.vue";
-import BranchSelect from "@/components/BranchSelect.vue";
+import ControlPlane from '@/components/ControlPlane.vue'
+import DataPlane from '@/components/DataPlane.vue'
+import { Plus, Search } from '@element-plus/icons-vue'
+import AppTable from '@/components/AppTable.vue'
+import FilterItem from '@/components/FilterItem.vue'
+import { h, reactive, ref } from 'vue'
+import { ElMessage, ElMessageBox, ElTag } from 'element-plus'
+import AppPagination from '@/components/AppPagination.vue'
+import AdminDrawer from '@/views/system/admin/AdminDrawer.vue'
+import BranchSelect from '@/components/BranchSelect.vue'
 
 const tableColumn = [
   {
@@ -16,28 +16,28 @@ const tableColumn = [
     title: '編號',
     dataKey: 'id',
     width: 80,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'branch',
     title: '分店',
     dataKey: 'branch',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'role',
     title: '角色',
     dataKey: 'role',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'name',
     title: '名稱',
     dataKey: 'name',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'sex',
@@ -45,14 +45,14 @@ const tableColumn = [
     dataKey: 'sex',
     width: 80,
     align: 'center',
-    cellRenderer: ({ cellData: sex }) => sex === 1 ? '男' : '女',
+    cellRenderer: ({ cellData: sex }) => (sex === 1 ? '男' : '女')
   },
   {
     key: 'mobile',
     title: '手機號',
     dataKey: 'mobile',
     width: 150,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'is_enabled',
@@ -60,8 +60,11 @@ const tableColumn = [
     dataKey: 'is_enabled',
     width: 80,
     align: 'center',
-    cellRenderer: ({cellData: is_enabled}) => is_enabled === 1 ? h(ElTag, {type: 'success'}, () => '啟用') : h(ElTag, {type: 'danger'}, () => '停用'),
-  },
+    cellRenderer: ({ cellData: is_enabled }) =>
+      is_enabled === 1
+        ? h(ElTag, { type: 'success' }, () => '啟用')
+        : h(ElTag, { type: 'danger' }, () => '停用')
+  }
 ]
 const tableData = [
   {
@@ -71,7 +74,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    is_enabled: 1,
+    is_enabled: 1
   },
   {
     id: 2,
@@ -80,7 +83,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    is_enabled: 1,
+    is_enabled: 1
   },
   {
     id: 3,
@@ -89,7 +92,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    is_enabled: 1,
+    is_enabled: 1
   },
   {
     id: 4,
@@ -98,7 +101,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    is_enabled: 1,
+    is_enabled: 1
   },
   {
     id: 5,
@@ -107,7 +110,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    is_enabled: 1,
+    is_enabled: 1
   },
   {
     id: 6,
@@ -116,7 +119,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    is_enabled: 1,
+    is_enabled: 1
   },
   {
     id: 7,
@@ -125,7 +128,7 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    is_enabled: 1,
+    is_enabled: 1
   },
   {
     id: 8,
@@ -134,13 +137,13 @@ const tableData = [
     name: 'Andy',
     sex: 1,
     mobile: '0912345678',
-    is_enabled: 1,
-  },
+    is_enabled: 1
+  }
 ]
 
 const initSearchParams = {
   branch_id: 0,
-  name: '',
+  name: ''
 }
 
 const searchParams = reactive({ ...initSearchParams })
@@ -152,23 +155,21 @@ function handleSearch() {
 }
 
 function handleDelete(index, row) {
-  ElMessageBox.confirm(
-      '是否刪除此管理員？',
-      '刪除',
-      {
-        confirmButtonText: '確認',
-        cancelButtonText: '取消',
-        type: 'error',
-        center: false,
-        showClose: false,
-      }
-  ).then(() => {
-    // call delete api
-    ElMessage({
-      type: 'success',
-      message: '刪除成功',
+  ElMessageBox.confirm('是否刪除此管理員？', '刪除', {
+    confirmButtonText: '確認',
+    cancelButtonText: '取消',
+    type: 'error',
+    center: false,
+    showClose: false
+  })
+    .then(() => {
+      // call delete api
+      ElMessage({
+        type: 'success',
+        message: '刪除成功'
+      })
     })
-  }).catch(() => {})
+    .catch(() => {})
   console.log('delete', index, row.id)
 }
 
@@ -178,18 +179,20 @@ function handlePassword(idx, data) {
     confirmButtonText: '確認',
     cancelButtonText: '取消',
     inputPattern: /^[a-zA-Z0-9]{8,20}$/,
-    inputErrorMessage: '密碼長度為 8 - 20 英文數字',
-  }).then(({}) => {
-    ElMessage({
-      type: 'success',
-      message: '修改成功',
-    })
-  }).catch(() => {
-    ElMessage({
-      type: 'info',
-      message: '取消修改',
-    })
+    inputErrorMessage: '密碼長度為 8 - 20 英文數字'
   })
+    .then(({}) => {
+      ElMessage({
+        type: 'success',
+        message: '修改成功'
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消修改'
+      })
+    })
 }
 
 const EditAdminDrawer = ref(null)
@@ -206,7 +209,7 @@ function handleCreate() {
 const paginationParams = {
   page: 1,
   page_size: 10,
-  total: 40,
+  total: 40
 }
 const pagination = reactive({ ...paginationParams })
 function handleChange(value) {
@@ -218,31 +221,35 @@ function handleChange(value) {
 
 <template>
   <div class="dashboard-container">
-    <ControlPlane
-        :reset="handleReset"
-        :search="handleSearch"
-    >
+    <ControlPlane :reset="handleReset" :search="handleSearch">
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
       <FilterItem title="名稱">
-        <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />
+        <ElInput
+          v-model="searchParams.name"
+          size="default"
+          placeholder="請輸入"
+          :suffix-icon="Search"
+        />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <PermButton :icon="Plus" perm-key="System.Admin.Create" @click="handleCreate">新增</PermButton>
+        <PermButton :icon="Plus" perm-key="System.Admin.Create" @click="handleCreate"
+          >新增</PermButton
+        >
       </template>
       <template #main-data>
         <AppTable
-            :data="tableData"
-            :columns="tableColumn"
-            :password="handlePassword"
-            password-key="System.Admin.Password"
-            :edit="handleEdit"
-            edit-key="System.Admin.Edit"
-            :delete="handleDelete"
-            delete-key="System.Admin.Delete"
+          :data="tableData"
+          :columns="tableColumn"
+          :password="handlePassword"
+          password-key="System.Admin.Password"
+          :edit="handleEdit"
+          edit-key="System.Admin.Edit"
+          :delete="handleDelete"
+          delete-key="System.Admin.Delete"
         />
       </template>
       <template #page-data>
@@ -254,5 +261,4 @@ function handleChange(value) {
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -8,10 +8,10 @@
 </template>
 
 <script setup>
-import AppMain from "@/layout/AppMain.vue";
-import SideBar from "@/layout/Sidebar/SidebarMenu.vue";
-import TopBar from "@/layout/TopBar.vue";
-import MainLogo from "@/layout/MainLogo.vue";
+import AppMain from '@/layout/AppMain.vue'
+import SideBar from '@/layout/Sidebar/SidebarMenu.vue'
+import TopBar from '@/layout/TopBar.vue'
+import MainLogo from '@/layout/MainLogo.vue'
 </script>
 
 <style scoped>

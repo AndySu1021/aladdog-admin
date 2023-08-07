@@ -1,13 +1,9 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-<div>
-  <h1>SystemOplog</h1>
-</div>
+  <div>
+    <h1>SystemOplog</h1>
+  </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

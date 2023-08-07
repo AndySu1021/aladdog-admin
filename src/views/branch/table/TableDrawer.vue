@@ -1,10 +1,10 @@
 <script setup>
-import AppDrawer from "@/components/AppDrawer.vue";
-import {reactive, ref} from "vue";
-import BranchSelect from "@/components/BranchSelect.vue";
+import AppDrawer from '@/components/AppDrawer.vue'
+import { reactive, ref } from 'vue'
+import BranchSelect from '@/components/BranchSelect.vue'
 
 const props = defineProps({
-  type: String,
+  type: String
 })
 
 const branchId = ref(0)
@@ -13,39 +13,39 @@ const initForm = {
   branch_id: null,
   floor: 1,
   table_no: '',
-  capacity: 0,
+  capacity: 0
 }
 
 const form = reactive({ ...initForm })
 
 const TableDrawer = ref(null)
 const TableForm = ref(null)
-function show(id=0) {
-  if (props.type === "create") {
-    Object.assign(form, initForm);
-  } else if (props.type === "edit") {
+function show(id = 0) {
+  if (props.type === 'create') {
+    Object.assign(form, initForm)
+  } else if (props.type === 'edit') {
     branchId.value = id
     // call api to get data
     const apiReturn = {
-        id: 1,
-        branch_id: 1,
-        floor: 2,
-        table_no: 'C22',
-        capacity: 5,
+      id: 1,
+      branch_id: 1,
+      floor: 2,
+      table_no: 'C22',
+      capacity: 5
     }
-    Object.assign(form, apiReturn);
+    Object.assign(form, apiReturn)
   }
   TableDrawer.value.show()
 }
 
-defineExpose({show});
+defineExpose({ show })
 
 function handleConfirm() {
   TableForm.value.validate((valid, fields) => {
     if (valid) {
-      if (props.type === "create") {
+      if (props.type === 'create') {
         // call create api
-      } else if (props.type === "edit") {
+      } else if (props.type === 'edit') {
         // call edit api with {branchId}
       }
       TableDrawer.value.close()
@@ -57,8 +57,8 @@ function handleConfirm() {
 }
 
 function handleCancel() {
-  if (props.type === "create") {
-    Object.assign(form, initForm);
+  if (props.type === 'create') {
+    Object.assign(form, initForm)
   }
   TableDrawer.value.close()
 }
@@ -72,36 +72,30 @@ const checkFloor = (rule, value, callback) => {
 }
 
 const rules = reactive({
-  branch_id: [
-    { required: true, message: '請選擇分店', trigger: 'change' },
-  ],
+  branch_id: [{ required: true, message: '請選擇分店', trigger: 'change' }],
   floor: [
     { required: true, message: '請輸入樓層', trigger: 'blue' },
-    { validator: checkFloor, trigger: 'blue' },
+    { validator: checkFloor, trigger: 'blue' }
   ],
-  table_no: [
-    { required: true, message: '請輸入桌號', trigger: 'blue' },
-  ],
-  capacity: [
-    { required: true, message: '請輸入人數', trigger: 'blue' },
-  ],
+  table_no: [{ required: true, message: '請輸入桌號', trigger: 'blue' }],
+  capacity: [{ required: true, message: '請輸入人數', trigger: 'blue' }]
 })
 </script>
 
 <template>
   <AppDrawer
-      ref="TableDrawer"
-      :title="type === 'create' ? '新增桌位' : '編輯桌位'"
-      :confirm="handleConfirm"
-      :cancel="handleCancel"
+    ref="TableDrawer"
+    :title="type === 'create' ? '新增桌位' : '編輯桌位'"
+    :confirm="handleConfirm"
+    :cancel="handleCancel"
   >
     <ElForm
-        ref="TableForm"
-        :model="form"
-        :rules="rules"
-        require-asterisk-position="right"
-        label-position="top"
-        status-icon
+      ref="TableForm"
+      :model="form"
+      :rules="rules"
+      require-asterisk-position="right"
+      label-position="top"
+      status-icon
     >
       <ElFormItem label="分店" required prop="branch_id">
         <BranchSelect v-model.number="form.branch_id" />
@@ -119,6 +113,4 @@ const rules = reactive({
   </AppDrawer>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

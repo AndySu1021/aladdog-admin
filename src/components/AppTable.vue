@@ -1,54 +1,54 @@
 <script setup>
-import {Delete, EditPen, Lock, View} from "@element-plus/icons-vue";
-import {h, reactive} from "vue";
-import {ElButton, TableV2FixedDir} from "element-plus";
-import {useAdminStore} from "@/stores/admin";
+import { Delete, EditPen, Lock, View } from '@element-plus/icons-vue'
+import { h, reactive } from 'vue'
+import { ElButton, TableV2FixedDir } from 'element-plus'
+import { useAdminStore } from '@/stores/admin'
 
 const store = useAdminStore()
 
 const props = defineProps({
   detail: {
     type: Function,
-    default: null,
+    default: null
   },
   passwordKey: {
     type: String,
-    default: '',
+    default: ''
   },
   password: {
     type: Function,
-    default: null,
+    default: null
   },
   editKey: {
     type: String,
-    default: '',
+    default: ''
   },
   edit: {
     type: Function,
-    default: null,
+    default: null
   },
   deleteKey: {
     type: String,
-    default: '',
+    default: ''
   },
   delete: {
     type: Function,
-    default: null,
+    default: null
   },
   columns: Array,
   data: Array,
   fixed: {
     type: Boolean,
-    default: true,
+    default: true
   },
   rowHeight: {
     type: Number,
-    default: 58,
-  },
+    default: 58
+  }
 })
 
 let tmpColumns = reactive(props.columns)
-let count = 0;
+let count = 0
 if (props.detail) {
   count++
 }
@@ -68,45 +68,48 @@ if (props.detail || props.password || props.edit || props.delete) {
     width: count * 50 + 20,
     align: 'center',
     fixed: TableV2FixedDir.RIGHT,
-    cellRenderer: (data) => (
-        h(
-            'div',
-            {},
-            [
-              props.detail ? h(ElButton, {
-                icon: View,
-                onClick: () => props.detail(data.rowIndex, data.rowData),
-                circle: true,
-                color: '#eaeaea',
-              }) : null,
-              props.password ? h(ElButton, {
-                type: 'warning',
-                icon: Lock,
-                onClick: () => props.password(data.rowIndex, data.rowData),
-                circle: true,
-                disabled: props.passwordKey === '' ? false : !store.checkPermission(props.passwordKey),
-              }) : null,
-              props.edit ? h(ElButton, {
-                icon: EditPen,
-                onClick: () => props.edit(data.rowIndex, data.rowData),
-                circle: true,
-                color: '#eaeaea',
-                disabled: props.deleteKey === '' ? false : !store.checkPermission(props.editKey),
-              }) : null,
-              props.delete ? h(ElButton, {
-                type: 'danger',
-                icon: Delete,
-                onClick: () => props.delete(data.rowIndex, data.rowData),
-                circle: true,
-                disabled: props.deleteKey === '' ? false : !store.checkPermission(props.deleteKey),
-              }) : null,
-            ]
-        )
-    ),
+    cellRenderer: (data) =>
+      h('div', {}, [
+        props.detail
+          ? h(ElButton, {
+              icon: View,
+              onClick: () => props.detail(data.rowIndex, data.rowData),
+              circle: true,
+              color: '#eaeaea'
+            })
+          : null,
+        props.password
+          ? h(ElButton, {
+              type: 'warning',
+              icon: Lock,
+              onClick: () => props.password(data.rowIndex, data.rowData),
+              circle: true,
+              disabled: props.passwordKey === '' ? false : !store.checkPermission(props.passwordKey)
+            })
+          : null,
+        props.edit
+          ? h(ElButton, {
+              icon: EditPen,
+              onClick: () => props.edit(data.rowIndex, data.rowData),
+              circle: true,
+              color: '#eaeaea',
+              disabled: props.deleteKey === '' ? false : !store.checkPermission(props.editKey)
+            })
+          : null,
+        props.delete
+          ? h(ElButton, {
+              type: 'danger',
+              icon: Delete,
+              onClick: () => props.delete(data.rowIndex, data.rowData),
+              circle: true,
+              disabled: props.deleteKey === '' ? false : !store.checkPermission(props.deleteKey)
+            })
+          : null
+      ])
   })
 }
-tmpColumns = tmpColumns.map(function (value){
-  return {...value, headerClass: 'app-table-cell-header'}
+tmpColumns = tmpColumns.map(function (value) {
+  return { ...value, headerClass: 'app-table-cell-header' }
 })
 </script>
 
@@ -114,15 +117,15 @@ tmpColumns = tmpColumns.map(function (value){
   <el-auto-resizer>
     <template #default="{ width }">
       <el-table-v2
-          :columns="tmpColumns"
-          :data="data"
-          stripe
-          :width="width"
-          :height="rowHeight * data.length + rowHeight"
-          :header-height="48"
-          :row-height="rowHeight"
-          header-class="app-table-header"
-          :fixed="fixed"
+        :columns="tmpColumns"
+        :data="data"
+        stripe
+        :width="width"
+        :height="rowHeight * data.length + rowHeight"
+        :header-height="48"
+        :row-height="rowHeight"
+        header-class="app-table-header"
+        :fixed="fixed"
       >
         <template #empty>
           <div class="flex items-center justify-center h-100%">

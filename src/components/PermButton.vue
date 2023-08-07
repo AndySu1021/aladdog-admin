@@ -1,5 +1,5 @@
 <script setup>
-import {useAdminStore} from "@/stores/admin";
+import { useAdminStore } from '@/stores/admin'
 
 const store = useAdminStore()
 
@@ -7,15 +7,15 @@ defineProps({
   permKey: String,
   icon: {
     type: Object,
-    default: null,
+    default: null
   },
   type: {
     type: String,
-    default: 'primary',
+    default: 'primary'
   },
   size: {
     type: String,
-    default: 'large',
+    default: 'large'
   }
 })
 
@@ -27,11 +27,15 @@ function handleClick() {
 </script>
 
 <template>
-  <ElButton :type="type" :icon="icon" :size="size" @click="handleClick" :disabled="!store.checkPermission(permKey)">
+  <ElButton
+    :type="type"
+    :icon="icon"
+    :size="size"
+    @click="handleClick"
+    :disabled="!store.checkPermission(permKey)"
+  >
     <slot />
   </ElButton>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

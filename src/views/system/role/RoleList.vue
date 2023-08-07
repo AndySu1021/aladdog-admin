@@ -1,14 +1,14 @@
 <script setup>
-import ControlPlane from "@/components/ControlPlane.vue";
-import DataPlane from "@/components/DataPlane.vue";
-import {Plus, Search} from "@element-plus/icons-vue";
-import AppTable from "@/components/AppTable.vue";
-import FilterItem from "@/components/FilterItem.vue";
-import {h, reactive, ref} from "vue";
-import {ElMessage, ElMessageBox, ElTag} from "element-plus";
-import AppPagination from "@/components/AppPagination.vue";
-import RoleDrawer from "@/views/system/role/RoleDrawer.vue";
-import PermButton from "@/components/PermButton.vue";
+import ControlPlane from '@/components/ControlPlane.vue'
+import DataPlane from '@/components/DataPlane.vue'
+import { Plus, Search } from '@element-plus/icons-vue'
+import AppTable from '@/components/AppTable.vue'
+import FilterItem from '@/components/FilterItem.vue'
+import { h, reactive, ref } from 'vue'
+import { ElMessage, ElMessageBox, ElTag } from 'element-plus'
+import AppPagination from '@/components/AppPagination.vue'
+import RoleDrawer from '@/views/system/role/RoleDrawer.vue'
+import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
@@ -16,14 +16,14 @@ const tableColumn = [
     title: '編號',
     dataKey: 'id',
     width: 80,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'name',
     title: '名稱',
     dataKey: 'name',
     width: 250,
-    align: 'center',
+    align: 'center'
   },
   {
     key: 'is_enabled',
@@ -31,54 +31,57 @@ const tableColumn = [
     dataKey: 'is_enabled',
     width: 120,
     align: 'center',
-    cellRenderer: ({cellData: is_enabled}) => is_enabled === 1 ? h(ElTag, {type: 'success'}, () => '啟用') : h(ElTag, {type: 'danger'}, () => '停用'),
-  },
+    cellRenderer: ({ cellData: is_enabled }) =>
+      is_enabled === 1
+        ? h(ElTag, { type: 'success' }, () => '啟用')
+        : h(ElTag, { type: 'danger' }, () => '停用')
+  }
 ]
 const tableData = [
   {
     id: 1,
     name: '超級管理員',
-    is_enabled: 1,
+    is_enabled: 1
   },
   {
     id: 2,
     name: '分店主管',
-    is_enabled: 0,
+    is_enabled: 0
   },
   {
     id: 3,
     name: '分店主管',
-    is_enabled: 0,
+    is_enabled: 0
   },
   {
     id: 4,
     name: '分店主管',
-    is_enabled: 0,
+    is_enabled: 0
   },
   {
     id: 5,
     name: '分店主管',
-    is_enabled: 0,
+    is_enabled: 0
   },
   {
     id: 6,
     name: '分店主管',
-    is_enabled: 0,
+    is_enabled: 0
   },
   {
     id: 7,
     name: '分店主管',
-    is_enabled: 0,
+    is_enabled: 0
   },
   {
     id: 8,
     name: '分店主管',
-    is_enabled: 0,
-  },
+    is_enabled: 0
+  }
 ]
 
 const initSearchParams = {
-  name: '',
+  name: ''
 }
 
 const searchParams = reactive({ ...initSearchParams })
@@ -90,23 +93,21 @@ function handleSearch() {
 }
 
 function handleDelete(index, row) {
-  ElMessageBox.confirm(
-      '是否刪除此角色？',
-      '刪除',
-      {
-        confirmButtonText: '確認',
-        cancelButtonText: '取消',
-        type: 'error',
-        center: false,
-        showClose: false,
-      }
-  ).then(() => {
-    // call delete api
-    ElMessage({
-      type: 'success',
-      message: '刪除成功',
+  ElMessageBox.confirm('是否刪除此角色？', '刪除', {
+    confirmButtonText: '確認',
+    cancelButtonText: '取消',
+    type: 'error',
+    center: false,
+    showClose: false
+  })
+    .then(() => {
+      // call delete api
+      ElMessage({
+        type: 'success',
+        message: '刪除成功'
+      })
     })
-  }).catch(() => {})
+    .catch(() => {})
   console.log('delete', index, row.id)
 }
 
@@ -124,7 +125,7 @@ function handleCreate() {
 const paginationParams = {
   page: 1,
   page_size: 10,
-  total: 40,
+  total: 40
 }
 const pagination = reactive({ ...paginationParams })
 function handleChange(value) {
@@ -136,26 +137,30 @@ function handleChange(value) {
 
 <template>
   <div class="dashboard-container">
-    <ControlPlane
-        :reset="handleReset"
-        :search="handleSearch"
-    >
+    <ControlPlane :reset="handleReset" :search="handleSearch">
       <FilterItem title="名稱">
-        <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />
+        <ElInput
+          v-model="searchParams.name"
+          size="default"
+          placeholder="請輸入"
+          :suffix-icon="Search"
+        />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <PermButton :icon="Plus" perm-key="System.Role.Create" @click="handleCreate">新增</PermButton>
+        <PermButton :icon="Plus" perm-key="System.Role.Create" @click="handleCreate"
+          >新增</PermButton
+        >
       </template>
       <template #main-data>
         <AppTable
-            :data="tableData"
-            :columns="tableColumn"
-            :edit="handleEdit"
-            edit-key="System.Role.Edit"
-            :delete="handleDelete"
-            delete-key="System.Role.Delete"
+          :data="tableData"
+          :columns="tableColumn"
+          :edit="handleEdit"
+          edit-key="System.Role.Edit"
+          :delete="handleDelete"
+          delete-key="System.Role.Delete"
         />
       </template>
       <template #page-data>
@@ -167,5 +172,4 @@ function handleChange(value) {
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
