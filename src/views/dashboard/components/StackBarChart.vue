@@ -25,13 +25,17 @@ const props = defineProps({
       return [];
     },
   },
+  title: {
+    type: String,
+    default: '',
+  }
 })
 
 // 配置信息
 const setOptions = computed(() => {
   return {
     title: {
-      text: '每日營業額',
+      text: props.title,
       textStyle: {
         color: 'black',
       },
@@ -51,10 +55,9 @@ const setOptions = computed(() => {
     },
     xAxis: {
       type: "category",
-      boundaryGap: false,
       axisTick: {
         show: false
-      }
+      },
     },
     grid: {
       left: 50,
@@ -64,9 +67,9 @@ const setOptions = computed(() => {
       containLabel: true
     },
     series: [
-      {type: "line"},
-      {type: "line"},
-      {type: "line"},
+      {type: "bar", stack:props.chartId},
+      {type: "bar", stack:props.chartId},
+      {type: "bar", stack:props.chartId},
     ],
     legend: {}
   };

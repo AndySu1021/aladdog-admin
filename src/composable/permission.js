@@ -217,8 +217,16 @@ export function getPermissionData(data) {
                     'label': '營收',
                 },
                 {
-                    'id': 'Report.Meal',
+                    'id': 'Report.AverageOrderValue',
+                    'label': '平均客單價'
+                },
+                {
+                    'id': 'Report.Product',
                     'label': '商品',
+                },
+                {
+                    'id': 'Report.ProductSummary',
+                    'label': '商品匯總',
                 },
             ]
         },

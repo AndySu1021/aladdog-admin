@@ -33,12 +33,12 @@ const tableColumn = [
     align: 'center',
   },
   {
-    key: 'quantity',
-    title: '數量',
-    dataKey: 'quantity',
+    key: 'total_quantity',
+    title: '總數量',
+    dataKey: 'total_quantity',
     width: 180,
     align: 'center',
-    cellRenderer: ({cellData: quantity}) => new Intl.NumberFormat().format(quantity)
+    cellRenderer: ({cellData: total_quantity}) => new Intl.NumberFormat().format(total_quantity)
   },
   {
     key: 'total_amount',
@@ -58,64 +58,65 @@ const tableData = [
     date: '2023-07-23',
     branch: '成功二店',
     product_name: '牛小排',
-    quantity: 3000,
+    total_quantity: 3000,
     total_amount: 2000000,
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
     product_name: '牛小排',
-    quantity: 3000,
+    total_quantity: 3000,
     total_amount: 2000000,
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
     product_name: '牛小排',
-    quantity: 3000,
+    total_quantity: 3000,
     total_amount: 2000000,
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
     product_name: '牛小排',
-    quantity: 3000,
+    total_quantity: 3000,
     total_amount: 2000000,
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
     product_name: '牛小排',
-    quantity: 3000,
+    total_quantity: 3000,
     total_amount: 2000000,
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
     product_name: '牛小排',
-    quantity: 3000,
+    total_quantity: 3000,
     total_amount: 2000000,
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
     product_name: '牛小排',
-    quantity: 3000,
+    total_quantity: 3000,
     total_amount: 2000000,
   },
   {
     date: '2023-07-23',
     branch: '成功二店',
     product_name: '牛小排',
-    quantity: 3000,
+    total_quantity: 3000,
     total_amount: 2000000,
   },
 ]
 
 const initSearchParams = {
-  date_range: [moment().add(-4, 'd').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')],
-  type: 1,
   branch_id: 0,
+  product_type: 1,
+  report_type: 1,
+  date_range: [moment().add(-4, 'd').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')],
   product_name: '',
 }
 
@@ -154,8 +155,14 @@ function handleDownload() {
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
-      <FilterItem title="類型">
-        <ElSelect v-model="searchParams.type" placeholder="請選擇">
+      <FilterItem title="商品類型">
+        <ElSelect v-model="searchParams.product_type" placeholder="請選擇">
+          <ElOption label="酒品" :value="1"/>
+          <ElOption label="餐點" :value="2"/>
+        </ElSelect>
+      </FilterItem>
+      <FilterItem title="報表類型">
+        <ElSelect v-model="searchParams.report_type" placeholder="請選擇">
           <ElOption label="每日" :value="1"/>
           <ElOption label="每月" :value="2"/>
         </ElSelect>

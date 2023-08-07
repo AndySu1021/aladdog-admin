@@ -59,6 +59,13 @@ const tableColumn = [
     align: 'center',
   },
   {
+    key: 'headcount',
+    title: '參與人數',
+    dataKey: 'headcount',
+    width: 120,
+    align: 'center',
+  },
+  {
     key: 'is_enabled',
     title: '狀態',
     dataKey: 'is_enabled',
@@ -75,6 +82,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    headcount: 50,
     is_enabled: 1,
   },
   {
@@ -84,6 +92,7 @@ const tableData = [
     type: 2,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    headcount: 50,
     is_enabled: 2,
   },
   {
@@ -93,6 +102,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    headcount: 50,
     is_enabled: 1,
   },
   {
@@ -102,6 +112,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    headcount: 50,
     is_enabled: 1,
   },
   {
@@ -111,6 +122,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    headcount: 50,
     is_enabled: 1,
   },
   {
@@ -120,6 +132,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    headcount: 50,
     is_enabled: 1,
   },
   {
@@ -129,6 +142,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    headcount: 50,
     is_enabled: 1,
   },
   {
@@ -138,6 +152,7 @@ const tableData = [
     type: 1,
     start_time: '2023-07-01 16:00:00',
     end_time: '2023-08-31 16:00:00',
+    headcount: 50,
     is_enabled: 1,
   },
 ]

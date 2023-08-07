@@ -152,10 +152,22 @@ export const permRoutes = [
         component: () => import('@/views/report/ProfitReport.vue'),
       },
       {
+        path: '/report/average-order-value',
+        name: 'ReportAverageOrderValue',
+        meta: { title: '平均客單價', key: 'Report.AverageOrderValue' },
+        component: () => import('@/views/report/AverageOrderValueReport.vue'),
+      },
+      {
         path: '/report/meal',
-        name: 'ReportMeal',
-        meta: { title: '商品', key: 'Report.Meal' },
-        component: () => import('@/views/report/MealReport.vue'),
+        name: 'ReportProduct',
+        meta: { title: '商品', key: 'Report.Product' },
+        component: () => import('@/views/report/ProductReport.vue'),
+      },
+      {
+        path: '/report/product-summary',
+        name: 'ReportProductSummary',
+        meta: { title: '商品匯總', key: 'Report.ProductSummary' },
+        component: () => import('@/views/report/ProductSummaryReport.vue'),
       },
     ]
   },
