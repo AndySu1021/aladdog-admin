@@ -36,7 +36,7 @@ if (adminStore.getBranchId !== 0) {
 </script>
 
 <template>
-  <ElSelect style="width: 130px;" v-model.number="form.branch_id" placeholder="請選擇" :disabled="adminStore.getBranchId !== 0">
+  <ElSelect v-model.number="form.branch_id" placeholder="請選擇" :disabled="adminStore.getBranchId !== 0">
     <ElOption v-if="props.showAll" :label="allTitle" :value="0"/>
     <ElOption v-for="(branch, idx) in branchStore.getBranches" :key="idx" :label="branch.name" :value="branch.id" />
   </ElSelect>

@@ -28,7 +28,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="statistic-card">
+  <div>
     <ElStatistic :value="value" :prefix="valuePrefix">
       <template #title>
         <div style="display: inline-flex; align-items: center">
@@ -64,13 +64,6 @@ defineProps({
 <style scoped lang="scss">
 .el-statistic {
   --el-statistic-content-font-size: 28px;
-}
-
-.statistic-card {
-  height: 100%;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: var(--el-bg-color-overlay);
 }
 
 .statistic-footer {

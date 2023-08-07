@@ -57,7 +57,7 @@ const setOptions = computed(() => {
     series: {
       name: '访问来源',
       type: 'pie',
-      radius: '60%',
+      radius: '55%',
     },
   };
 });
