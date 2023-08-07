@@ -5,9 +5,10 @@ import {Plus, Search} from "@element-plus/icons-vue";
 import AppTable from "@/components/AppTable.vue";
 import FilterItem from "@/components/FilterItem.vue";
 import {reactive, ref} from "vue";
-import {ElButton, ElMessage, ElMessageBox} from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
-import BranchDrawer from "@/views/branch/BranchDrawer.vue";
+import BranchDrawer from "@/views/branch/branch/BranchDrawer.vue";
+import PermButton from "@/components/PermButton.vue";
 
 const tableColumn = [
   {
@@ -214,15 +215,18 @@ function handleChange(value) {
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate">新增</ElButton>
+        <PermButton :icon="Plus" perm-key="Branch.List.Create" @click="handleCreate">新增</PermButton>
       </template>
       <template #main-data>
         <AppTable
             :data="tableData"
             :columns="tableColumn"
             :password="handlePassword"
+            password-key="Branch.List.Password"
             :edit="handleEdit"
+            edit-key="Branch.List.Edit"
             :delete="handleDelete"
+            delete-key="Branch.List.Delete"
         />
       </template>
       <template #page-data>

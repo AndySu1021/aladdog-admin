@@ -1,7 +1,6 @@
 <script setup>
 import {Plus} from "@element-plus/icons-vue";
 import {reactive, ref} from "vue";
-import {vDragable} from "element-plus-table-dragable";
 import {ElMessage, ElMessageBox} from "element-plus";
 import AppDrawer from "@/components/AppDrawer.vue";
 import BranchSelect from "@/components/BranchSelect.vue";

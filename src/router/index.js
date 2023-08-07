@@ -1,15 +1,16 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import MainLayout from '@/layout/MainLayout.vue'
 import {
-  ColdDrink, CreditCard, Discount,
+  ColdDrink,
+  CreditCard,
+  Discount,
   Dish,
   Location,
   Odometer,
   PieChart,
   Setting,
-  ShoppingCart, Ticket,
+  ShoppingCart,
   User,
-  Wallet
 } from "@element-plus/icons-vue";
 import {useRoutesStore} from "@/stores/routes";
 import LoginPage from "@/views/LoginPage.vue";
@@ -55,19 +56,19 @@ export const permRoutes = [
         path: '/branch',
         name: 'BranchList',
         meta: { title: '分店', key: 'Branch.List.View' },
-        component: () => import('@/views/branch/BranchList.vue'),
+        component: () => import('@/views/branch/branch/BranchList.vue'),
       },
       {
         path: '/branch/station',
         name: 'BranchStation',
         meta: { title: '崗位', key: 'Branch.Station.View' },
-        component: () => import('@/views/branch/BranchStation.vue'),
+        component: () => import('@/views/branch/station/StationList.vue'),
       },
       {
         path: '/branch/table',
         name: 'BranchTable',
         meta: { title: '桌位', key: 'Branch.Table.View' },
-        component: () => import('@/views/branch/BranchTable.vue'),
+        component: () => import('@/views/branch/table/TableList.vue'),
       },
     ]
   },
@@ -81,7 +82,7 @@ export const permRoutes = [
         path: '/liquor/stock',
         name: 'LiquorStock',
         meta: { title: '庫存', key: 'Liquor.Stock.View' },
-        component: () => import('@/views/liquor/LiquorStock.vue'),
+        component: () => import('@/views/liquor/stock/StockList.vue'),
       },
       {
         path: '/liquor/recipe',
@@ -91,9 +92,9 @@ export const permRoutes = [
       },
       {
         path: '/liquor/addon',
-        name: 'LiquorAddon',
-        meta: { title: '加價購', key: 'Liquor.Addon.View' },
-        component: () => import('@/views/liquor/LiquorAddon.vue'),
+        name: 'LiquorReplacement',
+        meta: { title: '加價換', key: 'Liquor.Replacement.View' },
+        component: () => import('@/views/liquor/replacement/ReplacementList.vue'),
       },
     ]
   },
@@ -128,14 +129,14 @@ export const permRoutes = [
   {
     path: '/activity',
     name: 'Activity',
-    meta: { title: '活動', icon: Discount, key: 'Activity' },
+    meta: { title: '活動', icon: Discount, key: 'Promotion.Activity' },
     component: MainLayout,
     children: [
       {
         path: '/activity',
         name: 'ActivityList',
-        meta: { title: '活動', key: 'Activity.View' },
-        component: () => import('@/views/promotion/ActivityList.vue'),
+        meta: { title: '活動', key: 'Promotion.Activity.View' },
+        component: () => import('@/views/promotion/activity/ActivityList.vue'),
       },
     ]
   },
@@ -201,13 +202,13 @@ export const permRoutes = [
         path: '/system/role',
         name: 'SystemRole',
         meta: { title: '角色', key: 'System.Role.View' },
-        component: () => import('@/views/system/RoleList.vue'),
+        component: () => import('@/views/system/role/RoleList.vue'),
       },
       {
         path: '/system/admin',
         name: 'SystemAdmin',
         meta: { title: '管理員', key: 'System.Admin.View' },
-        component: () => import('@/views/system/AdminList.vue'),
+        component: () => import('@/views/system/admin/AdminList.vue'),
       },
       {
         path: '/system/oplog',

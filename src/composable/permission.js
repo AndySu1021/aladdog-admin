@@ -133,23 +133,23 @@ export function getPermissionData(data) {
                     ],
                 },
                 {
-                    'id': 'Liquor.Addon',
+                    'id': 'Liquor.Replacement',
                     'label': '加價購',
                     'children': [
                         {
-                            'id': 'Liquor.Addon.View',
+                            'id': 'Liquor.Replacement.View',
                             'label': '查看',
                         },
                         {
-                            'id': 'Liquor.Addon.Create',
+                            'id': 'Liquor.Replacement.Create',
                             'label': '新增',
                         },
                         {
-                            'id': 'Liquor.Addon.Edit',
+                            'id': 'Liquor.Replacement.Edit',
                             'label': '編輯',
                         },
                         {
-                            'id': 'Liquor.Addon.Delete',
+                            'id': 'Liquor.Replacement.Delete',
                             'label': '刪除',
                         },
                     ],
@@ -191,19 +191,19 @@ export function getPermissionData(data) {
             'label': '活動',
             'children': [
                 {
-                    'id': 'Activity.View',
+                    'id': 'Promotion.Activity.View',
                     'label': '查看',
                 },
                 {
-                    'id': 'Activity.Create',
+                    'id': 'Promotion.Activity.Create',
                     'label': '新增',
                 },
                 {
-                    'id': 'Activity.Edit',
+                    'id': 'Promotion.Activity.Edit',
                     'label': '編輯',
                 },
                 {
-                    'id': 'Activity.Delete',
+                    'id': 'Promotion.Activity.Delete',
                     'label': '刪除',
                 },
             ],

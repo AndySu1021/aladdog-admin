@@ -10,6 +10,7 @@ import StaffDrawer from "@/views/staff/StaffDrawer.vue";
 import AppPagination from "@/components/AppPagination.vue";
 import {useAdminStore} from "@/stores/admin";
 import BranchSelect from "@/components/BranchSelect.vue";
+import PermButton from "@/components/PermButton.vue";
 
 const tableColumn = [
   {
@@ -179,8 +180,6 @@ function handleChange(value) {
   // call api to get new data
   console.log(value)
 }
-
-const store = useAdminStore()
 </script>
 
 <template>
@@ -198,7 +197,7 @@ const store = useAdminStore()
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate" :disabled="!store.checkPermission('Staff.List.Create')">新增</ElButton>
+        <PermButton :icon="Plus" perm-key="Staff.List.Create" @click="handleCreate">新增</PermButton>
       </template>
       <template #main-data>
         <AppTable

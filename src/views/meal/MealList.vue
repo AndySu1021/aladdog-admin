@@ -11,6 +11,7 @@ import MealDrawer from "@/views/meal/MealDrawer.vue";
 import BranchSelect from "@/components/BranchSelect.vue";
 import CategoryDrawer from "@/views/meal/CategoryDrawer.vue";
 import {useAdminStore} from "@/stores/admin";
+import PermButton from "@/components/PermButton.vue";
 
 const store = useAdminStore()
 
@@ -173,6 +174,7 @@ const tableData = [
 
 const initSearchParams = {
   branch_id: 0,
+  category_path: [0],
   name: '',
 }
 
@@ -233,6 +235,49 @@ function handleChange(value) {
   // call api to get new data
   console.log(value)
 }
+
+const options = [
+  {
+    value: 0,
+    label: '全部',
+  },
+  {
+    value: 1,
+    label: '主食',
+    children: [
+      {
+        value: 2,
+        label: '排餐',
+      },
+      {
+        value: 3,
+        label: '套餐',
+      },
+      {
+        value: 4,
+        label: '單點',
+      },
+    ],
+  },
+  {
+    value: 5,
+    label: '甜點',
+    children: [
+      {
+        value: 6,
+        label: '蛋糕',
+      },
+      {
+        value: 7,
+        label: '飲品',
+      },
+    ],
+  },
+  {
+    value: 8,
+    label: '酒水',
+  },
+]
 </script>
 
 <template>
@@ -244,14 +289,22 @@ function handleChange(value) {
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
+      <FilterItem title="類型">
+        <ElCascader
+            :disabled="searchParams.branch_id === 0"
+            v-model="searchParams.category_path"
+            :options="options"
+            placeholder="請選擇"
+        />
+      </FilterItem>
       <FilterItem title="名稱">
         <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <ElButton type="primary" :icon="Plus" size="large" :disabled="!store.checkPermission('Meal.Create')" @click="handleCreate">新增</ElButton>
-        <ElButton type="warning" :icon="Filter" size="large" :disabled="!store.checkPermission('Meal.Category')" @click="handleCategory">分類</ElButton>
+        <PermButton :icon="Plus" perm-key="Meal.Create" @click="handleCreate">新增</PermButton>
+        <PermButton type="warning" :icon="Filter" perm-key="Meal.Category" @click="handleCategory">分類</PermButton>
       </template>
       <template #main-data>
         <AppTable

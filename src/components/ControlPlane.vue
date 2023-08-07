@@ -56,7 +56,6 @@ function handleDownload() {
     :deep(.filter-item) {
       display: inline-flex;
       align-items:center;
-      width: 300px;
       margin-bottom: 24px;
       .el-input {
         width: 200px;

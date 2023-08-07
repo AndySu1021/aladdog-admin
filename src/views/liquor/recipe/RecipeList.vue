@@ -10,6 +10,7 @@ import AppPagination from "@/components/AppPagination.vue";
 import RecipeDrawer from "@/views/liquor/recipe/RecipeDrawer.vue";
 import CategoryDrawer from "@/views/liquor/recipe/CategoryDrawer.vue";
 import BranchSelect from "@/components/BranchSelect.vue";
+import PermButton from "@/components/PermButton.vue";
 
 const tableColumn = [
   {
@@ -194,6 +195,7 @@ const tableData = [
 
 const initSearchParams = {
   branch_id: 0,
+  category_id: 0,
   name: '',
 }
 const searchParams = reactive({ ...initSearchParams })
@@ -267,22 +269,33 @@ function handleChange(value) {
       <FilterItem title="分店">
         <BranchSelect v-model="searchParams.branch_id" :show-all="true" />
       </FilterItem>
+      <FilterItem title="類型">
+        <ElSelect v-model.number="searchParams.category_id" :disabled="searchParams.branch_id === 0">
+          <ElOption label="全部" :value="0" />
+          <ElOption label="特調" :value="1" />
+          <ElOption label="琴酒" :value="2" />
+          <ElOption label="威士忌" :value="3" />
+          <ElOption label="經典" :value="4" />
+        </ElSelect>
+      </FilterItem>
       <FilterItem title="名稱">
         <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate">新增</ElButton>
-        <ElButton type="warning" :icon="Filter" size="large" @click="handleCategory">分類</ElButton>
+        <PermButton :icon="Plus" perm-key="Liquor.Recipe.Create" @click="handleCreate">新增</PermButton>
+        <PermButton type="warning" :icon="Filter" perm-key="Liquor.Recipe.Category" @click="handleCategory">分類</PermButton>
       </template>
       <template #main-data>
         <AppTable
             :data="tableData"
             :columns="tableColumn"
             :edit="handleEdit"
+            edit-key="Liquor.Recipe.Edit"
             :delete="handleDelete"
             :row-height="100"
+            delete-key="Liquor.Recipe.Delete"
         />
       </template>
       <template #page-data>

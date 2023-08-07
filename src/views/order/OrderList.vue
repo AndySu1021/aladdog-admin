@@ -141,7 +141,7 @@ const tableData = [
 ]
 
 const initSearchParams = {
-  date_range: [moment().add(-4, 'd').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')],
+  datetime_range: [moment().add(-4, 'd').format('YYYY-MM-DD HH:mm:ss'), moment().format('YYYY-MM-DD HH:mm:ss')],
   branch_id: 0,
 }
 
@@ -181,14 +181,14 @@ function handleDetail(idx, data) {
       <FilterItem title="分店">
         <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
       </FilterItem>
-      <FilterItem title="日期">
+      <FilterItem title="入座時間">
         <ElDatePicker
-            v-model="searchParams.date_range"
-            type="daterange"
-            start-placeholder="開始日期"
-            end-placeholder="結束日期"
-            format="YYYY-MM-DD"
-            value-format="YYYY-MM-DD"
+            v-model="searchParams.datetime_range"
+            type="datetimerange"
+            start-placeholder="開始時間"
+            end-placeholder="結束時間"
+            format="YYYY-MM-DD HH:mm:ss"
+            value-format="YYYY-MM-DD HH:mm:ss"
         />
       </FilterItem>
     </ControlPlane>

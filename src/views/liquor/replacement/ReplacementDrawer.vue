@@ -23,8 +23,8 @@ const initForm = {
 
 const form = reactive({ ...initForm })
 
-const AddonDrawer = ref(null)
-const AddonForm = ref(null)
+const ReplacementDrawer = ref(null)
+const ReplacementForm = ref(null)
 function show(id=0) {
   if (props.type === "create") {
     Object.assign(form, initForm);
@@ -40,20 +40,20 @@ function show(id=0) {
     }
     Object.assign(form, apiReturn);
   }
-  AddonDrawer.value.show()
+  ReplacementDrawer.value.show()
 }
 
 defineExpose({show});
 
 function handleConfirm() {
-  AddonForm.value.validate((valid, fields) => {
+  ReplacementForm.value.validate((valid, fields) => {
     if (valid) {
       if (props.type === "create") {
         // call create api
       } else if (props.type === "edit") {
         // call edit api with {branchId}
       }
-      AddonDrawer.value.close()
+      ReplacementDrawer.value.close()
       console.log(form)
     } else {
       console.log('error submit!', fields)
@@ -65,7 +65,7 @@ function handleCancel() {
   if (props.type === "create") {
     Object.assign(form, initForm)
   }
-  AddonDrawer.value.close()
+  ReplacementDrawer.value.close()
 }
 
 const rules = reactive({
@@ -86,13 +86,13 @@ const rules = reactive({
 
 <template>
   <AppDrawer
-      ref="AddonDrawer"
+      ref="ReplacementDrawer"
       :title="type === 'create' ? '新增項目' : '編輯項目'"
       :confirm="handleConfirm"
       :cancel="handleCancel"
   >
     <ElForm
-        ref="AddonForm"
+        ref="ReplacementForm"
         :model="form"
         :rules="rules"
         require-asterisk-position="right"

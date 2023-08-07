@@ -7,7 +7,8 @@ import FilterItem from "@/components/FilterItem.vue";
 import {h, reactive, ref} from "vue";
 import {ElButton, ElMessage, ElMessageBox, ElTag} from "element-plus";
 import AppPagination from "@/components/AppPagination.vue";
-import RoleDrawer from "@/views/system/RoleDrawer.vue";
+import AdminDrawer from "@/views/system/admin/AdminDrawer.vue";
+import BranchSelect from "@/components/BranchSelect.vue";
 
 const tableColumn = [
   {
@@ -18,17 +19,46 @@ const tableColumn = [
     align: 'center',
   },
   {
+    key: 'branch',
+    title: '分店',
+    dataKey: 'branch',
+    width: 150,
+    align: 'center',
+  },
+  {
+    key: 'role',
+    title: '角色',
+    dataKey: 'role',
+    width: 150,
+    align: 'center',
+  },
+  {
     key: 'name',
     title: '名稱',
     dataKey: 'name',
-    width: 250,
+    width: 150,
+    align: 'center',
+  },
+  {
+    key: 'sex',
+    title: '性別',
+    dataKey: 'sex',
+    width: 80,
+    align: 'center',
+    cellRenderer: ({ cellData: sex }) => sex === 1 ? '男' : '女',
+  },
+  {
+    key: 'mobile',
+    title: '手機號',
+    dataKey: 'mobile',
+    width: 150,
     align: 'center',
   },
   {
     key: 'is_enabled',
     title: '狀態',
     dataKey: 'is_enabled',
-    width: 120,
+    width: 80,
     align: 'center',
     cellRenderer: ({cellData: is_enabled}) => is_enabled === 1 ? h(ElTag, {type: 'success'}, () => '啟用') : h(ElTag, {type: 'danger'}, () => '停用'),
   },
@@ -36,47 +66,80 @@ const tableColumn = [
 const tableData = [
   {
     id: 1,
-    name: '超級管理員',
+    branch: '中華一店',
+    role: '超級管理員',
+    name: 'Andy',
+    sex: 1,
+    mobile: '0912345678',
     is_enabled: 1,
   },
   {
     id: 2,
-    name: '分店主管',
-    is_enabled: 0,
+    branch: '成功二店',
+    role: '超級管理員',
+    name: 'Andy',
+    sex: 1,
+    mobile: '0912345678',
+    is_enabled: 1,
   },
   {
     id: 3,
-    name: '分店主管',
-    is_enabled: 0,
+    branch: '信義三店',
+    role: '超級管理員',
+    name: 'Andy',
+    sex: 1,
+    mobile: '0912345678',
+    is_enabled: 1,
   },
   {
     id: 4,
-    name: '分店主管',
-    is_enabled: 0,
+    branch: '中華一店',
+    role: '超級管理員',
+    name: 'Andy',
+    sex: 1,
+    mobile: '0912345678',
+    is_enabled: 1,
   },
   {
     id: 5,
-    name: '分店主管',
-    is_enabled: 0,
+    branch: '中華一店',
+    role: '超級管理員',
+    name: 'Andy',
+    sex: 1,
+    mobile: '0912345678',
+    is_enabled: 1,
   },
   {
     id: 6,
-    name: '分店主管',
-    is_enabled: 0,
+    branch: '中華一店',
+    role: '超級管理員',
+    name: 'Andy',
+    sex: 1,
+    mobile: '0912345678',
+    is_enabled: 1,
   },
   {
     id: 7,
-    name: '分店主管',
-    is_enabled: 0,
+    branch: '中華一店',
+    role: '超級管理員',
+    name: 'Andy',
+    sex: 1,
+    mobile: '0912345678',
+    is_enabled: 1,
   },
   {
     id: 8,
-    name: '分店主管',
-    is_enabled: 0,
+    branch: '中華一店',
+    role: '超級管理員',
+    name: 'Andy',
+    sex: 1,
+    mobile: '0912345678',
+    is_enabled: 1,
   },
 ]
 
 const initSearchParams = {
+  branch_id: 0,
   name: '',
 }
 
@@ -90,7 +153,7 @@ function handleSearch() {
 
 function handleDelete(index, row) {
   ElMessageBox.confirm(
-      '是否刪除此角色？',
+      '是否刪除此管理員？',
       '刪除',
       {
         confirmButtonText: '確認',
@@ -109,15 +172,35 @@ function handleDelete(index, row) {
   console.log('delete', index, row.id)
 }
 
-const EditRoleDrawer = ref(null)
+function handlePassword(idx, data) {
+  console.log(idx, data)
+  ElMessageBox.prompt('請輸入新密碼', '修改密碼', {
+    confirmButtonText: '確認',
+    cancelButtonText: '取消',
+    inputPattern: /^[a-zA-Z0-9]{8,20}$/,
+    inputErrorMessage: '密碼長度為 8 - 20 英文數字',
+  }).then(({}) => {
+    ElMessage({
+      type: 'success',
+      message: '修改成功',
+    })
+  }).catch(() => {
+    ElMessage({
+      type: 'info',
+      message: '取消修改',
+    })
+  })
+}
+
+const EditAdminDrawer = ref(null)
 function handleEdit(index, row) {
-  EditRoleDrawer.value.show(row.id)
+  EditAdminDrawer.value.show(row.id)
   console.log('edit', index, row.id)
 }
 
-const CreateRoleDrawer = ref(null)
+const CreateAdminDrawer = ref(null)
 function handleCreate() {
-  CreateRoleDrawer.value.show()
+  CreateAdminDrawer.value.show()
 }
 
 const paginationParams = {
@@ -139,28 +222,35 @@ function handleChange(value) {
         :reset="handleReset"
         :search="handleSearch"
     >
+      <FilterItem title="分店">
+        <BranchSelect v-model.number="searchParams.branch_id" :show-all="true" />
+      </FilterItem>
       <FilterItem title="名稱">
         <ElInput v-model="searchParams.name" size="default" placeholder="請輸入" :suffix-icon="Search" />
       </FilterItem>
     </ControlPlane>
     <DataPlane>
       <template #btn-group>
-        <ElButton type="primary" :icon="Plus" size="large" @click="handleCreate">新增</ElButton>
+        <PermButton :icon="Plus" perm-key="System.Admin.Create" @click="handleCreate">新增</PermButton>
       </template>
       <template #main-data>
         <AppTable
             :data="tableData"
             :columns="tableColumn"
+            :password="handlePassword"
+            password-key="System.Admin.Password"
             :edit="handleEdit"
+            edit-key="System.Admin.Edit"
             :delete="handleDelete"
+            delete-key="System.Admin.Delete"
         />
       </template>
       <template #page-data>
         <AppPagination :data="pagination" @change="handleChange" />
       </template>
     </DataPlane>
-    <RoleDrawer ref="CreateRoleDrawer" type="create" />
-    <RoleDrawer ref="EditRoleDrawer" type="edit" />
+    <AdminDrawer ref="CreateAdminDrawer" type="create" />
+    <AdminDrawer ref="EditAdminDrawer" type="edit" />
   </div>
 </template>
 
