@@ -10,10 +10,7 @@ import AppPagination from '@/components/AppPagination.vue'
 import MealDrawer from '@/views/meal/MealDrawer.vue'
 import BranchSelect from '@/components/BranchSelect.vue'
 import CategoryDrawer from '@/views/meal/CategoryDrawer.vue'
-import { useAdminStore } from '@/stores/admin'
 import PermButton from '@/components/PermButton.vue'
-
-const store = useAdminStore()
 
 const tableColumn = [
   {

@@ -9,6 +9,7 @@ import { ElMessage, ElMessageBox, ElTag } from 'element-plus'
 import AppPagination from '@/components/AppPagination.vue'
 import AdminDrawer from '@/views/system/admin/AdminDrawer.vue'
 import BranchSelect from '@/components/BranchSelect.vue'
+import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
@@ -181,7 +182,7 @@ function handlePassword(idx, data) {
     inputPattern: /^[a-zA-Z0-9]{8,20}$/,
     inputErrorMessage: '密碼長度為 8 - 20 英文數字'
   })
-    .then(({}) => {
+    .then(() => {
       ElMessage({
         type: 'success',
         message: '修改成功'
