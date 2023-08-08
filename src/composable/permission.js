@@ -73,6 +73,10 @@ export function getPermissionData(data) {
               label: '刪除'
             }
           ]
+        },
+        {
+          id: 'Branch.ShiftLog',
+          label: '交班紀錄'
         }
       ]
     },

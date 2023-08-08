@@ -70,6 +70,12 @@ export const permRoutes = [
         name: 'BranchTable',
         meta: { title: '桌位', key: 'Branch.Table.View' },
         component: () => import('@/views/branch/table/TableList.vue')
+      },
+      {
+        path: '/branch/shift-log',
+        name: 'BranchShiftLog',
+        meta: { title: '交班紀錄', key: 'Branch.ShiftLog' },
+        component: () => import('@/views/branch/shift/ShiftLog.vue')
       }
     ]
   },

@@ -21,6 +21,7 @@ const permissions = [
   'Branch.Table.Create',
   'Branch.Table.Edit',
   'Branch.Table.Delete',
+  'Branch.ShiftLog',
   'Liquor',
   'Liquor.Stock',
   'Liquor.Stock.View',

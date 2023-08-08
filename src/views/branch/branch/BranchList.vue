@@ -6,7 +6,6 @@ import AppTable from '@/components/AppTable.vue'
 import FilterItem from '@/components/FilterItem.vue'
 import { reactive, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import AppPagination from '@/components/AppPagination.vue'
 import BranchDrawer from '@/views/branch/branch/BranchDrawer.vue'
 import PermButton from '@/components/PermButton.vue'
 
@@ -72,82 +71,42 @@ const tableData = [
   {
     id: 1,
     name: '中華一店',
-    code: '123456',
-    tax_id_number: '12345678',
-    address: '台北市信義區大馬路50號',
-    start_time: '20:00',
-    end_time: '03:00',
-    minimum_order: 3000
+    code: 'PX-112',
+    tax_id_number: '53807129',
+    address: '台北市大安區和平東路一段141巷7-2號',
+    start_time: '19:00',
+    end_time: '04:00',
+    minimum_order: 450
   },
   {
     id: 2,
     name: '成功二店',
-    code: '123456',
-    tax_id_number: '12345678',
-    address: '台北市信義區大馬路50號',
+    code: 'PX-113',
+    tax_id_number: '54386029',
+    address: '台北市大安區仁愛路四段345巷4弄39號',
     start_time: '20:00',
     end_time: '03:00',
-    minimum_order: 300
+    minimum_order: 450
   },
   {
     id: 3,
-    name: '信義三店',
-    code: '123456',
-    tax_id_number: '12345678',
-    address: '台北市信義區大馬路50號',
+    name: '西門三店',
+    code: 'PX-114',
+    tax_id_number: '86037452',
+    address: '台北市大安區延吉街70巷5弄1號',
     start_time: '20:00',
     end_time: '03:00',
-    minimum_order: 300
+    minimum_order: 350
   },
   {
     id: 4,
-    name: '中華一店',
-    code: '123456',
-    tax_id_number: '12345678',
-    address: '台北市信義區大馬路50號',
-    start_time: '20:00',
-    end_time: '03:00',
-    minimum_order: 300
-  },
-  {
-    id: 5,
-    name: '中華一店',
-    code: '123456',
-    tax_id_number: '12345678',
-    address: '台北市信義區大馬路50號',
-    start_time: '20:00',
-    end_time: '03:00',
-    minimum_order: 300
-  },
-  {
-    id: 6,
-    name: '中華一店',
-    code: '123456',
-    tax_id_number: '12345678',
-    address: '台北市信義區大馬路50號',
-    start_time: '20:00',
-    end_time: '03:00',
-    minimum_order: 300
-  },
-  {
-    id: 7,
-    name: '中華一店',
-    code: '123456',
-    tax_id_number: '12345678',
-    address: '台北市信義區大馬路50號',
-    start_time: '20:00',
-    end_time: '03:00',
-    minimum_order: 300
-  },
-  {
-    id: 8,
-    name: '中華一店',
-    code: '123456',
-    tax_id_number: '12345678',
-    address: '台北市信義區大馬路50號',
-    start_time: '20:00',
-    end_time: '03:00',
-    minimum_order: 300
+    name: '信義四店',
+    code: 'PX-115',
+    tax_id_number: '18205364',
+    address: '台北市大安區市民大道三段304號1樓',
+    start_time: '19:00',
+    end_time: '02:00',
+    minimum_order: 400
   }
 ]
 
@@ -214,18 +173,6 @@ const CreateBranchDrawer = ref(null)
 function handleCreate() {
   CreateBranchDrawer.value.show()
 }
-
-const paginationParams = {
-  page: 1,
-  page_size: 10,
-  total: 1200
-}
-const pagination = reactive({ ...paginationParams })
-function handleChange(value) {
-  Object.assign(pagination, value)
-  // call api to get new data
-  console.log(value)
-}
 </script>
 
 <template>
@@ -257,9 +204,6 @@ function handleChange(value) {
           :delete="handleDelete"
           delete-key="Branch.List.Delete"
         />
-      </template>
-      <template #page-data>
-        <AppPagination :data="pagination" @change="handleChange" />
       </template>
     </DataPlane>
     <BranchDrawer ref="CreateBranchDrawer" type="create" />

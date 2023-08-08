@@ -7,7 +7,8 @@ export const useBranchStore = defineStore(
     const branches = ref([
       { id: 1, name: '中華一店' },
       { id: 2, name: '成功二店' },
-      { id: 3, name: '西門三店' }
+      { id: 3, name: '西門三店' },
+      { id: 4, name: '信義四店' }
     ])
     const codePrefix = ref('PX')
 
