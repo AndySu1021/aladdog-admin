@@ -8,6 +8,10 @@ import AppPagination from '@/components/AppPagination.vue'
 import moment from 'moment'
 import BranchSelect from '@/components/BranchSelect.vue'
 import DetailDialog from '@/views/order/DetailDialog.vue'
+import { getShiftType } from '@/composable/enums'
+
+const shiftType = ref({})
+getShiftType(shiftType)
 
 const tableColumn = [
   {
@@ -23,6 +27,14 @@ const tableColumn = [
     dataKey: 'branch',
     width: 180,
     align: 'center'
+  },
+  {
+    key: 'shift_type',
+    title: '班別',
+    dataKey: 'shift_type',
+    width: 180,
+    align: 'center',
+    cellRenderer: ({ cellData: shift_type }) => shiftType.value[shift_type]
   },
   {
     key: 'table_no',
@@ -72,6 +84,7 @@ const tableData = [
     table_no: 'A2',
     batch_no: 1,
     branch: '成功二店',
+    shift_type: 1,
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
     total_amount: 6500
@@ -81,6 +94,7 @@ const tableData = [
     table_no: 'A2',
     batch_no: 1,
     branch: '成功二店',
+    shift_type: 1,
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
     total_amount: 6500
@@ -90,6 +104,7 @@ const tableData = [
     table_no: 'A2',
     batch_no: 1,
     branch: '成功二店',
+    shift_type: 1,
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
     total_amount: 6500
@@ -99,6 +114,7 @@ const tableData = [
     table_no: 'A2',
     batch_no: 1,
     branch: '成功二店',
+    shift_type: 1,
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
     total_amount: 6500
@@ -108,6 +124,7 @@ const tableData = [
     table_no: 'A2',
     batch_no: 1,
     branch: '成功二店',
+    shift_type: 1,
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
     total_amount: 6500
@@ -117,6 +134,7 @@ const tableData = [
     table_no: 'A2',
     batch_no: 1,
     branch: '成功二店',
+    shift_type: 1,
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
     total_amount: 6500
@@ -126,6 +144,7 @@ const tableData = [
     table_no: 'A2',
     batch_no: 1,
     branch: '成功二店',
+    shift_type: 1,
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
     total_amount: 6500
@@ -135,6 +154,7 @@ const tableData = [
     table_no: 'A2',
     batch_no: 1,
     branch: '成功二店',
+    shift_type: 1,
     start_time: '2023-07-23 15:00:00',
     headcount: 5,
     total_amount: 6500

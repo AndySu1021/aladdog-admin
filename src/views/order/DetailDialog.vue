@@ -1,11 +1,16 @@
 <script setup>
 import { reactive, ref } from 'vue'
+import { getShiftType } from '@/composable/enums'
+
+const shiftType = ref({})
+getShiftType(shiftType)
 
 const isVisible = ref(false)
 const detailData = reactive({
   order_no: '202307231145',
   branch_id: 1,
   branch: '成功一店',
+  shift_type: 1,
   table_no: 'A2',
   batch_no: 158,
   start_time: '2023-07-23 15:00:00',
@@ -74,6 +79,9 @@ const formatter = new Intl.NumberFormat('en-US', {
         }}</ElDescriptionsItem>
         <el-descriptions-item label="分店" label-align="center">{{
           detailData.branch
+        }}</el-descriptions-item>
+        <el-descriptions-item label="班別" label-align="center">{{
+          shiftType[detailData.shift_type]
         }}</el-descriptions-item>
         <el-descriptions-item label="桌號" label-align="center">{{
           detailData.table_no

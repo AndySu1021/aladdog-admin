@@ -177,15 +177,25 @@ function handleDistrict(val) {
         <ElRow>
           <ElCol :span="10">
             <ElFormItem prop="start_time">
-              <ElTimePicker v-model="form.start_time" placeholder="開始時間" format="HH:mm" value-format="HH:mm"/>
+              <ElTimePicker
+                v-model="form.start_time"
+                placeholder="開始時間"
+                format="HH:mm"
+                value-format="HH:mm"
+              />
             </ElFormItem>
           </ElCol>
-          <ElCol style="text-align: center;" :span="4">
+          <ElCol style="text-align: center" :span="4">
             <span>至</span>
           </ElCol>
           <ElCol :span="10">
             <ElFormItem prop="end_time">
-              <ElTimePicker v-model="form.end_time" placeholder="結束時間" format="HH:mm" value-format="HH:mm"/>
+              <ElTimePicker
+                v-model="form.end_time"
+                placeholder="結束時間"
+                format="HH:mm"
+                value-format="HH:mm"
+              />
             </ElFormItem>
           </ElCol>
         </ElRow>

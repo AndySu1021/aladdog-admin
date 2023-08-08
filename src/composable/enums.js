@@ -47,9 +47,17 @@ export function getInvoiceStatus(data) {
 
 export function getActivityType(data) {
   Object.assign(data.value, {
-    1: '一般折扣', // ex. 全館8折
-    2: '一般贈送', // ex. 送一盤 shot
-    3: '滿額折扣', // ex. 滿2000送200
-    4: '滿額贈送' // ex. 滿 1500 送一盤 shot
+    1: '一般折扣',
+    2: '一般贈送',
+    3: '滿額折扣',
+    4: '滿額贈送'
+  })
+}
+
+export function getShiftType(data) {
+  Object.assign(data.value, {
+    1: '早班',
+    2: '午班',
+    3: '晚班'
   })
 }

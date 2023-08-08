@@ -16,7 +16,7 @@ import { useRoutesStore } from '@/stores/routes'
 import LoginPage from '@/views/LoginPage.vue'
 import NotFoundPage from '@/views/NotFoundPage.vue'
 import { useAdminStore } from '@/stores/admin'
-import {markRaw} from "vue";
+import { markRaw } from 'vue'
 
 export const constRoutes = [
   {
