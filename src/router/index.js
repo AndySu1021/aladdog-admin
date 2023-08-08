@@ -16,6 +16,7 @@ import { useRoutesStore } from '@/stores/routes'
 import LoginPage from '@/views/LoginPage.vue'
 import NotFoundPage from '@/views/NotFoundPage.vue'
 import { useAdminStore } from '@/stores/admin'
+import {markRaw} from "vue";
 
 export const constRoutes = [
   {
@@ -32,7 +33,7 @@ export const constRoutes = [
     path: '/',
     name: 'Root',
     redirect: '/dashboard',
-    meta: { title: '首頁', icon: Odometer, key: 'Dashboard' },
+    meta: { title: '首頁', icon: markRaw(Odometer), key: 'Dashboard' },
     component: MainLayout,
     children: [
       {
@@ -49,7 +50,7 @@ export const permRoutes = [
   {
     path: '/branch',
     name: 'Branch',
-    meta: { title: '分店', icon: Location, key: 'Branch' },
+    meta: { title: '分店', icon: markRaw(Location), key: 'Branch' },
     component: MainLayout,
     children: [
       {
@@ -75,7 +76,7 @@ export const permRoutes = [
   {
     path: '/liquor',
     name: 'Liquor',
-    meta: { title: '酒品', icon: ColdDrink, key: 'Liquor' },
+    meta: { title: '酒品', icon: markRaw(ColdDrink), key: 'Liquor' },
     component: MainLayout,
     children: [
       {
@@ -101,7 +102,7 @@ export const permRoutes = [
   {
     path: '/meal',
     name: 'Meal',
-    meta: { title: '餐點', icon: Dish, key: 'Meal' },
+    meta: { title: '餐點', icon: markRaw(Dish), key: 'Meal' },
     component: MainLayout,
     children: [
       {
@@ -115,7 +116,7 @@ export const permRoutes = [
   {
     path: '/order',
     name: 'Order',
-    meta: { title: '訂單', icon: ShoppingCart, key: 'Order' },
+    meta: { title: '訂單', icon: markRaw(ShoppingCart), key: 'Order' },
     component: MainLayout,
     children: [
       {
@@ -129,7 +130,7 @@ export const permRoutes = [
   {
     path: '/activity',
     name: 'Activity',
-    meta: { title: '活動', icon: Discount, key: 'Promotion.Activity' },
+    meta: { title: '活動', icon: markRaw(Discount), key: 'Promotion.Activity' },
     component: MainLayout,
     children: [
       {
@@ -143,7 +144,7 @@ export const permRoutes = [
   {
     path: '/report',
     name: 'Report',
-    meta: { title: '報表', icon: PieChart, key: 'Report' },
+    meta: { title: '報表', icon: markRaw(PieChart), key: 'Report' },
     component: MainLayout,
     children: [
       {
@@ -175,7 +176,7 @@ export const permRoutes = [
   {
     path: '/staff',
     name: 'Staff',
-    meta: { title: '員工', icon: User, key: 'Staff' },
+    meta: { title: '員工', icon: markRaw(User), key: 'Staff' },
     component: MainLayout,
     children: [
       {
@@ -195,7 +196,7 @@ export const permRoutes = [
   {
     path: '/system',
     name: 'System',
-    meta: { title: '系統', icon: Setting, key: 'System' },
+    meta: { title: '系統', icon: markRaw(Setting), key: 'System' },
     component: MainLayout,
     children: [
       {
@@ -227,7 +228,7 @@ export const permRoutes = [
   {
     path: '/bill',
     name: 'Bill',
-    meta: { title: '帳單', icon: CreditCard, key: 'Bill' },
+    meta: { title: '帳單', icon: markRaw(CreditCard), key: 'Bill' },
     component: MainLayout,
     children: [
       {
