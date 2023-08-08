@@ -19,6 +19,8 @@ const initForm = {
   city: '',
   district: '',
   address: '',
+  start_time: '',
+  end_time: '',
   zip_code: '',
   minimum_order: 0,
   password: ''
@@ -42,6 +44,8 @@ function show(id = 0) {
       city: '台北市',
       district: '信義區',
       address: '大馬路50號',
+      start_time: '20:00',
+      end_time: '03:00',
       zip_code: '110',
       minimum_order: 300
     }
@@ -80,6 +84,8 @@ const rules = reactive({
   code: [{ required: true, message: '請輸入代號', trigger: 'blue' }],
   tax_id_number: [{ required: true, message: '請輸入統一編號', trigger: 'blue' }],
   address: [{ required: true, message: '請輸入地址', trigger: 'blue' }],
+  start_time: [{ required: true, message: '請選擇開始時間', trigger: 'change' }],
+  end_time: [{ required: true, message: '請選擇結束時間', trigger: 'change' }],
   minimum_order: [{ required: true, message: '請輸入低消', trigger: 'blue' }],
   password: [{ required: true, message: '請輸入密碼', trigger: 'blur' }]
 })
@@ -166,6 +172,23 @@ function handleDistrict(val) {
           </ElRow>
           <ElInput v-model="form.address" />
         </ElSpace>
+      </ElFormItem>
+      <ElFormItem label="營業時間" required>
+        <ElRow>
+          <ElCol :span="10">
+            <ElFormItem prop="start_time">
+              <ElTimePicker v-model="form.start_time" placeholder="開始時間" format="HH:mm" value-format="HH:mm"/>
+            </ElFormItem>
+          </ElCol>
+          <ElCol style="text-align: center;" :span="4">
+            <span>至</span>
+          </ElCol>
+          <ElCol :span="10">
+            <ElFormItem prop="end_time">
+              <ElTimePicker v-model="form.end_time" placeholder="結束時間" format="HH:mm" value-format="HH:mm"/>
+            </ElFormItem>
+          </ElCol>
+        </ElRow>
       </ElFormItem>
       <ElFormItem label="每人低消" required prop="minimum_order">
         <ElInput

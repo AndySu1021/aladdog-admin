@@ -47,6 +47,14 @@ const tableColumn = [
     align: 'center'
   },
   {
+    key: 'time',
+    title: '營業時間',
+    dataKey: 'time',
+    width: 250,
+    align: 'center',
+    cellRenderer: (data) => `${data.rowData.start_time} - ${data.rowData.end_time}`
+  },
+  {
     key: 'minimum_order',
     title: '每人低消',
     dataKey: 'minimum_order',
@@ -67,6 +75,8 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
+    start_time: '20:00',
+    end_time: '03:00',
     minimum_order: 3000
   },
   {
@@ -75,6 +85,8 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
+    start_time: '20:00',
+    end_time: '03:00',
     minimum_order: 300
   },
   {
@@ -83,6 +95,8 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
+    start_time: '20:00',
+    end_time: '03:00',
     minimum_order: 300
   },
   {
@@ -91,6 +105,8 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
+    start_time: '20:00',
+    end_time: '03:00',
     minimum_order: 300
   },
   {
@@ -99,6 +115,8 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
+    start_time: '20:00',
+    end_time: '03:00',
     minimum_order: 300
   },
   {
@@ -107,6 +125,8 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
+    start_time: '20:00',
+    end_time: '03:00',
     minimum_order: 300
   },
   {
@@ -115,6 +135,8 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
+    start_time: '20:00',
+    end_time: '03:00',
     minimum_order: 300
   },
   {
@@ -123,6 +145,8 @@ const tableData = [
     code: '123456',
     tax_id_number: '12345678',
     address: '台北市信義區大馬路50號',
+    start_time: '20:00',
+    end_time: '03:00',
     minimum_order: 300
   }
 ]
