@@ -11,39 +11,24 @@ import BranchSelect from '@/components/BranchSelect.vue'
 
 const tableColumn = [
   {
-    key: 'date',
-    title: '日期',
-    dataKey: 'date',
-    width: 150,
-    align: 'center'
+    prop: 'date',
+    label: '日期'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 180,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'name',
-    title: '姓名',
-    dataKey: 'name',
-    width: 180,
-    align: 'center'
+    prop: 'name',
+    label: '姓名'
   },
   {
-    key: 'start_time',
-    title: '上班時間',
-    dataKey: 'start_time',
-    width: 250,
-    align: 'center'
+    prop: 'start_time',
+    label: '上班時間'
   },
   {
-    key: 'end_time',
-    title: '下班時間',
-    dataKey: 'end_time',
-    width: 250,
-    align: 'center'
+    prop: 'end_time',
+    label: '下班時間'
   }
 ]
 const tableData = [

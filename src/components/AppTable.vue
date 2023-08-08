@@ -1,13 +1,13 @@
 <script setup>
 import { Delete, EditPen, Lock, View } from '@element-plus/icons-vue'
-import { h, reactive } from 'vue'
-import { ElButton, TableV2FixedDir } from 'element-plus'
+import { ref } from 'vue'
+import { ElButton } from 'element-plus'
 import { useAdminStore } from '@/stores/admin'
 
 const store = useAdminStore()
 
 const props = defineProps({
-  detail: {
+  onDetail: {
     type: Function,
     default: null
   },
@@ -15,7 +15,7 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  password: {
+  onPassword: {
     type: Function,
     default: null
   },
@@ -23,7 +23,7 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  edit: {
+  onEdit: {
     type: Function,
     default: null
   },
@@ -31,7 +31,7 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  delete: {
+  onDelete: {
     type: Function,
     default: null
   },
@@ -47,94 +47,91 @@ const props = defineProps({
   }
 })
 
-let tmpColumns = reactive(props.columns)
-let count = 0
-if (props.detail) {
-  count++
+const count = ref(0)
+if (props.onDetail) {
+  count.value += 1
 }
-if (props.password) {
-  count++
+if (props.onPassword) {
+  count.value += 1
 }
-if (props.edit) {
-  count++
+if (props.onEdit) {
+  count.value += 1
 }
-if (props.delete) {
-  count++
+if (props.onDelete) {
+  count.value += 1
 }
-if (props.detail || props.password || props.edit || props.delete) {
-  tmpColumns.push({
-    key: 'operations',
-    title: '操作',
-    width: count * 50 + 20,
-    align: 'center',
-    fixed: TableV2FixedDir.RIGHT,
-    cellRenderer: (data) =>
-      h('div', {}, [
-        props.detail
-          ? h(ElButton, {
-              icon: View,
-              onClick: () => props.detail(data.rowIndex, data.rowData),
-              circle: true,
-              color: '#eaeaea'
-            })
-          : null,
-        props.password
-          ? h(ElButton, {
-              type: 'warning',
-              icon: Lock,
-              onClick: () => props.password(data.rowIndex, data.rowData),
-              circle: true,
-              disabled: props.passwordKey === '' ? false : !store.checkPermission(props.passwordKey)
-            })
-          : null,
-        props.edit
-          ? h(ElButton, {
-              icon: EditPen,
-              onClick: () => props.edit(data.rowIndex, data.rowData),
-              circle: true,
-              color: '#eaeaea',
-              disabled: props.deleteKey === '' ? false : !store.checkPermission(props.editKey)
-            })
-          : null,
-        props.delete
-          ? h(ElButton, {
-              type: 'danger',
-              icon: Delete,
-              onClick: () => props.delete(data.rowIndex, data.rowData),
-              circle: true,
-              disabled: props.deleteKey === '' ? false : !store.checkPermission(props.deleteKey)
-            })
-          : null
-      ])
-  })
-}
-tmpColumns = tmpColumns.map(function (value) {
-  return { ...value, headerClass: 'app-table-cell-header' }
-})
 </script>
 
 <template>
-  <el-auto-resizer>
-    <template #default="{ width }">
-      <el-table-v2
-        :columns="tmpColumns"
-        :data="data"
-        stripe
-        :width="width"
-        :height="rowHeight * data.length + rowHeight"
-        :header-height="48"
-        :row-height="rowHeight"
-        header-class="app-table-header"
-        :fixed="fixed"
+  <ElTable row-key="id" :data="data" style="width: 100%" stripe>
+    <template v-for="(column, idx) in columns" :key="idx">
+      <ElTableColumn
+        v-if="column.cellRender"
+        :prop="column.prop"
+        :label="column.label"
+        :min-width="column.minWidth"
+        align="center"
       >
-        <template #empty>
-          <div class="flex items-center justify-center h-100%">
-            <el-empty description="暫無數據" />
-          </div>
+        <template #default="scope">
+          <Component :is="column.cellRender(scope)" />
         </template>
-      </el-table-v2>
+      </ElTableColumn>
+      <ElTableColumn
+        v-else
+        :prop="column.prop"
+        :label="column.label"
+        :min-width="column.minWidth"
+        :formatter="column.formatter"
+        align="center"
+      />
     </template>
-  </el-auto-resizer>
+    <ElTableColumn
+      v-if="count > 0"
+      fixed="right"
+      label="操作"
+      :width="count * 50 + 20"
+      align="center"
+    >
+      <template #default="scope">
+        <ElButton
+          v-if="onDetail"
+          :icon="View"
+          color="#eaeaea"
+          circle
+          @click="onDetail(scope.$index, scope.row)"
+        />
+        <ElButton
+          v-if="onPassword"
+          type="warning"
+          :icon="Lock"
+          circle
+          @click="onPassword(scope.$index, scope.row)"
+          :disabled="passwordKey === '' ? false : !store.checkPermission(passwordKey)"
+        />
+        <ElButton
+          v-if="onEdit"
+          :icon="EditPen"
+          color="#eaeaea"
+          circle
+          @click="onEdit(scope.$index, scope.row)"
+          :disabled="editKey === '' ? false : !store.checkPermission(editKey)"
+        />
+        <ElButton
+          v-if="onDelete"
+          type="danger"
+          :icon="Delete"
+          circle
+          @click="onDelete(scope.$index, scope.row)"
+          :disabled="deleteKey === '' ? false : !store.checkPermission(deleteKey)"
+        />
+      </template>
+    </ElTableColumn>
+    <template #empty>
+      <div class="flex items-center justify-center h-100%">
+        <ElEmpty description="暫無數據" />
+      </div>
+    </template>
+  </ElTable>
 </template>
 
 <style lang="scss">

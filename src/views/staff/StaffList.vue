@@ -13,47 +13,29 @@ import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 100,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 180,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'name',
-    title: '姓名',
-    dataKey: 'name',
-    width: 180,
-    align: 'center'
+    prop: 'name',
+    label: '姓名'
   },
   {
-    key: 'sex',
-    title: '性別',
-    dataKey: 'sex',
-    width: 80,
-    align: 'center',
-    cellRenderer: ({ cellData: sex }) => (sex === 1 ? '男' : '女')
+    prop: 'sex',
+    label: '性別',
+    formatter: (data) => (data.sex === 1 ? '男' : '女')
   },
   {
-    key: 'mobile',
-    title: '手機號',
-    dataKey: 'mobile',
-    width: 180,
-    align: 'center'
+    prop: 'mobile',
+    label: '手機號'
   },
   {
-    key: 'staff_no',
-    title: '員工編號',
-    dataKey: 'staff_no',
-    width: 180,
-    align: 'center'
+    prop: 'staff_no',
+    label: '員工編號'
   }
 ]
 const tableData = [
@@ -204,9 +186,9 @@ function handleChange(value) {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="Staff.List.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           delete-key="Staff.List.Delete"
         />
       </template>

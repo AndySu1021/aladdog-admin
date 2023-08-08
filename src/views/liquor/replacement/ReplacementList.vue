@@ -11,52 +11,33 @@ import ReplacementDrawer from '@/views/liquor/replacement/ReplacementDrawer.vue'
 import { getAddonCategory } from '@/composable/enums'
 import BranchSelect from '@/components/BranchSelect.vue'
 import PermButton from '@/components/PermButton.vue'
+import { formatAmount } from '@/utils/formatter'
 
 const category = ref({})
 getAddonCategory(category)
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 150,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'category_id',
-    title: '分類',
-    dataKey: 'category_id',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: category_id }) => category.value[category_id]
+    prop: 'category_id',
+    label: '分類',
+    formatter: (data) => category.value[data.category_id]
   },
   {
-    key: 'liquor',
-    title: '酒品',
-    dataKey: 'liquor',
-    width: 250,
-    align: 'center'
+    prop: 'liquor',
+    label: '酒品'
   },
   {
-    key: 'price',
-    title: '價格',
-    dataKey: 'price',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: price }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(price)
+    prop: 'price',
+    label: '價格',
+    formatter: (data) => formatAmount(data.price)
   }
 ]
 const tableData = [
@@ -212,9 +193,9 @@ function handleChange(value) {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="Liquor.Replacement.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           delete-key="Liquor.Replacement.Delete"
         />
       </template>

@@ -17,63 +17,44 @@ getActivityType(activityType)
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號',
+    minWidth: 80
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 150,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'title',
-    title: '標題',
-    dataKey: 'title',
-    width: 150,
-    align: 'center'
+    prop: 'title',
+    label: '標題',
+    minWidth: 200
   },
   {
-    key: 'type',
-    title: '類型',
-    dataKey: 'type',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: type }) => activityType.value[type]
+    prop: 'type',
+    label: '類型',
+    formatter: (row) => activityType.value[row.type]
   },
   {
-    key: 'start_time',
-    title: '開始時間',
-    dataKey: 'start_time',
-    width: 180,
-    align: 'center'
+    prop: 'start_time',
+    label: '開始時間',
+    minWidth: 200
   },
   {
-    key: 'end_time',
-    title: '結束時間',
-    dataKey: 'end_time',
-    width: 180,
-    align: 'center'
+    prop: 'end_time',
+    label: '結束時間',
+    minWidth: 200
   },
   {
-    key: 'headcount',
-    title: '參與人數',
-    dataKey: 'headcount',
-    width: 120,
-    align: 'center'
+    prop: 'headcount',
+    label: '參與人數'
   },
   {
-    key: 'is_enabled',
-    title: '狀態',
-    dataKey: 'is_enabled',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: is_enabled }) =>
-      is_enabled === 1
+    prop: 'is_enabled',
+    label: '狀態',
+    minWidth: 120,
+    cellRender: (scope) =>
+      scope.row.is_enabled === 1
         ? h(ElTag, { type: 'success' }, () => '已上架')
         : h(ElTag, { type: 'danger' }, () => '下架中')
   }
@@ -252,9 +233,9 @@ function handleChange(value) {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="Promotion.Activity.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           delete-key="Promotion.Activity.Delete"
         />
       </template>

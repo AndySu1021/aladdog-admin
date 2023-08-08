@@ -8,7 +8,8 @@ import AppPagination from '@/components/AppPagination.vue'
 import moment from 'moment/moment'
 import { getInvoiceStatus, getPayStatus } from '@/composable/enums'
 import { ElTag } from 'element-plus'
-import DetailDialog from '@/views/bill/DetailDialog.vue'
+import DetailDialog from '@/views/bill/transaction/DetailDialog.vue'
+import { formatAmount } from '@/utils/formatter'
 
 const payStatus = ref({})
 getPayStatus(payStatus)
@@ -18,45 +19,32 @@ getInvoiceStatus(invoiceStatus)
 
 const tableColumn = [
   {
-    key: 'month',
-    title: '月份',
-    dataKey: 'month',
-    width: 150,
-    align: 'center'
+    prop: 'month',
+    label: '月份'
   },
   {
-    key: 'amount',
-    title: '付款金額',
-    dataKey: 'amount',
-    width: 180,
-    align: 'center',
-    cellRenderer: ({ cellData: total_amount }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(total_amount)
+    prop: 'amount',
+    label: '付款金額',
+    formatter: (data) => formatAmount(data.amount)
   },
   {
-    key: 'pay_status',
-    title: '付款狀態',
-    dataKey: 'pay_status',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: pay_status }) =>
-      h(ElTag, { type: payStatus.value[pay_status].type }, () => payStatus.value[pay_status].text)
-  },
-  {
-    key: 'invoice_status',
-    title: '發票狀態',
-    dataKey: 'invoice_status',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: invoice_status }) =>
+    prop: 'pay_status',
+    label: '付款狀態',
+    cellRender: (scope) =>
       h(
         ElTag,
-        { type: invoiceStatus.value[invoice_status].type },
-        () => invoiceStatus.value[invoice_status].text
+        { type: payStatus.value[scope.row.pay_status].type },
+        () => payStatus.value[scope.row.pay_status].text
+      )
+  },
+  {
+    prop: 'invoice_status',
+    label: '發票狀態',
+    cellRender: (scope) =>
+      h(
+        ElTag,
+        { type: invoiceStatus.value[scope.row.invoice_status].type },
+        () => invoiceStatus.value[scope.row.invoice_status].text
       )
   }
 ]
@@ -156,7 +144,7 @@ function handleChange(value) {
     </ControlPlane>
     <DataPlane>
       <template #main-data>
-        <AppTable :data="tableData" :columns="tableColumn" :detail="handleDetail" />
+        <AppTable :data="tableData" :columns="tableColumn" :on-detail="handleDetail" />
       </template>
       <template #page-data>
         <AppPagination :data="pagination" @change="handleChange" />

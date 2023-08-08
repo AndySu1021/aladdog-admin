@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { Box, Plus } from '@element-plus/icons-vue'
-import PaymentDialog from '@/views/bill/PaymentDialog.vue'
+import PaymentDialog from '@/views/bill/payment/PaymentDialog.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const initForm = {

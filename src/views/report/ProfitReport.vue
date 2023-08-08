@@ -8,34 +8,21 @@ import AppPagination from '@/components/AppPagination.vue'
 import moment from 'moment'
 import { ElMessage } from 'element-plus'
 import BranchSelect from '@/components/BranchSelect.vue'
+import { formatAmount } from '@/utils/formatter'
 
 const tableColumn = [
   {
-    key: 'date',
-    title: '日期',
-    dataKey: 'date',
-    align: 'center',
-    flexGrow: 1
+    prop: 'date',
+    label: '日期'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    align: 'center',
-    flexGrow: 1
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'total_amount',
-    title: '總營收',
-    dataKey: 'total_amount',
-    align: 'center',
-    flexGrow: 1,
-    cellRenderer: ({ cellData: total_amount }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(total_amount)
+    prop: 'total_amount',
+    label: '總營收',
+    formatter: (data) => formatAmount(data.total_amount)
   }
 ]
 const tableData = [

@@ -9,42 +9,26 @@ import moment from 'moment'
 import { ElMessage } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 import BranchSelect from '@/components/BranchSelect.vue'
+import { formatAmount, formatNumber } from '@/utils/formatter'
 
 const tableColumn = [
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 180,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'product_name',
-    title: '商品',
-    dataKey: 'product_name',
-    width: 180,
-    align: 'center'
+    prop: 'product_name',
+    label: '商品'
   },
   {
-    key: 'total_quantity',
-    title: '總數量',
-    dataKey: 'total_quantity',
-    width: 180,
-    align: 'center',
-    cellRenderer: ({ cellData: total_quantity }) => new Intl.NumberFormat().format(total_quantity)
+    prop: 'total_quantity',
+    label: '總數量',
+    formatter: (data) => formatNumber(data.total_quantity)
   },
   {
-    key: 'total_amount',
-    title: '總金額',
-    dataKey: 'total_amount',
-    width: 180,
-    align: 'center',
-    cellRenderer: ({ cellData: total_amount }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(total_amount)
+    prop: 'total_amount',
+    label: '總金額',
+    formatter: (data) => formatAmount(data.total_amount)
   }
 ]
 const tableData = [

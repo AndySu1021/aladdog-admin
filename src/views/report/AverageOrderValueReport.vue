@@ -8,34 +8,21 @@ import AppPagination from '@/components/AppPagination.vue'
 import moment from 'moment'
 import { ElMessage } from 'element-plus'
 import BranchSelect from '@/components/BranchSelect.vue'
+import { formatAmount } from '@/utils/formatter'
 
 const tableColumn = [
   {
-    key: 'date',
-    title: '日期',
-    dataKey: 'date',
-    align: 'center',
-    flexGrow: 1
+    prop: 'date',
+    label: '日期'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    align: 'center',
-    flexGrow: 1
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'average_order_value',
-    title: '平均客單價',
-    dataKey: 'average_order_value',
-    align: 'center',
-    flexGrow: 1,
-    cellRenderer: ({ cellData: average_order_value }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(average_order_value)
+    prop: 'average_order_value',
+    label: '平均客單價',
+    formatter: (data) => formatAmount(data.average_order_value)
   }
 ]
 const tableData = [

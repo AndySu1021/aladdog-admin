@@ -13,41 +13,26 @@ import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 150,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'floor',
-    title: '樓層',
-    dataKey: 'floor',
-    width: 150,
-    align: 'center',
-    cellRenderer: ({ cellData: floor }) => (floor < 0 ? `B ${-1 * floor}` : `${floor} F`)
+    prop: 'floor',
+    label: '樓層',
+    formatter: (data) => (data.floor < 0 ? `B ${-1 * data.floor}` : `${data.floor} F`)
   },
   {
-    key: 'table_no',
-    title: '桌號',
-    dataKey: 'table_no',
-    width: 150,
-    align: 'center'
+    prop: 'table_no',
+    label: '桌號'
   },
   {
-    key: 'capacity',
-    title: '容納人數',
-    dataKey: 'capacity',
-    width: 150,
-    align: 'center',
-    cellRenderer: ({ cellData: capacity }) => `${capacity} 人`
+    prop: 'capacity',
+    label: '容納人數',
+    formatter: (data) => `${data.capacity} 人`
   }
 ]
 const tableData = [
@@ -181,9 +166,9 @@ function handleChange(value) {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="Branch.Table.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           delete-key="Branch.Table.Delete"
         />
       </template>

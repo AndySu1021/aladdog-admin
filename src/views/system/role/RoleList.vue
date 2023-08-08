@@ -12,27 +12,18 @@ import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'name',
-    title: '名稱',
-    dataKey: 'name',
-    width: 250,
-    align: 'center'
+    prop: 'name',
+    label: '名稱'
   },
   {
-    key: 'is_enabled',
-    title: '狀態',
-    dataKey: 'is_enabled',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: is_enabled }) =>
-      is_enabled === 1
+    prop: 'is_enabled',
+    label: '狀態',
+    cellRender: (scope) =>
+      scope.row.is_enabled === 1
         ? h(ElTag, { type: 'success' }, () => '啟用')
         : h(ElTag, { type: 'danger' }, () => '停用')
   }
@@ -157,9 +148,9 @@ function handleChange(value) {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="System.Role.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           delete-key="System.Role.Delete"
         />
       </template>

@@ -11,66 +11,40 @@ import StockDrawer from '@/views/liquor/stock/StockDrawer.vue'
 import StockDialog from '@/views/liquor/stock/StockDialog.vue'
 import BranchSelect from '@/components/BranchSelect.vue'
 import PermButton from '@/components/PermButton.vue'
+import { formatAmount } from '@/utils/formatter'
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 150,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'name',
-    title: '名稱',
-    dataKey: 'name',
-    width: 300,
-    align: 'center'
+    prop: 'name',
+    label: '名稱'
   },
   {
-    key: 'capacity',
-    title: '單位容量',
-    dataKey: 'capacity',
-    width: 80,
-    align: 'center',
-    cellRenderer: ({ cellData: capacity }) => `${capacity} ml`
+    prop: 'capacity',
+    label: '單位容量',
+    formatter: (data) => `${data.capacity} ml`
   },
   {
-    key: 'unit',
-    title: '預估剩餘',
-    dataKey: 'unit',
-    width: 150,
-    align: 'center',
-    cellRenderer: (data) =>
-      `${Math.round((data.rowData.remaining_capacity / data.rowData.capacity) * 10) / 10} 瓶`
+    prop: 'unit',
+    label: '預估剩餘',
+    formatter: (data) => `${Math.round((data.remaining_capacity / data.capacity) * 10) / 10} 瓶`
   },
   {
-    key: 'remaining_capacity',
-    title: '預估剩餘容量',
-    dataKey: 'remaining_capacity',
-    width: 150,
-    align: 'center',
-    cellRenderer: ({ cellData: remaining_capacity }) => `${remaining_capacity} ml`
+    prop: 'remaining_capacity',
+    label: '預估剩餘容量',
+    formatter: (data) => `${data.remaining_capacity} ml`
   },
   {
-    key: 'cost',
-    title: '參考成本價',
-    dataKey: 'cost',
-    width: 150,
-    align: 'center',
-    cellRenderer: ({ cellData: cost }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(cost)
+    prop: 'cost',
+    label: '參考成本價',
+    formatter: (data) => formatAmount(data.cost)
   }
 ]
 const tableData = [
@@ -229,8 +203,8 @@ function handleChange(value) {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
-          :delete="handleDelete"
+          :on-edit="handleEdit"
+          :on-delete="handleDelete"
         />
       </template>
       <template #page-data>

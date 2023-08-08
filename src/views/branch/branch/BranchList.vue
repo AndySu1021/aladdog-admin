@@ -8,63 +8,43 @@ import { reactive, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import BranchDrawer from '@/views/branch/branch/BranchDrawer.vue'
 import PermButton from '@/components/PermButton.vue'
+import { formatAmount } from '@/utils/formatter'
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號',
+    minWidth: 80
   },
   {
-    key: 'name',
-    title: '名稱',
-    dataKey: 'name',
-    width: 150,
-    align: 'center'
+    prop: 'name',
+    label: '名稱'
   },
   {
-    key: 'code',
-    title: '分店代號',
-    dataKey: 'code',
-    width: 150,
-    align: 'center'
+    prop: 'code',
+    label: '分店代號'
   },
   {
-    key: 'tax_id_number',
-    title: '統一編號',
-    dataKey: 'tax_id_number',
-    width: 150,
-    align: 'center'
+    prop: 'tax_id_number',
+    label: '統一編號',
+    minWidth: 150
   },
   {
-    key: 'address',
-    title: '地址',
-    dataKey: 'address',
-    width: 250,
-    align: 'center'
+    prop: 'address',
+    label: '地址',
+    minWidth: 350
   },
   {
-    key: 'time',
-    title: '營業時間',
-    dataKey: 'time',
-    width: 250,
-    align: 'center',
-    cellRenderer: (data) => `${data.rowData.start_time} - ${data.rowData.end_time}`
+    prop: 'time',
+    label: '營業時間',
+    minWidth: 180,
+    formatter: (row) => `${row.start_time} - ${row.end_time}`
   },
   {
-    key: 'minimum_order',
-    title: '每人低消',
-    dataKey: 'minimum_order',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: minimum_order }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(minimum_order)
+    prop: 'minimum_order',
+    label: '每人低消',
+    minWidth: 120,
+    formatter: (data) => formatAmount(data.minimum_order)
   }
 ]
 const tableData = [
@@ -197,11 +177,11 @@ function handleCreate() {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :password="handlePassword"
+          :on-password="handlePassword"
           password-key="Branch.List.Password"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="Branch.List.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           delete-key="Branch.List.Delete"
         />
       </template>

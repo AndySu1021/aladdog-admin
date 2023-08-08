@@ -11,30 +11,22 @@ import RecipeDrawer from '@/views/liquor/recipe/RecipeDrawer.vue'
 import CategoryDrawer from '@/views/liquor/recipe/CategoryDrawer.vue'
 import BranchSelect from '@/components/BranchSelect.vue'
 import PermButton from '@/components/PermButton.vue'
+import { formatAmount } from '@/utils/formatter'
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 150,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'image',
-    title: '圖片',
-    dataKey: 'image',
-    width: 120,
-    align: 'center',
-    cellRenderer: function ({ cellData: image }) {
-      if (image !== '') {
+    prop: 'image',
+    label: '圖片',
+    cellRender: function (scope) {
+      if (scope.row.image !== '') {
         return h(
           'div',
           {
@@ -44,7 +36,7 @@ const tableColumn = [
             h(
               'img',
               {
-                src: image,
+                src: scope.row.image,
                 style: { width: '100%', height: '100%', objectFit: 'cover' }
               },
               []
@@ -56,53 +48,28 @@ const tableColumn = [
     }
   },
   {
-    key: 'name',
-    title: '名稱',
-    dataKey: 'name',
-    width: 250,
-    align: 'center'
+    prop: 'name',
+    label: '名稱'
   },
   {
-    key: 'category_id',
-    title: '分類',
-    dataKey: 'category_id',
-    width: 120,
-    align: 'center'
+    prop: 'category_id',
+    label: '分類'
   },
   {
-    key: 'price',
-    title: '售價',
-    dataKey: 'price',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: price }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(price)
+    prop: 'price',
+    label: '售價',
+    formatter: (data) => formatAmount(data.price)
   },
   {
-    key: 'cost',
-    title: '參考成本價',
-    dataKey: 'cost',
-    width: 150,
-    align: 'center',
-    cellRenderer: ({ cellData: cost }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(cost)
+    prop: 'cost',
+    label: '參考成本價',
+    formatter: (data) => formatAmount(data.cost)
   },
   {
-    key: 'is_enabled',
-    title: '狀態',
-    dataKey: 'is_enabled',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: is_enabled }) =>
-      is_enabled === 1
+    prop: 'is_enabled',
+    label: '狀態',
+    cellRender: (scope) =>
+      scope.row.is_enabled === 1
         ? h(ElTag, { type: 'success' }, () => '已上架')
         : h(ElTag, { type: 'danger' }, () => '下架中')
   }
@@ -314,9 +281,9 @@ function handleChange(value) {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="Liquor.Recipe.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           :row-height="100"
           delete-key="Liquor.Recipe.Delete"
         />

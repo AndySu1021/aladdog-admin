@@ -11,30 +11,22 @@ import MealDrawer from '@/views/meal/MealDrawer.vue'
 import BranchSelect from '@/components/BranchSelect.vue'
 import CategoryDrawer from '@/views/meal/CategoryDrawer.vue'
 import PermButton from '@/components/PermButton.vue'
+import { formatAmount } from '@/utils/formatter'
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 150,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'image',
-    title: '圖片',
-    dataKey: 'image',
-    width: 120,
-    align: 'center',
-    cellRenderer: function ({ cellData: image }) {
-      if (image !== '') {
+    prop: 'image',
+    label: '圖片',
+    cellRender: function (scope) {
+      if (scope.row.image !== '') {
         return h(
           'div',
           {
@@ -44,7 +36,7 @@ const tableColumn = [
             h(
               'img',
               {
-                src: image,
+                src: scope.row.image,
                 style: { width: '100%', height: '100%', objectFit: 'cover' }
               },
               []
@@ -56,45 +48,28 @@ const tableColumn = [
     }
   },
   {
-    key: 'name',
-    title: '名稱',
-    dataKey: 'name',
-    width: 180,
-    align: 'center'
+    prop: 'name',
+    label: '名稱'
   },
   {
-    key: 'category',
-    title: '分類',
-    dataKey: 'category',
-    width: 120,
-    align: 'center'
+    prop: 'category',
+    label: '分類'
   },
   {
-    key: 'prices',
-    title: '售價',
-    dataKey: 'prices',
-    width: 150,
-    align: 'center',
-    cellRenderer: function (data) {
-      const formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      })
-      const children = data.rowData.prices.map((item) =>
-        h('div', {}, `${formatter.format(item.price)} (${item.spec})`)
+    prop: 'prices',
+    label: '售價',
+    cellRender: function (scope) {
+      const children = scope.row.prices.map((item) =>
+        h('div', {}, `${formatAmount(item.price)} (${item.spec})`)
       )
       return h('div', {}, children)
     }
   },
   {
-    key: 'is_enabled',
-    title: '狀態',
-    dataKey: 'is_enabled',
-    width: 120,
-    align: 'center',
-    cellRenderer: ({ cellData: is_enabled }) =>
-      is_enabled === 1
+    prop: 'is_enabled',
+    label: '狀態',
+    cellRender: (scope) =>
+      scope.row.is_enabled === 1
         ? h(ElTag, { type: 'success' }, () => '已上架')
         : h(ElTag, { type: 'danger' }, () => '下架中')
   }
@@ -345,9 +320,9 @@ const options = [
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="Meal.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           delete-key="Meal.Delete"
           :row-height="100"
         />

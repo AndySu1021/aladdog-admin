@@ -9,73 +9,45 @@ import moment from 'moment'
 import BranchSelect from '@/components/BranchSelect.vue'
 import DetailDialog from '@/views/order/DetailDialog.vue'
 import { getShiftType } from '@/composable/enums'
+import { formatAmount } from '@/utils/formatter'
 
 const shiftType = ref({})
 getShiftType(shiftType)
 
 const tableColumn = [
   {
-    key: 'order_no',
-    title: '訂單號',
-    dataKey: 'order_no',
-    width: 150,
-    align: 'center'
+    prop: 'order_no',
+    label: '訂單號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 180,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'shift_type',
-    title: '班別',
-    dataKey: 'shift_type',
-    width: 180,
-    align: 'center',
-    cellRenderer: ({ cellData: shift_type }) => shiftType.value[shift_type]
+    prop: 'shift_type',
+    label: '班別',
+    formatter: (data) => shiftType.value[data.shift_type]
   },
   {
-    key: 'table_no',
-    title: '桌號',
-    dataKey: 'table_no',
-    width: 120,
-    align: 'center'
+    prop: 'table_no',
+    label: '桌號'
   },
   {
-    key: 'batch_no',
-    title: '批次號',
-    dataKey: 'batch_no',
-    width: 120,
-    align: 'center'
+    prop: 'batch_no',
+    label: '批次號'
   },
   {
-    key: 'start_time',
-    title: '入座時間',
-    dataKey: 'start_time',
-    width: 200,
-    align: 'center'
+    prop: 'start_time',
+    label: '入座時間'
   },
   {
-    key: 'headcount',
-    title: '用餐人數',
-    dataKey: 'headcount',
-    width: 120,
-    align: 'center'
+    prop: 'headcount',
+    label: '用餐人數'
   },
   {
-    key: 'total_amount',
-    title: '總金額',
-    dataKey: 'total_amount',
-    width: 150,
-    align: 'center',
-    cellRenderer: ({ cellData: total_amount }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(total_amount)
+    prop: 'total_amount',
+    label: '總金額',
+    formatter: (data) => formatAmount(data.total_amount)
   }
 ]
 const tableData = [
@@ -215,7 +187,7 @@ function handleDetail(idx, data) {
     </ControlPlane>
     <DataPlane>
       <template #main-data>
-        <AppTable :data="tableData" :columns="tableColumn" :detail="handleDetail" />
+        <AppTable :data="tableData" :columns="tableColumn" :on-detail="handleDetail" />
       </template>
       <template #page-data>
         <AppPagination :data="pagination" @change="handleChange" />

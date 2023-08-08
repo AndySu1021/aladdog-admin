@@ -8,59 +8,37 @@ import AppPagination from '@/components/AppPagination.vue'
 import moment from 'moment'
 import BranchSelect from '@/components/BranchSelect.vue'
 import { getShiftType } from '@/composable/enums'
+import { formatAmount } from '@/utils/formatter'
 
 const shiftType = ref({})
 getShiftType(shiftType)
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 180,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'shift_type',
-    title: '班別',
-    dataKey: 'shift_type',
-    width: 100,
-    align: 'center',
-    cellRenderer: ({ cellData: shift_type }) => shiftType.value[shift_type]
+    prop: 'shift_type',
+    label: '班別',
+    formatter: (data) => shiftType.value[data.shift_type]
   },
   {
-    key: 'shift_time',
-    title: '交班時間',
-    dataKey: 'shift_time',
-    width: 200,
-    align: 'center'
+    prop: 'shift_time',
+    label: '交班時間'
   },
   {
-    key: 'settle_time',
-    title: '小結時間',
-    dataKey: 'settle_time',
-    width: 200,
-    align: 'center'
+    prop: 'settle_time',
+    label: '小結時間'
   },
   {
-    key: 'petty_cash',
-    title: '零用金',
-    dataKey: 'petty_cash',
-    width: 150,
-    align: 'center',
-    cellRenderer: ({ cellData: total_amount }) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'TWD',
-        maximumFractionDigits: 0
-      }).format(total_amount)
+    prop: 'petty_cash',
+    label: '零用金',
+    formatter: (data) => formatAmount(data.total_amount)
   }
 ]
 const tableData = [

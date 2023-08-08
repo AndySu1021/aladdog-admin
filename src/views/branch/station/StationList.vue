@@ -13,25 +13,16 @@ import PermButton from '@/components/PermButton.vue'
 
 const tableColumn = [
   {
-    key: 'id',
-    title: '編號',
-    dataKey: 'id',
-    width: 80,
-    align: 'center'
+    prop: 'id',
+    label: '編號'
   },
   {
-    key: 'branch',
-    title: '分店',
-    dataKey: 'branch',
-    width: 180,
-    align: 'center'
+    prop: 'branch',
+    label: '分店'
   },
   {
-    key: 'name',
-    title: '名稱',
-    dataKey: 'name',
-    width: 150,
-    align: 'center'
+    prop: 'name',
+    label: '名稱'
   }
 ]
 const tableData = [
@@ -149,9 +140,9 @@ function handleChange(value) {
         <AppTable
           :data="tableData"
           :columns="tableColumn"
-          :edit="handleEdit"
+          :on-edit="handleEdit"
           edit-key="Branch.Station.Edit"
-          :delete="handleDelete"
+          :on-delete="handleDelete"
           delete-key="Branch.Station.Delete"
         />
       </template>
