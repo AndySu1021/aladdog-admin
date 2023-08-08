@@ -23,6 +23,7 @@ const initForm = {
   end_time: '',
   zip_code: '',
   minimum_order: 0,
+  support_shift_type: [],
   password: ''
 }
 
@@ -47,7 +48,8 @@ function show(id = 0) {
       start_time: '20:00',
       end_time: '03:00',
       zip_code: '110',
-      minimum_order: 300
+      minimum_order: 300,
+      support_shift_type: [1, 3]
     }
     Object.assign(form, apiReturn)
   }
@@ -128,6 +130,13 @@ function handleDistrict(val) {
           :formatter="(value) => `${branchStore.getCodePrefix} - ${value}`"
           :parser="(value) => value.replace(new RegExp(branchStore.getCodePrefix + ' - ', 'g'), '')"
         />
+      </ElFormItem>
+      <ElFormItem label="班別" required prop="support_shift_type">
+        <ElCheckboxGroup v-model="form.support_shift_type">
+          <ElCheckbox :label="1">早班</ElCheckbox>
+          <ElCheckbox :label="2">午班</ElCheckbox>
+          <ElCheckbox :label="3">晚班</ElCheckbox>
+        </ElCheckboxGroup>
       </ElFormItem>
       <ElFormItem label="統一編號" required prop="tax_id_number">
         <ElInput v-model="form.tax_id_number" />
