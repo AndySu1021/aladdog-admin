@@ -63,7 +63,13 @@ if (props.onDelete) {
 </script>
 
 <template>
-  <ElTable row-key="id" :data="data" style="width: 100%" stripe>
+  <ElTable
+    row-key="id"
+    :data="data"
+    style="width: 100%"
+    stripe
+    header-cell-class-name="app-table-cell-header"
+  >
     <template v-for="(column, idx) in columns" :key="idx">
       <ElTableColumn
         v-if="column.cellRender"
@@ -135,16 +141,10 @@ if (props.onDelete) {
 </template>
 
 <style lang="scss">
-.app-table-header {
-  background: rgb(249, 249, 249);
-  color: rgb(124, 124, 124);
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 8px 8px 0 0;
-}
 .app-table-cell-header {
-  background: rgb(249, 249, 249);
+  background: rgb(249, 249, 249) !important;
   color: rgb(124, 124, 124);
+  height: 46px;
   &:first-child {
     border-radius: 8px 0 0 0;
   }

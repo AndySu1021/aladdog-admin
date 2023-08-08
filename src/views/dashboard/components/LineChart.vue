@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, watch } from 'vue'
+import { computed, onMounted } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps({
@@ -85,11 +85,6 @@ function initChart() {
 }
 
 onMounted(() => {
-  initChart()
-})
-
-// 监听传值，刷新图表
-watch(props.dataSet, () => {
   initChart()
 })
 </script>

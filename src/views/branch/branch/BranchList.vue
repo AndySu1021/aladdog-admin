@@ -18,11 +18,13 @@ const tableColumn = [
   },
   {
     prop: 'name',
-    label: '名稱'
+    label: '名稱',
+    minWidth: 150
   },
   {
     prop: 'code',
-    label: '分店代號'
+    label: '分店代號',
+    minWidth: 150
   },
   {
     prop: 'tax_id_number',
