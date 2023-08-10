@@ -38,7 +38,7 @@ const tableColumn = [
   {
     prop: 'petty_cash',
     label: '零用金',
-    formatter: (data) => formatAmount(data.total_amount)
+    formatter: (data) => formatAmount(data.petty_cash)
   }
 ]
 const tableData = [

@@ -23,8 +23,12 @@ const tableColumn = [
     label: '分店'
   },
   {
+    prop: 'brand',
+    label: '品牌',
+  },
+  {
     prop: 'name',
-    label: '名稱'
+    label: '名稱',
   },
   {
     prop: 'capacity',
@@ -51,6 +55,7 @@ const tableData = [
   {
     id: 1,
     branch: '中華一店',
+    brand: 'Campari',
     name: 'Campari',
     capacity: 750,
     remaining_capacity: 2358,
@@ -59,7 +64,8 @@ const tableData = [
   {
     id: 2,
     branch: '成功二店',
-    name: 'Bowmore',
+    brand: 'Bowmore',
+    name: '21年威士忌',
     capacity: 750,
     remaining_capacity: 3000,
     cost: 1200
@@ -67,7 +73,8 @@ const tableData = [
   {
     id: 3,
     branch: '信義三店',
-    name: '紫羅蘭(Bitter Truth)',
+    brand: 'Bitter Truth',
+    name: '紫羅蘭利口酒',
     capacity: 750,
     remaining_capacity: 3000,
     cost: 1200
@@ -75,7 +82,8 @@ const tableData = [
   {
     id: 4,
     branch: '中華一店',
-    name: '煙燻紅茶利口酒(卡騰)',
+    brand: '卡騰',
+    name: '煙燻紅茶利口酒',
     capacity: 750,
     remaining_capacity: 3000,
     cost: 1200
@@ -83,7 +91,8 @@ const tableData = [
   {
     id: 5,
     branch: '中華一店',
-    name: 'Johnny Walker Black Label',
+    brand: 'Johnny Walker',
+    name: '黑牌威士忌',
     capacity: 750,
     remaining_capacity: 3000,
     cost: 1200
@@ -91,6 +100,7 @@ const tableData = [
   {
     id: 6,
     branch: '中華一店',
+    brand: 'Campari',
     name: 'Campari',
     capacity: 750,
     remaining_capacity: 3000,
@@ -99,6 +109,7 @@ const tableData = [
   {
     id: 7,
     branch: '中華一店',
+    brand: 'Campari',
     name: 'Campari',
     capacity: 750,
     remaining_capacity: 3000,
@@ -107,6 +118,7 @@ const tableData = [
   {
     id: 8,
     branch: '中華一店',
+    brand: 'Campari',
     name: 'Campari',
     capacity: 750,
     remaining_capacity: 3000,

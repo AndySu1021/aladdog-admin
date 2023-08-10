@@ -11,6 +11,7 @@ const branchId = ref(0)
 
 const initForm = {
   branch_id: null,
+  brand: '',
   name: '',
   capacity: 1,
   quantity: 1,
@@ -31,7 +32,8 @@ function show(id = 0) {
     const apiReturn = {
       id: 1,
       branch_id: 1,
-      name: 'Campari',
+      brand: '卡䲢',
+      name: '煙燻紅茶利口酒',
       capacity: 750,
       quantity: 3,
       cost: 1200
@@ -68,6 +70,7 @@ function handleCancel() {
 
 const rules = reactive({
   branch_id: [{ required: true, message: '請選擇分店', trigger: 'change' }],
+  brand: [{ required: true, message: '請輸入品牌', trigger: 'blue' }],
   name: [{ required: true, message: '請輸入名稱', trigger: 'blue' }],
   capacity: [{ required: true, message: '請輸入單位容量', trigger: 'blue' }],
   quantity: [{ required: true, message: '請輸入數量', trigger: 'blue' }],
@@ -92,6 +95,9 @@ const rules = reactive({
     >
       <ElFormItem label="分店" required prop="branch_id">
         <BranchSelect v-model.number="form.branch_id" />
+      </ElFormItem>
+      <ElFormItem label="品牌" required prop="brand">
+        <ElInput v-model="form.brand" />
       </ElFormItem>
       <ElFormItem label="名稱" required prop="name">
         <ElInput v-model="form.name" />
