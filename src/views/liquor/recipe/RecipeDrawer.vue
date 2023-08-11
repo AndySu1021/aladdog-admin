@@ -14,6 +14,7 @@ const initForm = {
   image: '',
   name: '',
   category_id: null,
+  skill_type: null,
   price: 1,
   cost: 1,
   is_enabled: 1,
@@ -21,6 +22,16 @@ const initForm = {
     {
       stock_id: null,
       quantity: 0
+    }
+  ],
+  steps: [
+    {
+      content: '',
+      // children: [
+      //   {
+      //     content: ''
+      //   }
+      // ]
     }
   ]
 }
@@ -46,6 +57,16 @@ function show(id = 0) {
         {
           stock_id: 1,
           quantity: 45
+        }
+      ],
+      steps: [
+        {
+          content: '',
+          children: [
+            {
+              content: ''
+            }
+          ]
         }
       ]
     }
@@ -95,6 +116,12 @@ function handleRecipeAdd() {
   })
 }
 
+function handleStepAdd() {
+  form.steps.push({
+    content: '',
+  })
+}
+
 const categories = ref([
   {
     id: 1,
@@ -141,6 +168,15 @@ const categories = ref([
           />
         </ElSelect>
       </ElFormItem>
+      <ElFormItem label="調製方式" required prop="skill_type">
+        <ElSelect v-model.number="form.skill_type" placeholder="請選擇">
+          <ElOption label="Build" :value="1" />
+          <ElOption label="Stir" :value="2" />
+          <ElOption label="Shake" :value="3" />
+          <ElOption label="Rolling" :value="4" />
+          <ElOption label="Blend" :value="5" />
+        </ElSelect>
+      </ElFormItem>
       <ElDivider style="margin-top: 30px">內容物</ElDivider>
       <template v-for="(stock, idx) in form.stocks" :key="idx">
         <ElFormItem :label="`酒品 ${idx + 1}`" required>
@@ -160,6 +196,13 @@ const categories = ref([
         </ElFormItem>
       </template>
       <ElButton :icon="Plus" plain @click="handleRecipeAdd" />
+      <ElDivider style="margin-top: 30px">調製步驟</ElDivider>
+      <template v-for="(step, idx) in form.steps" :key="idx">
+        <ElFormItem :label="`步驟 ${idx + 1}`" required>
+          <ElInput v-model="step.content" placeholder="請輸入" />
+        </ElFormItem>
+      </template>
+      <ElButton :icon="Plus" plain @click="handleStepAdd" />
       <ElDivider />
       <ElFormItem label="參考成本價" required prop="cost">
         <ElInput
