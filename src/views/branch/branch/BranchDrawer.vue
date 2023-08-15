@@ -24,7 +24,8 @@ const initForm = {
   zip_code: '',
   minimum_order: 0,
   support_shift_type: [],
-  password: ''
+  password: '',
+  dining_time: 0
 }
 
 const form = reactive({ ...initForm })
@@ -49,6 +50,7 @@ function show(id = 0) {
       end_time: '03:00',
       zip_code: '110',
       minimum_order: 300,
+      dining_time: 2,
       support_shift_type: [1, 3]
     }
     Object.assign(form, apiReturn)
@@ -216,6 +218,9 @@ function handleDistrict(val) {
           :parser="(value) => value.replace(/\$\s?|(,*)/g, '')"
           placeholder="請輸入"
         />
+      </ElFormItem>
+      <ElFormItem label="用餐時間限制" prop="dinging_time">
+        <ElInput v-model="form.dining_time" />
       </ElFormItem>
       <ElFormItem v-if="type === 'create'" label="密碼" required prop="password">
         <ElInput v-model="form.password" />
