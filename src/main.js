@@ -1,4 +1,3 @@
-import './assets/main.css'
 import 'default-passive-events'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -8,6 +7,7 @@ import App from './App.vue'
 import { router } from './router'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import zhTw from 'element-plus/dist/locale/zh-tw.mjs'
+import './assets/main.css'
 
 const app = createApp(App)
 const pinia = createPinia()

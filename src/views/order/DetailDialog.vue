@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { getShiftType } from '@/composable/enums'
+import AppDialog from "@/components/AppDialog.vue";
 
 const shiftType = ref({})
 getShiftType(shiftType)
@@ -55,8 +56,9 @@ const detailData = reactive({
   ]
 })
 
+const DetailDialog = ref(null)
 function show(orderNo) {
-  isVisible.value = true
+  DetailDialog.value.show()
   detailData.order_no = orderNo
   // call order detail api
 }
@@ -72,7 +74,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 <template>
   <div class="dddd">
-    <ElDialog v-model="isVisible" :title="`訂單詳情 #${detailData.order_no}`" width="60%">
+    <AppDialog ref="DetailDialog" :title="`訂單詳情 #${detailData.order_no}`" width="800px">
       <ElDescriptions class="margin-top" :column="2" size="large" border>
         <ElDescriptionsItem label="訂單號" label-align="center">{{
           detailData.order_no
@@ -132,7 +134,7 @@ const formatter = new Intl.NumberFormat('en-US', {
         </ElTableColumn>
         <ElTableColumn label="點單時間" prop="created_at" width="180" align="center" />
       </ElTable>
-    </ElDialog>
+    </AppDialog>
   </div>
 </template>
 
