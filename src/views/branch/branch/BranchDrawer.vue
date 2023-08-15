@@ -3,6 +3,10 @@ import AppDrawer from '@/components/AppDrawer.vue'
 import { reactive, ref } from 'vue'
 import { getAddressData } from '@/composable/address.js'
 import { useBranchStore } from '@/stores/branch'
+import {getPaymentType} from "@/composable/enums";
+
+const paymentTypes = ref({})
+getPaymentType(paymentTypes)
 
 const branchStore = useBranchStore()
 
@@ -25,7 +29,8 @@ const initForm = {
   minimum_order: 0,
   support_shift_type: [],
   password: '',
-  dining_time: 0
+  dining_time: 0,
+  support_payment_type: [],
 }
 
 const form = reactive({ ...initForm })
@@ -51,7 +56,8 @@ function show(id = 0) {
       zip_code: '110',
       minimum_order: 300,
       dining_time: 2,
-      support_shift_type: [1, 3]
+      support_shift_type: [1, 3],
+      support_payment_type: [1, 2],
     }
     Object.assign(form, apiReturn)
   }
@@ -221,6 +227,11 @@ function handleDistrict(val) {
       </ElFormItem>
       <ElFormItem label="用餐時間限制" prop="dinging_time">
         <ElInput v-model="form.dining_time" />
+      </ElFormItem>
+      <ElFormItem label="付款方式" required prop="support_payment_type">
+        <ElCheckboxGroup v-model="form.support_payment_type">
+          <ElCheckbox v-for="(item, idx) in Object.keys(paymentTypes)" :key="idx" :label="parseInt(item)">{{paymentTypes[item]}}</ElCheckbox>
+        </ElCheckboxGroup>
       </ElFormItem>
       <ElFormItem v-if="type === 'create'" label="密碼" required prop="password">
         <ElInput v-model="form.password" />

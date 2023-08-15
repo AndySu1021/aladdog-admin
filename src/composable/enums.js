@@ -62,3 +62,13 @@ export function getShiftType(data) {
     3: '晚班'
   })
 }
+
+export function getPaymentType(data) {
+  Object.assign(data.value, {
+    1: '現金',
+    2: '信用卡',
+    3: '街口',
+    4: 'LinePay',
+    5: 'ApplePay'
+  })
+}
