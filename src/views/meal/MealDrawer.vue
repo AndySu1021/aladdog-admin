@@ -22,7 +22,8 @@ const initForm = {
       price: 1
     }
   ],
-  is_enabled: 1
+  is_enabled: 1,
+  can_free: 0,
 }
 
 const form = reactive(JSON.parse(JSON.stringify(initForm)))
@@ -52,7 +53,8 @@ function show(id = 0) {
           price: 60
         }
       ],
-      is_enabled: 1
+      is_enabled: 1,
+      can_free: 0,
     }
     Object.assign(form, apiReturn)
   }
@@ -189,6 +191,9 @@ const options = [
       <ElDivider />
       <ElFormItem label="狀態" required prop="is_enabled">
         <ElSwitch v-model="form.is_enabled" :active-value="1" :inactive-value="0" />
+      </ElFormItem>
+      <ElFormItem label="可招待" required prop="can_free">
+        <ElSwitch v-model="form.can_free" :active-value="1" :inactive-value="0" />
       </ElFormItem>
     </ElForm>
   </AppDrawer>

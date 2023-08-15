@@ -18,6 +18,7 @@ const initForm = {
   price: 1,
   cost: 1,
   is_enabled: 1,
+  can_free: 0,
   stocks: [
     {
       stock_id: null,
@@ -53,6 +54,7 @@ function show(id = 0) {
       price: 1500,
       cost: 500,
       is_enabled: 1,
+      can_free: 0,
       stocks: [
         {
           stock_id: 1,
@@ -198,7 +200,7 @@ const categories = ref([
       <ElButton :icon="Plus" plain @click="handleRecipeAdd" />
       <ElDivider style="margin-top: 30px">調製步驟</ElDivider>
       <template v-for="(step, idx) in form.steps" :key="idx">
-        <ElFormItem :label="`步驟 ${idx + 1}`" required>
+        <ElFormItem :label="`步驟 ${idx + 1}`">
           <ElInput v-model="step.content" placeholder="請輸入" />
         </ElFormItem>
       </template>
@@ -223,6 +225,9 @@ const categories = ref([
       </ElFormItem>
       <ElFormItem label="狀態" required prop="is_enabled">
         <ElSwitch v-model="form.is_enabled" :active-value="1" :inactive-value="0" />
+      </ElFormItem>
+      <ElFormItem label="可招待" required prop="can_free">
+        <ElSwitch v-model="form.can_free" :active-value="1" :inactive-value="0" />
       </ElFormItem>
     </ElForm>
   </AppDrawer>
